@@ -6,7 +6,9 @@ Documentation available on [godoc.org](http://godoc.org/github.com/ndyakov/go-la
 
 ## Instalation
 
-``` go get github.com/ndyakov/go-lastfm```
+```
+    go get github.com/ndyakov/go-lastfm
+```
 
 ## License
    Copyright 2014 Nedyalko Dyakov
