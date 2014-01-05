@@ -29,6 +29,34 @@ func New(apiKey string) LastFM {
 	}
 }
 
+func (lfm *LastFM) buildURL (query map[string]string) string {
+	values := url.Values{}
+	for key, value := range query {
+		values.Add(key, value)
+	}
+	uri := apiRootURL
+	uri.RawQuery = values.Encode()
+	return uri.String()
+}
+
+func (lfm *LastFM) makeRequest(method string, params map[string]string) (body io.ReadCloser, hdr http.Header, err error) {
+	queryParams := make(map[string]string, len(params)+2)
+	queryParams["api_key"] = lfm.apiKey
+	queryParams["method"] = method
+	for key, value := range params {
+		queryParams[key] = value
+	}
+
+	response, err := lfm.client.Get(lfm.buildURL(queryParams))
+	if err != nil {
+		if response != nil && response.Body != nil {
+			response.Body.Close()
+		}
+		return
+	}
+	return response.Body, response.Header, err
+}
+
 type DummyClient struct{}
 
 func (c *DummyClient) Get(uri string) (resp *http.Response, err error) {
