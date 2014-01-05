@@ -29,7 +29,7 @@ type LastFM struct {
 
 func New(apiKey string) LastFM {
 	if apiKey == "api_key_for_testing" {
-		return LastFM{apiKey: apiKey, client: &DummyClient{}}
+		return LastFM{apiKey: apiKey, client: &dummyClient{}}
 	} else {
 		return LastFM{apiKey: apiKey, client: http.DefaultClient}
 	}
@@ -63,9 +63,9 @@ func (lfm *LastFM) makeRequest(method string, params map[string]string) (body io
 	return response.Body, response.Header, err
 }
 
-type DummyClient struct{}
+type dummyClient struct{}
 
-func (c *DummyClient) Get(uri string) (resp *http.Response, err error) {
+func (c *dummyClient) Get(uri string) (resp *http.Response, err error) {
 	u, err := url.Parse(uri)
 	if err != nil {
 		return
@@ -78,7 +78,7 @@ func (c *DummyClient) Get(uri string) (resp *http.Response, err error) {
 	return
 }
 
-func (c *DummyClient) buildFilename(values url.Values) string {
+func (c *dummyClient) buildFilename(values url.Values) string {
 	var parts []string
 	var keys []string
 	parts = append(parts, values.Get("method"))
