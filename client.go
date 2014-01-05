@@ -13,13 +13,17 @@ var (
 	apiRootURL = url.URL{Scheme: "http", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
 )
 
-type client interface {
+type getter interface {
 	Get(uri string) (resp *http.Response, err error)
+}
+
+type client struct {
+	lfm *LastFM
 }
 
 type LastFM struct {
 	apiKey string
-	client client
+	getter getter
 	Album  albumClient
 	Artist artistClient
 	Tag    tagClient
@@ -27,12 +31,20 @@ type LastFM struct {
 	User   userClient
 }
 
-func New(apiKey string) LastFM {
+func New(apiKey string) *LastFM {
+	lfm := new(LastFM)
+	lfm.apiKey = apiKey
+	lfm.Album = albumClient{client:client{lfm}}
+	lfm.Artist = artistClient{client:client{lfm}}
+	lfm.Tag = tagClient{client:client{lfm}}
+	lfm.Track = trackClient{client:client{lfm}}
+	lfm.User = userClient{client:client{lfm}}
 	if apiKey == "api_key_for_testing" {
-		return LastFM{apiKey: apiKey, client: &dummyClient{}}
+		lfm.getter = new(dummyGetter)
 	} else {
-		return LastFM{apiKey: apiKey, client: http.DefaultClient}
+		lfm.getter = http.DefaultClient
 	}
+	return lfm
 }
 
 func (lfm *LastFM) buildURL(query map[string]string) string {
@@ -53,7 +65,7 @@ func (lfm *LastFM) makeRequest(method string, params map[string]string) (body io
 		queryParams[key] = value
 	}
 
-	response, err := lfm.client.Get(lfm.buildURL(queryParams))
+	response, err := lfm.getter.Get(lfm.buildURL(queryParams))
 	if err != nil {
 		if response != nil && response.Body != nil {
 			response.Body.Close()
@@ -63,9 +75,9 @@ func (lfm *LastFM) makeRequest(method string, params map[string]string) (body io
 	return response.Body, response.Header, err
 }
 
-type dummyClient struct{}
+type dummyGetter struct{}
 
-func (c *dummyClient) Get(uri string) (resp *http.Response, err error) {
+func (c *dummyGetter) Get(uri string) (resp *http.Response, err error) {
 	u, err := url.Parse(uri)
 	if err != nil {
 		return
@@ -78,7 +90,7 @@ func (c *dummyClient) Get(uri string) (resp *http.Response, err error) {
 	return
 }
 
-func (c *dummyClient) buildFilename(values url.Values) string {
+func (c *dummyGetter) buildFilename(values url.Values) string {
 	var parts []string
 	var keys []string
 	parts = append(parts, values.Get("method"))
