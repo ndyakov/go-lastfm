@@ -1,18 +1,18 @@
 package lastfm
 
-type ArtistBio struct {
-	LastfmWiki
+type ArtistBioResponse struct {
+	LastfmWikiResponse
 }
 
-type Artist struct {
-	Rank       int           `xml:"rank,attr"`
-	Name       string        `xml:"name"`
-	Playcount  int64         `xml:"playcount"`
-	MBID       string        `xml:"mbid"`
-	URL        string        `xml:"url"`
-	Streamable int           `xml:"streamable"`
-	Image      []LastfmImage `xml:"image"`
-	Stats      LastfmStats   `xml:"stats"`
-	Similar    []Artist      `xml:"similar"`
-	Bio        ArtistBio     `xml:"bio"`
+type ArtistResponse struct {
+	Rank       int                   `xml:"rank,attr"`
+	Name       string                `xml:"name"`
+	Playcount  int64                 `xml:"playcount"`
+	MBID       string                `xml:"mbid"`
+	URL        string                `xml:"url"`
+	Streamable int                   `xml:"streamable"`
+	Image      []LastfmImageResponse `xml:"image"`
+	Stats      LastfmStatsResponse   `xml:"stats"`
+	Similar    []ArtistResponse      `xml:"similar"`
+	Bio        ArtistBioResponse     `xml:"bio"`
 }

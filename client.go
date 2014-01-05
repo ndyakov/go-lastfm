@@ -1,6 +1,7 @@
 package lastfm
 
 import (
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -19,6 +20,11 @@ type client interface {
 type LastFM struct {
 	apiKey string
 	client client
+	Album  albumClient
+	Artist artistClient
+	Tag    tagClient
+	Track  trackClient
+	User   userClient
 }
 
 func New(apiKey string) LastFM {
@@ -29,7 +35,7 @@ func New(apiKey string) LastFM {
 	}
 }
 
-func (lfm *LastFM) buildURL (query map[string]string) string {
+func (lfm *LastFM) buildURL(query map[string]string) string {
 	values := url.Values{}
 	for key, value := range query {
 		values.Add(key, value)
