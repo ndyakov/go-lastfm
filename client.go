@@ -34,11 +34,11 @@ type LastFM struct {
 func New(apiKey string) *LastFM {
 	lfm := new(LastFM)
 	lfm.apiKey = apiKey
-	lfm.Album = albumClient{client:client{lfm}}
-	lfm.Artist = artistClient{client:client{lfm}}
-	lfm.Tag = tagClient{client:client{lfm}}
-	lfm.Track = trackClient{client:client{lfm}}
-	lfm.User = userClient{client:client{lfm}}
+	lfm.Album = albumClient{client: client{lfm}}
+	lfm.Artist = artistClient{client: client{lfm}}
+	lfm.Tag = tagClient{client: client{lfm}}
+	lfm.Track = trackClient{client: client{lfm}}
+	lfm.User = userClient{client: client{lfm}}
 	if apiKey == "api_key_for_testing" {
 		lfm.getter = new(dummyGetter)
 	} else {

@@ -5,6 +5,7 @@ type ArtistBioResponse struct {
 }
 
 type ArtistResponse struct {
+	LastfmStatusResponse
 	Rank       int                   `xml:"rank,attr"`
 	Name       string                `xml:"name"`
 	Playcount  int64                 `xml:"playcount"`

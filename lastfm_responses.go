@@ -1,6 +1,7 @@
 package lastfm
 
 type LastfmResponse interface{}
+
 type LastfmStatusResponse struct {
 	Status string              `xml:"status,attr"`
 	Error  LastfmErrorResponse `xml:"error"`
