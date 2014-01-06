@@ -1,6 +1,10 @@
 package lastfm
 
 type TagResponse struct {
+	Name string `xml:"name"`
+	URL  string `xml:"url"`
+}
+type TagInfoResponse struct {
 	LastfmStatusResponse
 	Name       string             `xml:"name"`
 	URL        string             `xml:"url"`
@@ -12,5 +16,5 @@ type TagResponse struct {
 
 type TopTagsResponse struct {
 	LastfmStatusResponse
-	TopTags []TagResponse `xml:"toptags"`
+	TopTags []TagResponse `xml:"toptags>tag"`
 }

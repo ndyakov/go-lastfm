@@ -103,7 +103,7 @@ func (c *dummyGetter) buildFilename(values url.Values) string {
 	sort.Strings(keys)
 
 	for _, key := range keys {
-		parts = append(parts, strings.Join([]string{key, strings.Replace(strings.Join(values[key], ","), " ", ".", -1)}, "="))
+		parts = append(parts, strings.Join([]string{key, strings.Replace(strings.Join(values[key], ","), " ", "-", -1)}, "="))
 	}
 	return "testing/" + strings.Join(parts, "-") + ".xml"
 }
