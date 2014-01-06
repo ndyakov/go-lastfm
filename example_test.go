@@ -5,7 +5,7 @@ import (
 	"github.com/ndyakov/go-lastfm"
 )
 
-func ExampleLastFM_Artist_GetTopTags() {
+func ExampleArtistClient_GetTopTags() {
 	lfm := lastfm.New("api_key_for_testing")
 	response, err := lfm.Artist.GetTopTags("Daft Punk", "", 0)
 	if err != nil {
