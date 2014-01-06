@@ -36,3 +36,8 @@ type ArtistSearchResponse struct {
 	LastfmOpenSearchResponse
 	ArtistMatches []ArtistResponse `xml:"artistmaches>artist"`
 }
+
+type TopArtistsResponse struct {
+	LastfmStatusResponse
+	TopArtists []ArtistResponse `xml:"topartists>artist"`
+}
