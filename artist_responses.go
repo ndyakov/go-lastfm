@@ -5,15 +5,28 @@ type ArtistBioResponse struct {
 }
 
 type ArtistResponse struct {
-	LastfmStatusResponse
-	Rank       int                   `xml:"rank,attr"`
 	Name       string                `xml:"name"`
-	Playcount  int64                 `xml:"playcount"`
 	MBID       string                `xml:"mbid"`
 	URL        string                `xml:"url"`
+	Images     []LastfmImageResponse `xml:"image"`
 	Streamable int                   `xml:"streamable"`
-	Image      []LastfmImageResponse `xml:"image"`
-	Stats      LastfmStatsResponse   `xml:"stats"`
-	Similar    []ArtistResponse      `xml:"similar"`
-	Bio        ArtistBioResponse     `xml:"bio"`
+	Match      float32               `xml:"match"`
+}
+
+type ArtistInfoResponse struct {
+	LastfmStatusResponse
+	ArtistResponse
+	Stats          LastfmStatsResponse `xml:"stats"`
+	SimilarArtists []ArtistResponse    `xml:"similar>artist"`
+	Bio            ArtistBioResponse   `xml:"bio"`
+}
+
+type ArtistCorrectionResponse struct {
+	LastfmStatusResponse
+	Corrections []ArtistResponse `xml:"corrections>correction>artist"`
+}
+
+type ArtistSimilarResponse struct {
+	LastfmStatusResponse
+	SimilarArtists []ArtistResponse `xml:"similarartists>artist"`
 }
