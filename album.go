@@ -1,5 +1,5 @@
 package lastfm
 
-type albumClient struct {
-	client
+type AlbumClient struct {
+	Client
 }

@@ -17,28 +17,28 @@ type getter interface {
 	Get(uri string) (resp *http.Response, err error)
 }
 
-type client struct {
+type Client struct {
 	lfm *LastFM
 }
 
 type LastFM struct {
 	apiKey string
 	getter getter
-	Album  albumClient
-	Artist artistClient
-	Tag    tagClient
-	Track  trackClient
-	User   userClient
+	Album  AlbumClient
+	Artist ArtistClient
+	Tag    TagClient
+	Track  TrackClient
+	User   UserClient
 }
 
 func New(apiKey string) *LastFM {
 	lfm := new(LastFM)
 	lfm.apiKey = apiKey
-	lfm.Album = albumClient{client: client{lfm}}
-	lfm.Artist = artistClient{client: client{lfm}}
-	lfm.Tag = tagClient{client: client{lfm}}
-	lfm.Track = trackClient{client: client{lfm}}
-	lfm.User = userClient{client: client{lfm}}
+	lfm.Album = AlbumClient{Client: Client{lfm}}
+	lfm.Artist = ArtistClient{Client: Client{lfm}}
+	lfm.Tag = TagClient{Client: Client{lfm}}
+	lfm.Track = TrackClient{Client: Client{lfm}}
+	lfm.User = UserClient{Client: Client{lfm}}
 	if apiKey == "api_key_for_testing" {
 		lfm.getter = new(dummyGetter)
 	} else {

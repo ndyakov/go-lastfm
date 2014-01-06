@@ -1,5 +1,5 @@
 package lastfm
 
-type trackClient struct {
-	client
+type TrackClient struct {
+	Client
 }

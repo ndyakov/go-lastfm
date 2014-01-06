@@ -5,11 +5,11 @@ import (
 	"strconv"
 )
 
-type artistClient struct {
-	client
+type ArtistClient struct {
+	Client
 }
 
-func (c *artistClient) GetTopTags(name string, mbid string, autocorrect int) (response TopTagsResponse, err error) {
+func (c *ArtistClient) GetTopTags(name string, mbid string, autocorrect int) (response TopTagsResponse, err error) {
 	method := "artist.getTopTags"
 	query := make(map[string]string)
 	if mbid == "" {
