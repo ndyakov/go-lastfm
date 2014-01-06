@@ -5,7 +5,6 @@ import (
 	"github.com/ndyakov/go-lastfm"
 	"reflect"
 )
-
 // Create new api client object
 // with your api key as argument.
 func ExampleLastFM_New() {

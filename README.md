@@ -4,6 +4,9 @@ Lastfm's api wrapper in golang
 
 Documentation available on [godoc.org](http://godoc.org/github.com/ndyakov/go-lastfm).
 
+[![BuildStatus](https://travis-ci.org/ndyakov/go-lastfm.png)](https://travis-ci.org/ndyakov/go-lastfm)
+[![GoDoc](https://godoc.org/github.com/ndyakov/go-lastfm?status.png)](https://godoc.org/github.com/ndyakov/go-lastfm)
+
 ## Instalation
 
 ```
