@@ -36,3 +36,16 @@ type LastfmWikiResponse struct {
 	Summary   string `xml:"summary"`
 	Content   string `xml:"content"`
 }
+
+type LastfmOpenSearchResponse struct {
+	Query        OpenSearchQueryResponse `xml:"Query"`
+	TotalResults int                     `xml:"totalResults"`
+	StartIndex   int                     `xml:"startIndex"`
+	ItemsPerPage int                     `xml:"itemsPerPage"`
+}
+
+type OpenSearchQueryResponse struct {
+	Role        string `xml:"role,attr"`
+	SearchTerms string `xml:"searchTerms,attr"`
+	StartPage   int    `xml:"startPage,attr"`
+}

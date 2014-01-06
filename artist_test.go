@@ -1,8 +1,8 @@
 package lastfm
 
 import (
-	"testing"
 	"math"
+	"testing"
 )
 
 func TestArtistTopTags(t *testing.T) {
@@ -22,7 +22,7 @@ func TestArtistSimilar(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if math.Abs((float64)(response.SimilarArtists[0].Match - 1)) > 0.01 {
+	if math.Abs((float64)(response.SimilarArtists[0].Match-1)) > 0.01 {
 		t.Errorf("Expexted SimilarArtists[0].Match to be closer to 1, but it is %v",
 			response.SimilarArtists[0].Match)
 	}

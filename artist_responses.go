@@ -8,7 +8,7 @@ type ArtistResponse struct {
 	Name       string                `xml:"name"`
 	MBID       string                `xml:"mbid"`
 	URL        string                `xml:"url"`
-	Images     []LastfmImageResponse `xml:"image"`
+	Image      []LastfmImageResponse `xml:"image"`
 	Streamable int                   `xml:"streamable"`
 	Match      float32               `xml:"match"`
 }
@@ -29,4 +29,10 @@ type ArtistCorrectionResponse struct {
 type ArtistSimilarResponse struct {
 	LastfmStatusResponse
 	SimilarArtists []ArtistResponse `xml:"similarartists>artist"`
+}
+
+type ArtistSearchResponse struct {
+	LastfmStatusResponse
+	LastfmOpenSearchResponse
+	ArtistMatches []ArtistResponse `xml:"artistmaches>artist"`
 }

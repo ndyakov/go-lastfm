@@ -14,6 +14,10 @@ type TagInfoResponse struct {
 	Wiki       LastfmWikiResponse `xml:"wiki"`
 }
 
+type TagsResponse struct {
+	LastfmStatusResponse
+	Tags []TagResponse `xml:"tags>tag"`
+}
 type TopTagsResponse struct {
 	LastfmStatusResponse
 	TopTags []TagResponse `xml:"toptags>tag"`
