@@ -22,13 +22,14 @@ type Client struct {
 }
 
 type LastFM struct {
-	apiKey string
-	getter getter
-	Album  AlbumClient
-	Artist ArtistClient
-	Tag    TagClient
-	Track  TrackClient
-	User   UserClient
+	apiKey      string
+	getter      getter
+	Album       AlbumClient
+	Artist      ArtistClient
+	Tag         TagClient
+	Track       TrackClient
+	User        UserClient
+	Tasteometer TasteometerClient
 }
 
 func New(apiKey string) *LastFM {
@@ -39,6 +40,7 @@ func New(apiKey string) *LastFM {
 	lfm.Tag = TagClient{Client: Client{lfm}}
 	lfm.Track = TrackClient{Client: Client{lfm}}
 	lfm.User = UserClient{Client: Client{lfm}}
+	lfm.Tasteometer = TasteometerClient{Client: Client{lfm}}
 	if apiKey == "api_key_for_testing" {
 		lfm.getter = new(dummyGetter)
 	} else {
