@@ -33,7 +33,7 @@ type TopFansResponse struct {
 
 type NeighbourResponse struct {
 	UserResponse
-	Match float32 `xml:"match"`
+	Match float64 `xml:"match"`
 }
 type NeighboursResponse struct {
 	LastfmStatusResponse

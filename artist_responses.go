@@ -10,7 +10,7 @@ type ArtistResponse struct {
 	URL        string                `xml:"url"`
 	Image      []LastfmImageResponse `xml:"image"`
 	Streamable int                   `xml:"streamable"`
-	Match      float32               `xml:"match"`
+	Match      float64               `xml:"match"`
 }
 
 type ArtistInfoResponse struct {
