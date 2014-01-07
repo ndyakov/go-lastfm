@@ -54,3 +54,19 @@ type TrackSearchResponse struct {
 	LastfmOpenSearchResponse
 	TrackMatches []TrackResponse `xml:"trackmatches>track"`
 }
+
+type TracksLovedResponse struct {
+	LastfmStatusResponse
+	LovedTracks []TrackResponse `xml:"lovedtracks>track"`
+}
+
+type RecentTrackResponse struct {
+	TrackResponse
+	NowPlaying string             `xml:"nowplaying,attr"`
+	Date       LastfmDateResponse `xml:"date"`
+}
+
+type TracksRecentResponse struct {
+	LastfmStatusResponse
+	RecentTracks []RecentTrackResponse `xml:"recenttracks>track"`
+}

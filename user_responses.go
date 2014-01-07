@@ -30,3 +30,12 @@ type TopFansResponse struct {
 	LastfmStatusResponse
 	TopFans []FanResponse `xml:"topfans>user"`
 }
+
+type NeighbourResponse struct {
+	UserResponse
+	Match float32 `xml:"match"`
+}
+type NeighboursResponse struct {
+	LastfmStatusResponse
+	Neighbours []NeighbourResponse `xml:"neighbours>user"`
+}
