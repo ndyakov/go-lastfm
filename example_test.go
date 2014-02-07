@@ -261,7 +261,7 @@ func ExampleAlbumClient_GetTopTags() {
 
 // Search for Album.
 func ExampleAlbumClient_Search() {
-	lfm := lastfm.New("23326cb6ab138ba392e89df0db61defa")
+	lfm := lastfm.New("api_key_for_testing")
 	response, err := lfm.Album.Search("go", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
