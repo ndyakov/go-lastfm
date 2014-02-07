@@ -116,6 +116,26 @@ func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit 
 }
 
 func (c *ArtistClient) GetTopFans(name, mbid string, autocorrect int) (response TopFansResponse, err error) {
+	method := "artist.getTopFans"
+	query := c.prepareQuery(name, mbid, autocorrect)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

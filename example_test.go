@@ -97,3 +97,22 @@ func ExampleArtistClient_GetTopAlbums() {
 	// Playcount: 26
 	// Image [small] : http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png
 }
+
+// Get Top Fans for Artist.
+func ExampleArtistClient_GetTopFans() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Artist.GetTopFans("Ogonek", "", 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	user := response.TopFans[0]
+	fmt.Printf("Top Fan #1 : %v\n", user.Name)
+	fmt.Printf("URL : %v\n", user.URL)
+	fmt.Printf("Image [%v] : %v\n", user.Image[0].Size, user.Image[0].URL)
+
+	// Output:
+	// Top Fan #1 : rikardo_83
+	// URL : http://www.last.fm/user/rikardo_83
+	// Image [small] : http://userserve-ak.last.fm/serve/34/79926153.gif
+}
