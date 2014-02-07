@@ -38,10 +38,10 @@ type LastfmWikiResponse struct {
 }
 
 type LastfmOpenSearchResponse struct {
-	Query        OpenSearchQueryResponse `xml:"Query"`
-	TotalResults int                     `xml:"totalResults"`
-	StartIndex   int                     `xml:"startIndex"`
-	ItemsPerPage int                     `xml:"itemsPerPage"`
+	Query        OpenSearchQueryResponse `xml:"results>Query"`
+	TotalResults int                     `xml:"results>totalResults"`
+	StartIndex   int                     `xml:"results>startIndex"`
+	ItemsPerPage int                     `xml:"results>itemsPerPage"`
 }
 
 type OpenSearchQueryResponse struct {
