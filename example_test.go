@@ -309,3 +309,23 @@ func ExampleTagClient_GetInfo() {
 	// Reach : 374178
 	// Taggings : 3979953
 }
+
+// Get Similar Tags.
+func ExampleTagClient_GetSimilar() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.GetSimilar("rock")
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	tag := response.SimilarTags[0]
+	fmt.Printf("Number of matches : %v\n", len(response.SimilarTags))
+	fmt.Printf("First match :\n")
+	fmt.Printf("Tag : %v\n", tag.Name)
+	fmt.Printf("URL : %v\n", tag.URL)
+	// Output:
+	// Number of matches : 50
+	// First match :
+	// Tag : classic rock
+	// URL : http://www.last.fm/tag/classic%20rock
+}

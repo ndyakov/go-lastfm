@@ -56,6 +56,27 @@ func (c *TagClient) GetInfo(tag string) (response TagInfoResponse, err error) {
 }
 
 func (c *TagClient) GetSimilar(tag string) (response TagSimilarResponse, err error) {
+	method := "tag.getSimilar"
+	query := make(map[string]string)
+	query["tag"] = tag
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
