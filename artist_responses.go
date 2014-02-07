@@ -40,7 +40,7 @@ type ArtistSimilarResponse struct {
 type ArtistSearchResponse struct {
 	LastfmStatusResponse
 	LastfmOpenSearchResponse
-	ArtistMatches []ArtistResponse `xml:"artistmatches>artist"`
+	ArtistMatches []ArtistResponse `xml:"results>artistmatches>artist"`
 }
 
 // TopArtistsResponse, used where <topartists> tag is present.
