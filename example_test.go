@@ -218,3 +218,22 @@ func ExampleAlbumClient_GetInfo() {
 	//   Title : luk i praz
 	//   Duration : 302
 }
+
+// Get Tags for Album.
+func ExampleAlbumClient_GetTags() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Album.GetTags("Guano Apes", "Bel Air", "", "n3mo-", 1)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
+	fmt.Printf("Tag #1 :\n")
+	fmt.Printf("Name : %v\n", response.Tags[0].Name)
+	fmt.Printf("URL  : %v\n", response.Tags[0].URL)
+	// Output:
+	// Number of Tags by User : 2
+	// Tag #1 :
+	// Name : guano apes v2
+	// URL  : http://www.last.fm/tag/guano%20apes%20v2
+}

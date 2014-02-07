@@ -17,7 +17,7 @@ type AlbumClient struct {
 // MBID has higher priority than Artist's and Album's name, so if MBID is present
 // the names are ignored. Provide empty strings for missing data.
 // Returns map[string]string that can be used in LastFM.makeRequest.
-func (c *AlbumClient) prepareQuery(artist, album, mbid, username string, autocorrect int) (query map[string]string) {
+func (c *AlbumClient) prepareQuery(artist, album, mbid, user string, autocorrect int, userLongVariableName bool) (query map[string]string) {
 	query = make(map[string]string)
 
 	if mbid == "" {
@@ -27,8 +27,12 @@ func (c *AlbumClient) prepareQuery(artist, album, mbid, username string, autocor
 		query["mbid"] = mbid
 	}
 
-	if username != "" {
-		query["username"] = username
+	if user != "" {
+		if userLongVariableName {
+			query["username"] = user
+		} else {
+			query["user"] = user
+		}
 	}
 
 	query["autocorrect"] = strconv.Itoa(autocorrect)
@@ -38,7 +42,7 @@ func (c *AlbumClient) prepareQuery(artist, album, mbid, username string, autocor
 
 func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect int) (response AlbumInfoResponse, err error) {
 	method := "album.getInfo"
-	query := c.prepareQuery(artist, album, mbid, username, autocorrect)
+	query := c.prepareQuery(artist, album, mbid, username, autocorrect, true)
 	body, _, err := c.lfm.makeRequest(method, query)
 
 	if err != nil {
@@ -61,6 +65,26 @@ func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect 
 }
 
 func (c *AlbumClient) GetTags(artist, album, mbid, username string, autocorrect int) (response TagsResponse, err error) {
+	method := "album.getTags"
+	query := c.prepareQuery(artist, album, mbid, username, autocorrect, false)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
