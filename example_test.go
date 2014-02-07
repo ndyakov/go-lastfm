@@ -413,3 +413,33 @@ func ExampleTagClient_GetTopTracks() {
 	// Artist : OneRepublic
 	// URL : http://www.last.fm/music/OneRepublic/_/Counting+Stars
 }
+
+// Search for Tags.
+func ExampleTagClient_Search() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.Search("rock", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+
+	var tag lastfm.TagResponse
+
+	fmt.Printf("Search request for : %v\n", response.Query.SearchTerms)
+	fmt.Printf("Total results : %v\n", response.TotalResults)
+	if response.TotalResults > 0 {
+		tag = response.TagMatches[0]
+	}
+	fmt.Printf("First result :\n")
+	fmt.Printf("  Tag Name : %v\n", tag.Name)
+	fmt.Printf("  Tag Count : %v\n", tag.Count)
+	fmt.Printf("  Tag URL : %v\n", tag.URL)
+
+	// Output:
+	// Search request for : rock
+	// Total results : 15206
+	// First result :
+	//   Tag Name : rock
+	//   Tag Count : 3979953
+	//   Tag URL : www.last.fm/tag/rock
+}

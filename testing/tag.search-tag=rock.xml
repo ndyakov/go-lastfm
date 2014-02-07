@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<results for="rock" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query role="request" searchTerms="rock" startPage="1" />
+<opensearch:totalResults>15206</opensearch:totalResults>
+<opensearch:startIndex>0</opensearch:startIndex>
+<opensearch:itemsPerPage>30</opensearch:itemsPerPage><tagmatches>
+<tag>
+    <name>rock</name>
+    <count>3979953</count>
+    <url>www.last.fm/tag/rock</url>
+</tag>
+<tag>
+    <name>alternative rock</name>
+    <count>1153430</count>
+    <url>www.last.fm/tag/alternative%20rock</url>
+</tag>
+<tag>
+    <name>classic rock</name>
+    <count>1143881</count>
+    <url>www.last.fm/tag/classic%20rock</url>
+</tag>
+<tag>
+    <name>indie rock</name>
+    <count>871796</count>
+    <url>www.last.fm/tag/indie%20rock</url>
+</tag>
+<tag>
+    <name>hard rock</name>
+    <count>838864</count>
+    <url>www.last.fm/tag/hard%20rock</url>
+</tag>
+<tag>
+    <name>punk rock</name>
+    <count>530047</count>
+    <url>www.last.fm/tag/punk%20rock</url>
+</tag>
+<tag>
+    <name>progressive rock</name>
+    <count>683311</count>
+    <url>www.last.fm/tag/progressive%20rock</url>
+</tag>
+<tag>
+    <name>post-rock</name>
+    <count>437784</count>
+    <url>www.last.fm/tag/post-rock</url>
+</tag>
+<tag>
+    <name>pop rock</name>
+    <count>201068</count>
+    <url>www.last.fm/tag/pop%20rock</url>
+</tag>
+<tag>
+    <name>psychedelic rock</name>
+    <count>244907</count>
+    <url>www.last.fm/tag/psychedelic%20rock</url>
+</tag>
+<tag>
+    <name>blues rock</name>
+    <count>200008</count>
+    <url>www.last.fm/tag/blues%20rock</url>
+</tag>
+<tag>
+    <name>folk rock</name>
+    <count>137708</count>
+    <url>www.last.fm/tag/folk%20rock</url>
+</tag>
+<tag>
+    <name>gothic rock</name>
+    <count>154341</count>
+    <url>www.last.fm/tag/gothic%20rock</url>
+</tag>
+<tag>
+    <name>stoner rock</name>
+    <count>144489</count>
+    <url>www.last.fm/tag/stoner%20rock</url>
+</tag>
+<tag>
+    <name>j-rock</name>
+    <count>176943</count>
+    <url>www.last.fm/tag/j-rock</url>
+</tag>
+<tag>
+    <name>garage rock</name>
+    <count>119268</count>
+    <url>www.last.fm/tag/garage%20rock</url>
+</tag>
+<tag>
+    <name>glam rock</name>
+    <count>90786</count>
+    <url>www.last.fm/tag/glam%20rock</url>
+</tag>
+<tag>
+    <name>soft rock</name>
+    <count>102059</count>
+    <url>www.last.fm/tag/soft%20rock</url>
+</tag>
+<tag>
+    <name>southern rock</name>
+    <count>73127</count>
+    <url>www.last.fm/tag/southern%20rock</url>
+</tag>
+<tag>
+    <name>post rock</name>
+    <count>75051</count>
+    <url>www.last.fm/tag/post%20rock</url>
+</tag>
+<tag>
+    <name>industrial rock</name>
+    <count>68251</count>
+    <url>www.last.fm/tag/industrial%20rock</url>
+</tag>
+<tag>
+    <name>rock n roll</name>
+    <count>84428</count>
+    <url>www.last.fm/tag/rock%20n%20roll</url>
+</tag>
+<tag>
+    <name>rock and roll</name>
+    <count>73926</count>
+    <url>www.last.fm/tag/rock%20and%20roll</url>
+</tag>
+<tag>
+    <name>art rock</name>
+    <count>87717</count>
+    <url>www.last.fm/tag/art%20rock</url>
+</tag>
+<tag>
+    <name>russian rock</name>
+    <count>76426</count>
+    <url>www.last.fm/tag/russian%20rock</url>
+</tag>
+<tag>
+    <name>noise rock</name>
+    <count>76048</count>
+    <url>www.last.fm/tag/noise%20rock</url>
+</tag>
+<tag>
+    <name>math rock</name>
+    <count>55213</count>
+    <url>www.last.fm/tag/math%20rock</url>
+</tag>
+<tag>
+    <name>space rock</name>
+    <count>73788</count>
+    <url>www.last.fm/tag/space%20rock</url>
+</tag>
+<tag>
+    <name>christian rock</name>
+    <count>58855</count>
+    <url>www.last.fm/tag/christian%20rock</url>
+</tag>
+<tag>
+    <name>pop-rock</name>
+    <count>47494</count>
+    <url>www.last.fm/tag/pop-rock</url>
+</tag>
+</tagmatches>
+</results></lfm>
+

@@ -33,5 +33,5 @@ type TagSimilarResponse struct {
 type TagSearchResponse struct {
 	LastfmStatusResponse
 	LastfmOpenSearchResponse
-	TagMatches []TagResponse `xml:"tagmatches>tag"`
+	TagMatches []TagResponse `xml:"results>tagmatches>tag"`
 }
