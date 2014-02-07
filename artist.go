@@ -213,21 +213,46 @@ func (c *ArtistClient) GetSimilar(name string, mbid string, autocorrect int) (re
 	method := "artist.getsimilar"
 	query := c.prepareQuery(name, mbid, autocorrect)
 	body, _, err := c.lfm.makeRequest(method, query)
+
 	if err != nil {
 		return
 	}
+
 	defer body.Close()
 	err = xml.NewDecoder(body).Decode(&response)
+
 	if err != nil {
 		return
 	}
+
 	if response.Error.Code != 0 {
 		err = &response.Error
 		return
 	}
+
 	return
 }
 
 func (c *ArtistClient) GetInfo(name, mbid string, autocorrect int) (response ArtistInfoResponse, err error) {
+	method := "artist.getInfo"
+	query := c.prepareQuery(name, mbid, autocorrect)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }

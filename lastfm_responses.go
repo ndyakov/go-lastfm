@@ -28,7 +28,7 @@ type LastfmImageResponse struct {
 
 type LastfmStatsResponse struct {
 	Listeners int64 `xml:"listeners"`
-	Plays     int64 `xml:"plays"`
+	Playcount int64 `xml:"playcount"`
 }
 
 type LastfmWikiResponse struct {

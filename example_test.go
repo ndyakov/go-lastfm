@@ -167,3 +167,24 @@ func ExampleArtistClient_Search() {
 	//   Artist MBID : 971762d6-c851-499c-a656-7fa4fa055f47
 	//   Artist Image[small] : http://userserve-ak.last.fm/serve/34/26437217.jpg
 }
+
+// Get full info for Artist.
+func ExampleArtistClient_GetInfo() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Artist.GetInfo("Gorillaz", "", 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Artist : %v\n", response.Artist.Name)
+	fmt.Printf("MBID : %v\n", response.Artist.MBID)
+	fmt.Printf("URL : %v\n", response.Artist.URL)
+	fmt.Printf("Listeners : %v\n", response.Artist.Stats.Listeners)
+	fmt.Printf("Playcount : %v\n", response.Artist.Stats.Playcount)
+	// Output:
+	// Artist : Gorillaz
+	// MBID : e21857d5-3256-4547-afb3-4b6ded592596
+	// URL : http://www.last.fm/music/Gorillaz
+	// Listeners : 3091710
+	// Playcount : 124649955
+}
