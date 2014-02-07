@@ -20,6 +20,7 @@ func ExampleArtistClient_GetTopTags() {
 	lfm := lastfm.New("api_key_for_testing")
 	response, err := lfm.Artist.GetTopTags("Daft Punk", "", 0)
 	if err != nil {
+		fmt.Println("Error:")
 		fmt.Println(err)
 	}
 	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
@@ -33,11 +34,31 @@ func ExampleArtistClient_GetTopTags() {
 	// URL  : http://www.last.fm/tag/electronic
 }
 
+// Get Tags for Artist.
+func ExampleArtistClient_GetTags() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Artist.GetTags("Red Hot Chili Peppers", "", 1, "RJ")
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
+	fmt.Printf("Tag #1 :\n")
+	fmt.Printf("Name : %v\n", response.Tags[0].Name)
+	fmt.Printf("URL  : %v\n", response.Tags[0].URL)
+	// Output:
+	// Number of Tags by User : 2
+	// Tag #1 :
+	// Name : funky
+	// URL  : http://www.last.fm/tag/funky
+}
+
 // Get Similar Artists.
 func ExampleArtistClient_GetSimilar() {
 	lfm := lastfm.New("api_key_for_testing")
 	response, err := lfm.Artist.GetSimilar("Cher", "", 0)
 	if err != nil {
+		fmt.Println("Error:")
 		fmt.Println(err)
 	}
 	artist := response.SimilarArtists[0]

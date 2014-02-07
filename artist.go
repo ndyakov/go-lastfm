@@ -21,8 +21,7 @@ func (c *ArtistClient) prepareQuery(name, mbid string, autocorrect int) (query m
 	query = make(map[string]string)
 	if mbid == "" {
 		query["artist"] = name
-	}
-	if mbid != "" {
+	} else {
 		query["mbid"] = mbid
 	}
 	query["autocorrect"] = strconv.Itoa(autocorrect)
@@ -50,7 +49,23 @@ func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response 
 	return
 }
 
-func (c *ArtistClient) GetTags(name, mbid string, autocorrect int) (response TagsResponse, err error) {
+func (c *ArtistClient) GetTags(name, mbid string, autocorrect int, user string) (response TagsResponse, err error) {
+	method := "artist.getTags"
+	query := c.prepareQuery(name, mbid, autocorrect)
+	query["user"] = user
+	body, _, err := c.lfm.makeRequest(method, query)
+	if err != nil {
+		return
+	}
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+	if err != nil {
+		return
+	}
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
 	return
 }
 
