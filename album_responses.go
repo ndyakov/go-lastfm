@@ -1,5 +1,7 @@
 package lastfm
 
+// AlbumResponse, used where <album> tag is present
+// and there is a tree of tags in <artist></artist> pair.
 type AlbumResponse struct {
 	Name        string                `xml:"name"`
 	Artist      ArtistResponse        `xml:"artist"`
@@ -15,6 +17,8 @@ type AlbumResponse struct {
 	Tracks      []TrackResponse       `xml:"tracks>track"`
 }
 
+// AlbumResponseNoArtistStruct, used where <album> tag is
+// present but there is no subtags in <artist></artist>.
 type AlbumResponseNoArtistStruct struct {
 	Name        string                `xml:"name"`
 	Artist      string                `xml:"artist"`
@@ -30,16 +34,19 @@ type AlbumResponseNoArtistStruct struct {
 	Tracks      []TrackResponse       `xml:"tracks>track"`
 }
 
+// AlbumInfoResponse, used for album.getInfo request.
 type AlbumInfoResponse struct {
 	LastfmStatusResponse
 	Album AlbumResponseNoArtistStruct `xml:"album"`
 }
 
+// TopAlbumResponse, used where <topalbums> tag is present.
 type TopAlbumsResponse struct {
 	LastfmStatusResponse
 	TopAlbums []AlbumResponse `xml:"topalbums>album"`
 }
 
+// AlbumSearchResponse, used for album.search request.
 type AlbumSearchResponse struct {
 	LastfmStatusResponse
 	LastfmOpenSearchResponse

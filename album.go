@@ -40,6 +40,9 @@ func (c *AlbumClient) prepareQuery(artist, album, mbid, user string, autocorrect
 	return
 }
 
+// Get full information for Album.
+// Returns AlbumInforResponse or error.
+// There may be an error returned from the parser/decoder as well.
 func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect int) (response AlbumInfoResponse, err error) {
 	method := "album.getInfo"
 	query := c.prepareQuery(artist, album, mbid, username, autocorrect, true)
@@ -64,6 +67,8 @@ func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect 
 	return
 }
 
+// Get Tags for some Album, that are added by some user.
+// Returns TagsResponse or error.
 func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int) (response TagsResponse, err error) {
 	method := "album.getTags"
 	query := c.prepareQuery(artist, album, mbid, user, autocorrect, false)
@@ -88,6 +93,8 @@ func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int)
 	return
 }
 
+// Get Top Tags for Album.
+// Returns TopTagsResponse or error.
 func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (response TopTagsResponse, err error) {
 	method := "album.getTopTags"
 	query := c.prepareQuery(artist, album, mbid, "", autocorrect, false)
@@ -112,6 +119,9 @@ func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (r
 	return
 }
 
+// Search album by given name. You can specify page and limit also.
+// Default values are as stated in lastfm's api documentation.
+// Returns AlbumSearchResponse.
 func (c *AlbumClient) Search(album string, page, limit int) (response AlbumSearchResponse, err error) {
 	method := "album.search"
 	query := make(map[string]string)
