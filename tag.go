@@ -30,6 +30,8 @@ func (c *TagClient) prepareQuery(tag string, page, limit int) (query map[string]
 	return
 }
 
+// Get full information for some tag.
+// Returns TagInfoResponse or error.
 func (c *TagClient) GetInfo(tag string) (response TagInfoResponse, err error) {
 	method := "tag.getInfo"
 	query := make(map[string]string)
@@ -55,6 +57,8 @@ func (c *TagClient) GetInfo(tag string) (response TagInfoResponse, err error) {
 	return
 }
 
+// Get similar tags to some tag.
+// Returns TagSimilarResponse or error.
 func (c *TagClient) GetSimilar(tag string) (response TagSimilarResponse, err error) {
 	method := "tag.getSimilar"
 	query := make(map[string]string)
@@ -80,6 +84,8 @@ func (c *TagClient) GetSimilar(tag string) (response TagSimilarResponse, err err
 	return
 }
 
+// Get top Albums with some tag.
+// Returns TopAlbumsResponse or error.
 func (c *TagClient) GetTopAlbums(tag string, page, limit int) (response TopAlbumsResponse, err error) {
 	method := "tag.getTopAlbums"
 	query := c.prepareQuery(tag, page, limit)
@@ -104,6 +110,8 @@ func (c *TagClient) GetTopAlbums(tag string, page, limit int) (response TopAlbum
 	return
 }
 
+// Get top Artists with some tag.
+// Returns TopArtistsResponse or error.
 func (c *TagClient) GetTopArtists(tag string, page, limit int) (response TopArtistsResponse, err error) {
 	method := "tag.getTopArtists"
 	query := c.prepareQuery(tag, page, limit)
@@ -128,6 +136,8 @@ func (c *TagClient) GetTopArtists(tag string, page, limit int) (response TopArti
 	return
 }
 
+// Get Top Tags in Lastfm.
+// Returns TopTagsResponse or error.
 func (c *TagClient) GetTopTags() (response TopTagsResponse, err error) {
 	method := "tag.getTopTags"
 	query := make(map[string]string)
@@ -152,6 +162,8 @@ func (c *TagClient) GetTopTags() (response TopTagsResponse, err error) {
 	return
 }
 
+// Get Top Tracks with some tag.
+// Returns TopTracksResponse or error.
 func (c *TagClient) GetTopTracks(tag string, page, limit int) (response TopTracksResponse, err error) {
 	method := "tag.getTopTracks"
 	query := c.prepareQuery(tag, page, limit)
@@ -176,6 +188,8 @@ func (c *TagClient) GetTopTracks(tag string, page, limit int) (response TopTrack
 	return
 }
 
+// Search tag by some string.
+// Returns TagSearchResponse or error.
 func (c *TagClient) Search(tag string, page, limit int) (response TagSearchResponse, err error) {
 	method := "tag.search"
 	query := c.prepareQuery(tag, page, limit)
