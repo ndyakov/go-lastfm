@@ -290,3 +290,22 @@ func ExampleAlbumClient_Search() {
 	//   Artist Name : Gorillaz
 	//   Album Image[small] : http://userserve-ak.last.fm/serve/34s/44425129.png
 }
+
+// Get full info for Tag.
+func ExampleTagClient_GetInfo() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.GetInfo("rock")
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Name : %v\n", response.Tag.Name)
+	fmt.Printf("URL : %v\n", response.Tag.URL)
+	fmt.Printf("Reach : %v\n", response.Tag.Reach)
+	fmt.Printf("Taggings : %v\n", response.Tag.Taggings)
+	// Output:
+	// Name : rock
+	// URL : http://www.last.fm/tag/rock
+	// Reach : 374178
+	// Taggings : 3979953
+}

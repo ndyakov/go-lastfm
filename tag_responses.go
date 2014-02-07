@@ -1,18 +1,18 @@
 package lastfm
 
 type TagResponse struct {
-	Name       string `xml:"name"`
-	URL        string `xml:"url"`
-	Reach      int64  `xml:"reach"`
-	Taggings   int64  `xml:"taggings"`
-	Streamable int    `xml:"streamable"`
-	Count      int64  `xml:"count"`
+	Name       string             `xml:"name"`
+	URL        string             `xml:"url"`
+	Reach      int64              `xml:"reach"`
+	Taggings   int64              `xml:"taggings"`
+	Streamable int                `xml:"streamable"`
+	Count      int64              `xml:"count"`
+	Wiki       LastfmWikiResponse `xml:"wiki"`
 }
 
 type TagInfoResponse struct {
 	LastfmStatusResponse
-	TagResponse
-	Wiki LastfmWikiResponse `xml:"wiki"`
+	Tag TagResponse `xml:"tag"`
 }
 
 type TagsResponse struct {
