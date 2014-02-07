@@ -188,3 +188,33 @@ func ExampleArtistClient_GetInfo() {
 	// Listeners : 3091710
 	// Playcount : 124649955
 }
+
+// Get full info for Album.
+func ExampleAlbumClient_GetInfo() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Album.GetInfo("Ogonek", "Drum And Bass Massacre", "", "", 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Artist : %v\n", response.Album.Artist)
+	fmt.Printf("Album : %v\n", response.Album.Name)
+	fmt.Printf("ID : %v\n", response.Album.ID)
+	fmt.Printf("URL : %v\n", response.Album.URL)
+	fmt.Printf("Listeners : %v\n", response.Album.Listeners)
+	fmt.Printf("Playcount : %v\n", response.Album.Playcount)
+	fmt.Printf("First track :\n")
+	track := response.Album.Tracks[0]
+	fmt.Printf("  Title : %v\n", track.Name)
+	fmt.Printf("  Duration : %v\n", track.Duration)
+	// Output:
+	// Artist : Ogonek
+	// Album : Drum And Bass Massacre
+	// ID : 3668131
+	// URL : http://www.last.fm/music/Ogonek/Drum+And+Bass+Massacre
+	// Listeners : 2163
+	// Playcount : 4288
+	// First track :
+	//   Title : luk i praz
+	//   Duration : 302
+}
