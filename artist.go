@@ -140,6 +140,35 @@ func (c *ArtistClient) GetTopFans(name, mbid string, autocorrect int) (response 
 }
 
 func (c *ArtistClient) GetTopTracks(name, mbid string, autocorrect, page, limit int) (response TopTracksResponse, err error) {
+	method := "artist.getTopTracks"
+	query := c.prepareQuery(name, mbid, autocorrect)
+
+	if page != 0 {
+		query["page"] = strconv.Itoa(page)
+	}
+
+	if limit != 0 {
+		query["limit"] = strconv.Itoa(limit)
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

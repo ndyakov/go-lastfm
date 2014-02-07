@@ -116,3 +116,24 @@ func ExampleArtistClient_GetTopFans() {
 	// URL : http://www.last.fm/user/rikardo_83
 	// Image [small] : http://userserve-ak.last.fm/serve/34/79926153.gif
 }
+
+// Get Top Tracks for Artist.
+func ExampleArtistClient_GetTopTracks() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Artist.GetTopTracks("Ogonek", "", 0, 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	track := response.TopTracks[0]
+	fmt.Printf("Top Tracks By : %v\n", track.Artist.Name)
+	fmt.Printf("Top Track #1 : %v\n", track.Name)
+	fmt.Printf("URL : %v\n", track.URL)
+	fmt.Printf("Playcount: %v\n", track.Playcount)
+
+	// Output:
+	// Top Tracks By : Ogonek
+	// Top Track #1 : Starlight
+	// URL : http://www.last.fm/music/Ogonek/_/Starlight
+	// Playcount: 109
+}

@@ -2,7 +2,7 @@ package lastfm
 
 type TrackStreamableResponse struct {
 	FullTrack  int `xml:"fulltrack,attr"`
-	Streamable int `xml",chardata"`
+	Streamable int `xml:",chardata"`
 }
 
 type TrackResponse struct {
