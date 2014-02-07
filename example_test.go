@@ -258,3 +258,35 @@ func ExampleAlbumClient_GetTopTags() {
 	// URL  : http://www.last.fm/tag/rock
 	// Count : 100
 }
+
+// Search for Album.
+func ExampleAlbumClient_Search() {
+	lfm := lastfm.New("23326cb6ab138ba392e89df0db61defa")
+	response, err := lfm.Album.Search("go", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+
+	var album lastfm.AlbumResponseNoArtistStruct
+
+	fmt.Printf("Search request for : %v\n", response.Query.SearchTerms)
+	fmt.Printf("Total results : %v\n", response.TotalResults)
+	if response.TotalResults > 0 {
+		album = response.AlbumMatches[0]
+	}
+	fmt.Printf("First result :\n")
+	fmt.Printf("  Album Name : %v\n", album.Name)
+	fmt.Printf("  Album MBID : %v\n", album.MBID)
+	fmt.Printf("  Artist Name : %v\n", album.Artist)
+	fmt.Printf("  Album Image[%v] : %v\n", album.Image[0].Size, album.Image[0].URL)
+
+	// Output:
+	// Search request for : go
+	// Total results : 31102
+	// First result :
+	//   Album Name : Demon Days
+	//   Album MBID : 26193df8-54c5-4c75-80e3-84ddc9aa7379
+	//   Artist Name : Gorillaz
+	//   Album Image[small] : http://userserve-ak.last.fm/serve/34s/44425129.png
+}

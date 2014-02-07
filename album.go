@@ -112,6 +112,36 @@ func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (r
 	return
 }
 
-func (c *AlbumClient) Search(album string, limit, page int) (response AlbumSearchResponse, err error) {
+func (c *AlbumClient) Search(album string, page, limit int) (response AlbumSearchResponse, err error) {
+	method := "album.search"
+	query := make(map[string]string)
+	query["album"] = album
+
+	if page != 0 {
+		query["page"] = strconv.Itoa(page)
+	}
+
+	if limit != 0 {
+		query["limit"] = strconv.Itoa(limit)
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }

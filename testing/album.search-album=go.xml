@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<results for="go" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query role="request" searchTerms="go" startPage="1" />
+<opensearch:totalResults>31102</opensearch:totalResults>
+<opensearch:startIndex>0</opensearch:startIndex>
+<opensearch:itemsPerPage>50</opensearch:itemsPerPage><albummatches>
+<album>
+    <name>Demon Days</name>
+    <artist>Gorillaz</artist>
+    <id>1437090</id>
+    <url>http://www.last.fm/music/Gorillaz/Demon+Days</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/44425129.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/44425129.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/44425129.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/44425129.png</image>
+    <streamable>0</streamable>
+            <mbid>26193df8-54c5-4c75-80e3-84ddc9aa7379</mbid>
+    </album>
+<album>
+    <name>Good Girl Gone Bad</name>
+    <artist>Rihanna</artist>
+    <id>3341265</id>
+    <url>http://www.last.fm/music/Rihanna/Good+Girl+Gone+Bad</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/88340887.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/88340887.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/88340887.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/88340887.png</image>
+    <streamable>0</streamable>
+            <mbid>768695cf-35fa-4919-9090-25c5200e6836</mbid>
+    </album>
+<album>
+    <name>Good News For People Who Love Bad News</name>
+    <artist>Modest Mouse</artist>
+    <id>2024547</id>
+    <url>http://www.last.fm/music/Modest+Mouse/Good+News+For+People+Who+Love+Bad+News</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/55584809.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/55584809.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/55584809.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/55584809.png</image>
+    <streamable>0</streamable>
+            <mbid>5fc4b729-2396-3723-a6f0-01c58f2af1f4</mbid>
+    </album>
+<album>
+    <name>Gorillaz</name>
+    <artist>Gorillaz</artist>
+    <id>2024871</id>
+    <url>http://www.last.fm/music/Gorillaz/Gorillaz</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/24507751.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/24507751.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/24507751.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/24507751.png</image>
+    <streamable>0</streamable>
+            <mbid>0c2b6134-3f1b-4567-8ba4-4828065917c6</mbid>
+    </album>
+<album>
+    <name>Dizzy Up the Girl</name>
+    <artist>Goo Goo Dolls</artist>
+    <id>2024754</id>
+    <url>http://www.last.fm/music/Goo+Goo+Dolls/Dizzy+Up+the+Girl</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/96581527.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/96581527.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/96581527.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/96581527.png</image>
+    <streamable>1</streamable>
+            <mbid>8dee8a83-91c8-4fcc-b069-8816024eca17</mbid>
+    </album>
+<album>
+    <name>Let Go</name>
+    <artist>Avril Lavigne</artist>
+    <id>11513</id>
+    <url>http://www.last.fm/music/Avril+Lavigne/Let+Go</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/95158681.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/95158681.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/95158681.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/95158681.png</image>
+    <streamable>0</streamable>
+            <mbid>ab3e2fe3-3465-43f8-aee9-214dfa9e86bf</mbid>
+    </album>
+<album>
+    <name>So Far Gone</name>
+    <artist>Drake</artist>
+    <id>4702246</id>
+    <url>http://www.last.fm/music/Drake/So+Far+Gone</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/87951269.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/87951269.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/87951269.jpg</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/87951269.jpg</image>
+    <streamable>0</streamable>
+            <mbid>2f2b8cd8-1c70-48c6-bbb6-a92365d8cf75</mbid>
+    </album>
+<album>
+    <name>Rolled Gold +</name>
+    <artist>The Rolling Stones</artist>
+    <id>3667042</id>
+    <url>http://www.last.fm/music/The+Rolling+Stones/Rolled+Gold+%252B</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/50670591.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/50670591.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/50670591.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/50670591.png</image>
+    <streamable>0</streamable>
+            <mbid></mbid>
+    </album>
+<album>
+    <name>The Young and The Hopeless</name>
+    <artist>Good Charlotte</artist>
+    <id>2025717</id>
+    <url>http://www.last.fm/music/Good+Charlotte/The+Young+and+The+Hopeless</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/51876291.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/51876291.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/51876291.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/51876291.png</image>
+    <streamable>1</streamable>
+            <mbid>058c4edc-345b-3411-9d61-35e542d54e66</mbid>
+    </album>
+<album>
+    <name>Making Mirrors</name>
+    <artist>Gotye</artist>
+    <id>267588254</id>
+    <url>http://www.last.fm/music/Gotye/Making+Mirrors</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/68234032.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/68234032.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/68234032.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/68234032.png</image>
+    <streamable>0</streamable>
+            <mbid>c90aa93c-09fc-448f-9d94-dc08760989eb</mbid>
+    </album>
+<album>
+    <name>Mellow Gold</name>
+    <artist>Beck</artist>
+    <id>4739</id>
+    <url>http://www.last.fm/music/Beck/Mellow+Gold</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/54834545.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/54834545.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/54834545.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/54834545.png</image>
+    <streamable>0</streamable>
+            <mbid>2ba18fee-81de-4344-a081-fffd1940fd91</mbid>
+    </album>
+<album>
+    <name>Plastic Beach</name>
+    <artist>Gorillaz</artist>
+    <id>72850886</id>
+    <url>http://www.last.fm/music/Gorillaz/Plastic+Beach</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/43379949.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/43379949.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/43379949.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/43379949.png</image>
+    <streamable>0</streamable>
+            <mbid>2bf1fb73-456f-45c3-9b7a-9edae7e8e99e</mbid>
+    </album>
+<album>
+    <name>Faceless</name>
+    <artist>Godsmack</artist>
+    <id>2026559</id>
+    <url>http://www.last.fm/music/Godsmack/Faceless</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/82752381.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/82752381.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/82752381.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/82752381.png</image>
+    <streamable>0</streamable>
+            <mbid>61f506ec-2605-4bbe-903e-2be1f34a654e</mbid>
+    </album>
+<album>
+    <name>Oh No</name>
+    <artist>OK Go</artist>
+    <id>2269526</id>
+    <url>http://www.last.fm/music/OK+Go/Oh+No</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/43053675.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/43053675.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/43053675.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/43053675.png</image>
+    <streamable>0</streamable>
+            <mbid>ad4773bb-84c8-4b0b-be6b-4d9790d2b8da</mbid>
+    </album>
+<album>
+    <name>Lights</name>
+    <artist>Ellie Goulding</artist>
+    <id>217327110</id>
+    <url>http://www.last.fm/music/Ellie+Goulding/Lights</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/96347641.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/96347641.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/96347641.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/96347641.png</image>
+    <streamable>0</streamable>
+            <mbid>92bfcc50-9385-4e4f-9329-ec0e043861d1</mbid>
+    </album>
+<album>
+    <name>So Far So Good</name>
+    <artist>Bryan Adams</artist>
+    <id>2029084</id>
+    <url>http://www.last.fm/music/Bryan+Adams/So+Far+So+Good</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/91313663.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/91313663.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/91313663.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/91313663.png</image>
+    <streamable>0</streamable>
+            <mbid>c725b334-df08-36f0-b825-d62afe7a68c8</mbid>
+    </album>
+<album>
+    <name>Supernature</name>
+    <artist>Goldfrapp</artist>
+    <id>2055010</id>
+    <url>http://www.last.fm/music/Goldfrapp/Supernature</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/31584797.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/31584797.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/31584797.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/31584797.png</image>
+    <streamable>0</streamable>
+            <mbid>2f0a8de1-1824-4ab2-9d8b-eaf05ca41538</mbid>
+    </album>
+<album>
+    <name>Good Morning Revival</name>
+    <artist>Good Charlotte</artist>
+    <id>3266080</id>
+    <url>http://www.last.fm/music/Good+Charlotte/Good+Morning+Revival</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/41450933.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/41450933.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/41450933.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/41450933.png</image>
+    <streamable>0</streamable>
+            <mbid>a890e9a6-90cf-4665-8928-2123f792355f</mbid>
+    </album>
+<album>
+    <name>The Chronicles of Life and Death</name>
+    <artist>Good Charlotte</artist>
+    <id>2337007</id>
+    <url>http://www.last.fm/music/Good+Charlotte/The+Chronicles+of+Life+and+Death</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/51880535.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/51880535.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/51880535.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/51880535.png</image>
+    <streamable>1</streamable>
+            <mbid>59e4f832-0a3d-4f14-afcd-faf13a3f7fe1</mbid>
+    </album>
+<album>
+    <name>Goodies</name>
+    <artist>Ciara</artist>
+    <id>2027362</id>
+    <url>http://www.last.fm/music/Ciara/Goodies</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/91396193.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/91396193.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/91396193.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/91396193.png</image>
+    <streamable>0</streamable>
+            <mbid>376574aa-2b5d-4d6e-aea3-743e358468f3</mbid>
+    </album>
+<album>
+    <name>Good Girl Gone Bad: Reloaded</name>
+    <artist>Rihanna</artist>
+    <id>3820409</id>
+    <url>http://www.last.fm/music/Rihanna/Good+Girl+Gone+Bad:+Reloaded</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/63735909.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/63735909.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/63735909.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/63735909.png</image>
+    <streamable>0</streamable>
+            <mbid>7bac4449-eeb1-3917-8c8c-b369e5b2b8f7</mbid>
+    </album>
+<album>
+    <name>Awake</name>
+    <artist>Godsmack</artist>
+    <id>2025040</id>
+    <url>http://www.last.fm/music/Godsmack/Awake</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/95912149.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/95912149.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/95912149.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/95912149.png</image>
+    <streamable>0</streamable>
+            <mbid>33794bf4-6195-3fba-a5c0-cd2a49ada82c</mbid>
+    </album>
+<album>
+    <name>Kiss &amp; Tell</name>
+    <artist>Selena Gomez &amp; the Scene</artist>
+    <id>82406391</id>
+    <url>http://www.last.fm/music/Selena+Gomez+&amp;+the+Scene/Kiss+&amp;+Tell</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/80118145.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/80118145.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/80118145.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/80118145.png</image>
+    <streamable>0</streamable>
+            <mbid>35d83c6e-925f-4e09-b78c-645297ef92e5</mbid>
+    </album>
+<album>
+    <name>Gorilla Manor</name>
+    <artist>Local Natives</artist>
+    <id>21171755</id>
+    <url>http://www.last.fm/music/Local+Natives/Gorilla+Manor</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/36192295.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/36192295.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/36192295.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/36192295.png</image>
+    <streamable>0</streamable>
+            <mbid>5155bf21-467a-41b2-a02b-3850f06771fb</mbid>
+    </album>
+<album>
+    <name>Sinatra Reprise: The Very Good Years</name>
+    <artist>Frank Sinatra</artist>
+    <id>2028315</id>
+    <url>http://www.last.fm/music/Frank+Sinatra/Sinatra+Reprise:+The+Very+Good+Years</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/82784269.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/82784269.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/82784269.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/82784269.png</image>
+    <streamable>1</streamable>
+            <mbid>6dc1cb85-0dab-4993-8fee-93973079f2ae</mbid>
+    </album>
+<album>
+    <name>Ashes Of The Wake</name>
+    <artist>Lamb of God</artist>
+    <id>1435890</id>
+    <url>http://www.last.fm/music/Lamb+of+God/Ashes+Of+The+Wake</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/94600637.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/94600637.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/94600637.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/94600637.png</image>
+    <streamable>1</streamable>
+            <mbid>11728368-91c4-333b-80cd-61e308bc6f57</mbid>
+    </album>
+<album>
+    <name>The Devil and God Are Raging Inside Me</name>
+    <artist>Brand New</artist>
+    <id>3233038</id>
+    <url>http://www.last.fm/music/Brand+New/The+Devil+and+God+Are+Raging+Inside+Me</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/83245971.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/83245971.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/83245971.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/83245971.png</image>
+    <streamable>0</streamable>
+            <mbid>4591a2e7-abad-4c8c-a717-8b61cb461cc2</mbid>
+    </album>
+<album>
+    <name>Veneer</name>
+    <artist>José González</artist>
+    <id>3550273</id>
+    <url>http://www.last.fm/music/Jos%C3%A9+Gonz%C3%A1lez/Veneer</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/76075586.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/76075586.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/76075586.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/76075586.png</image>
+    <streamable>0</streamable>
+            <mbid>69e16928-4321-3b7e-a191-7b3264e5ba49</mbid>
+    </album>
+<album>
+    <name>Seventh Tree</name>
+    <artist>Goldfrapp</artist>
+    <id>3649975</id>
+    <url>http://www.last.fm/music/Goldfrapp/Seventh+Tree</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/40427911.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/40427911.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/40427911.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/40427911.png</image>
+    <streamable>0</streamable>
+            <mbid>97c1ab8f-d179-37e1-af99-20e9c63a8f09</mbid>
+    </album>
+<album>
+    <name>Fur and Gold</name>
+    <artist>Bat for Lashes</artist>
+    <id>3084217</id>
+    <url>http://www.last.fm/music/Bat+for+Lashes/Fur+and+Gold</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/76396296.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/76396296.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/76396296.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/76396296.png</image>
+    <streamable>0</streamable>
+            <mbid>003ee347-0551-435f-82ba-e1afeff7f636</mbid>
+    </album>
+<album>
+    <name>Black Cherry</name>
+    <artist>Goldfrapp</artist>
+    <id>21997</id>
+    <url>http://www.last.fm/music/Goldfrapp/Black+Cherry</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/61870927.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/61870927.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/61870927.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/61870927.png</image>
+    <streamable>0</streamable>
+            <mbid>6947767b-13f9-4232-b88a-6c579dd09901</mbid>
+    </album>
+<album>
+    <name>Gold: Greatest Hits</name>
+    <artist>ABBA</artist>
+    <id>2025870</id>
+    <url>http://www.last.fm/music/ABBA/Gold:+Greatest+Hits</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/91651569.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/91651569.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/91651569.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/91651569.png</image>
+    <streamable>0</streamable>
+            <mbid>f2d583b3-c542-4b9e-bcef-12b9696bea51</mbid>
+    </album>
+<album>
+    <name>Proud Like a God</name>
+    <artist>Guano Apes</artist>
+    <id>2027101</id>
+    <url>http://www.last.fm/music/Guano+Apes/Proud+Like+a+God</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/70542660.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/70542660.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/70542660.jpg</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/70542660.jpg</image>
+    <streamable>1</streamable>
+            <mbid>fb8d7e2b-e74c-405d-a241-a65614c9d197</mbid>
+    </album>
+<album>
+    <name>Goodbye Country (Hello Nightclub)</name>
+    <artist>Groove Armada</artist>
+    <id>2027541</id>
+    <url>http://www.last.fm/music/Groove+Armada/Goodbye+Country+(Hello+Nightclub)</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/45151107.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/45151107.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/45151107.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/45151107.png</image>
+    <streamable>0</streamable>
+            <mbid>ca71dc00-97bc-36e9-af30-0881bb1b6966</mbid>
+    </album>
+<album>
+    <name>All Hope Is Gone</name>
+    <artist>Slipknot</artist>
+    <id>3896452</id>
+    <url>http://www.last.fm/music/Slipknot/All+Hope+Is+Gone</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/81899475.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/81899475.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/81899475.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/81899475.png</image>
+    <streamable>0</streamable>
+            <mbid>2a8652f0-6d68-45e0-814c-aad9e216420a</mbid>
+    </album>
+<album>
+    <name>The Golden Age Of Grotesque</name>
+    <artist>Marilyn Manson</artist>
+    <id>1416155</id>
+    <url>http://www.last.fm/music/Marilyn+Manson/The+Golden+Age+Of+Grotesque</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/69752222.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/69752222.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/69752222.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/69752222.png</image>
+    <streamable>0</streamable>
+            <mbid>5e22cde7-18cd-4114-90e6-234136f8bd71</mbid>
+    </album>
+<album>
+    <name>Godsmack</name>
+    <artist>Godsmack</artist>
+    <id>2025564</id>
+    <url>http://www.last.fm/music/Godsmack/Godsmack</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/54777457.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/54777457.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/54777457.jpg</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/54777457.jpg</image>
+    <streamable>0</streamable>
+            <mbid>42edca7a-ab97-44bc-8b15-620a9708aabe</mbid>
+    </album>
+<album>
+    <name>The Good, the Bad &amp; the Queen</name>
+    <artist>The Good, the Bad &amp; the Queen</artist>
+    <id>3243669</id>
+    <url>http://www.last.fm/music/The+Good,+the+Bad+&amp;+the+Queen/The+Good,+the+Bad+&amp;+the+Queen</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/58316021.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/58316021.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/58316021.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/58316021.png</image>
+    <streamable>0</streamable>
+            <mbid>76b1e838-2033-4982-a331-d29e5bcac941</mbid>
+    </album>
+<album>
+    <name>Sacrament</name>
+    <artist>Lamb of God</artist>
+    <id>3332759</id>
+    <url>http://www.last.fm/music/Lamb+of+God/Sacrament</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/82087209.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/82087209.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/82087209.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/82087209.png</image>
+    <streamable>0</streamable>
+            <mbid>1b9f51cf-3b45-303b-9983-f9c43870b6bb</mbid>
+    </album>
+<album>
+    <name>Felt Mountain</name>
+    <artist>Goldfrapp</artist>
+    <id>11717</id>
+    <url>http://www.last.fm/music/Goldfrapp/Felt+Mountain</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/43643239.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/43643239.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/43643239.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/43643239.png</image>
+    <streamable>1</streamable>
+            <mbid>2793085e-e925-380c-915a-683b82e89dd6</mbid>
+    </album>
+<album>
+    <name>What's Going On</name>
+    <artist>Marvin Gaye</artist>
+    <id>1938</id>
+    <url>http://www.last.fm/music/Marvin+Gaye/What%27s+Going+On</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/76130808.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/76130808.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/76130808.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/76130808.png</image>
+    <streamable>0</streamable>
+            <mbid>247fbafd-37f5-4a66-a0e3-41d33a1ace9b</mbid>
+    </album>
+<album>
+    <name>OK Go</name>
+    <artist>OK Go</artist>
+    <id>2026278</id>
+    <url>http://www.last.fm/music/OK+Go/OK+Go</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/90485191.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/90485191.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/90485191.jpg</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/90485191.jpg</image>
+    <streamable>0</streamable>
+            <mbid>25ff78c8-9e5b-4332-9de8-bc57fd1e4303</mbid>
+    </album>
+<album>
+    <name>Goo</name>
+    <artist>Sonic Youth</artist>
+    <id>1436449</id>
+    <url>http://www.last.fm/music/Sonic+Youth/Goo</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/88371929.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/88371929.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/88371929.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/88371929.png</image>
+    <streamable>0</streamable>
+            <mbid>1123137a-295d-4c19-9dad-76ea01bc656a</mbid>
+    </album>
+<album>
+    <name>Thunder, Lightning, Strike</name>
+    <artist>The Go! Team</artist>
+    <id>1420086</id>
+    <url>http://www.last.fm/music/The+Go!+Team/Thunder,+Lightning,+Strike</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/86204827.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/86204827.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/86204827.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/86204827.png</image>
+    <streamable>1</streamable>
+            <mbid>10303c8e-a0ff-443d-8df4-0ff01a855e92</mbid>
+    </album>
+<album>
+    <name>Gossamer</name>
+    <artist>Passion Pit</artist>
+    <id>301556527</id>
+    <url>http://www.last.fm/music/Passion+Pit/Gossamer</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/82026865.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/82026865.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/82026865.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/82026865.png</image>
+    <streamable>0</streamable>
+            <mbid>c2174e3e-6c49-4262-8965-36a173a9ebc0</mbid>
+    </album>
+<album>
+    <name>In Our Nature</name>
+    <artist>José González</artist>
+    <id>3394945</id>
+    <url>http://www.last.fm/music/Jos%C3%A9+Gonz%C3%A1lez/In+Our+Nature</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/76075444.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/76075444.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/76075444.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/76075444.png</image>
+    <streamable>0</streamable>
+            <mbid>01f6a9b2-4e92-3322-b3c4-60855c65832b</mbid>
+    </album>
+<album>
+    <name>Feel Good Lost</name>
+    <artist>Broken Social Scene</artist>
+    <id>1416352</id>
+    <url>http://www.last.fm/music/Broken+Social+Scene/Feel+Good+Lost</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/73300430.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/73300430.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/73300430.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/73300430.png</image>
+    <streamable>0</streamable>
+            <mbid>7dccdcae-a7b3-46d0-a4ad-ec584f0c20b4</mbid>
+    </album>
+<album>
+    <name>La Revancha Del Tango</name>
+    <artist>Gotan Project</artist>
+    <id>38842</id>
+    <url>http://www.last.fm/music/Gotan+Project/La+Revancha+Del+Tango</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/55307193.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/55307193.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/55307193.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/55307193.png</image>
+    <streamable>0</streamable>
+            <mbid>5f543e57-1903-3c3f-8a5b-215704f42f2b</mbid>
+    </album>
+<album>
+    <name>After the Gold Rush</name>
+    <artist>Neil Young</artist>
+    <id>1672</id>
+    <url>http://www.last.fm/music/Neil+Young/After+the+Gold+Rush</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/65285990.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/65285990.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/65285990.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/65285990.png</image>
+    <streamable>0</streamable>
+            <mbid>d107778c-821b-3a77-9f2c-6c16fb20cc6a</mbid>
+    </album>
+<album>
+    <name>Punk Goes Crunk</name>
+    <artist>Various Artists</artist>
+    <id>3771837</id>
+    <url>http://www.last.fm/music/Various+Artists/Punk+Goes+Crunk</url>
+    <image size="small">http://userserve-ak.last.fm/serve/34s/5554361.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/5554361.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/5554361.jpg</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/5554361.jpg</image>
+    <streamable>1</streamable>
+            <mbid>245bddf9-76b4-4573-a690-01929f28ddb0</mbid>
+    </album>
+</albummatches>
+</results></lfm>
+

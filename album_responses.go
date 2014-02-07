@@ -43,5 +43,5 @@ type TopAlbumsResponse struct {
 type AlbumSearchResponse struct {
 	LastfmStatusResponse
 	LastfmOpenSearchResponse
-	AlbumMatches []AlbumResponse `xml:"albummatches>album"`
+	AlbumMatches []AlbumResponseNoArtistStruct `xml:"results>albummatches>album"`
 }
