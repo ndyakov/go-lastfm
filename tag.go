@@ -81,6 +81,26 @@ func (c *TagClient) GetSimilar(tag string) (response TagSimilarResponse, err err
 }
 
 func (c *TagClient) GetTopAlbums(tag string, page, limit int) (response TopAlbumsResponse, err error) {
+	method := "tag.getTopAlbums"
+	query := c.prepareQuery(tag, page, limit)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

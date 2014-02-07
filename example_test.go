@@ -329,3 +329,26 @@ func ExampleTagClient_GetSimilar() {
 	// Tag : classic rock
 	// URL : http://www.last.fm/tag/classic%20rock
 }
+
+// Get Top Albums for Tag.
+func ExampleTagClient_GetTopAlbums() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.GetTopAlbums("dnb", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	album := response.TopAlbums[0]
+	fmt.Printf("Top Album #1 : %v\n", album.Name)
+	fmt.Printf("Artist : %v\n", album.Artist.Name)
+	fmt.Printf("URL : %v\n", album.URL)
+	fmt.Printf("MBID : %v\n", album.MBID)
+	fmt.Printf("Image [%v] : %v\n", album.Image[0].Size, album.Image[0].URL)
+
+	// Output:
+	// Top Album #1 : Hold Your Colour
+	// Artist : Pendulum
+	// URL : http://www.last.fm/music/Pendulum/Hold+Your+Colour
+	// MBID : 9d9b873c-fbd4-43df-9533-b401dd86081d
+	// Image [small] : http://userserve-ak.last.fm/serve/34s/41919803.png
+}
