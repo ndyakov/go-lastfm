@@ -172,7 +172,38 @@ func (c *ArtistClient) GetTopTracks(name, mbid string, autocorrect, page, limit 
 	return
 }
 
-func (c *ArtistClient) Search(name string, limit, page int) (response ArtistSearchResponse, err error) {
+// Search for Artist by given name
+func (c *ArtistClient) Search(name string, page, limit int) (response ArtistSearchResponse, err error) {
+	method := "artist.Search"
+	query := make(map[string]string)
+	query["artist"] = name
+
+	if page != 0 {
+		query["page"] = strconv.Itoa(page)
+	}
+
+	if limit != 0 {
+		query["limit"] = strconv.Itoa(limit)
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

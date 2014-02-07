@@ -137,3 +137,33 @@ func ExampleArtistClient_GetTopTracks() {
 	// URL : http://www.last.fm/music/Ogonek/_/Starlight
 	// Playcount: 109
 }
+
+// Search for Artist.
+func ExampleArtistClient_Search() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Artist.Search("Ogo", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+
+	var artist lastfm.ArtistResponse
+
+	fmt.Printf("Search request for : %v\n", response.Query.SearchTerms)
+	fmt.Printf("Total results : %v\n", response.TotalResults)
+	if response.TotalResults > 0 {
+		artist = response.ArtistMatches[0]
+	}
+	fmt.Printf("First result :\n")
+	fmt.Printf("  Artist Name : %v\n", artist.Name)
+	fmt.Printf("  Artist MBID : %v\n", artist.MBID)
+	fmt.Printf("  Artist Image[%v] : %v\n", artist.Image[0].Size, artist.Image[0].URL)
+
+	// Output:
+	// Search request for : Ogo
+	// Total results : 22
+	// First result :
+	//   Artist Name : Ogonek
+	//   Artist MBID : 971762d6-c851-499c-a656-7fa4fa055f47
+	//   Artist Image[small] : http://userserve-ak.last.fm/serve/34/26437217.jpg
+}

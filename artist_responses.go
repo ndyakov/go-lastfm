@@ -34,7 +34,7 @@ type ArtistSimilarResponse struct {
 type ArtistSearchResponse struct {
 	LastfmStatusResponse
 	LastfmOpenSearchResponse
-	ArtistMatches []ArtistResponse `xml:"artistmaches>artist"`
+	ArtistMatches []ArtistResponse `xml:"artistmatches>artist"`
 }
 
 type TopArtistsResponse struct {
