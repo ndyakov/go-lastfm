@@ -19,12 +19,15 @@ type ArtistClient struct {
 // Returns map[string]string that can be parsed to LastFM.makeRequest.
 func (c *ArtistClient) prepareQuery(name, mbid string, autocorrect int) (query map[string]string) {
 	query = make(map[string]string)
+
 	if mbid == "" {
 		query["artist"] = name
 	} else {
 		query["mbid"] = mbid
 	}
+
 	query["autocorrect"] = strconv.Itoa(autocorrect)
+
 	return
 }
 
@@ -34,18 +37,23 @@ func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response 
 	method := "artist.getTopTags"
 	query := c.prepareQuery(name, mbid, autocorrect)
 	body, _, err := c.lfm.makeRequest(method, query)
+
 	if err != nil {
 		return
 	}
+
 	defer body.Close()
 	err = xml.NewDecoder(body).Decode(&response)
+
 	if err != nil {
 		return
 	}
+
 	if response.Error.Code != 0 {
 		err = &response.Error
 		return
 	}
+
 	return
 }
 
@@ -54,22 +62,56 @@ func (c *ArtistClient) GetTags(name, mbid string, autocorrect int, user string) 
 	query := c.prepareQuery(name, mbid, autocorrect)
 	query["user"] = user
 	body, _, err := c.lfm.makeRequest(method, query)
+
 	if err != nil {
 		return
 	}
+
 	defer body.Close()
 	err = xml.NewDecoder(body).Decode(&response)
+
 	if err != nil {
 		return
 	}
+
 	if response.Error.Code != 0 {
 		err = &response.Error
 		return
 	}
+
 	return
 }
 
 func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit int) (response TopAlbumsResponse, err error) {
+	method := "artist.getTopAlbums"
+	query := c.prepareQuery(name, mbid, autocorrect)
+
+	if page != 0 {
+		query["page"] = strconv.Itoa(page)
+	}
+
+	if limit != 0 {
+		query["limit"] = strconv.Itoa(limit)
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

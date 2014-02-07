@@ -74,3 +74,26 @@ func ExampleArtistClient_GetSimilar() {
 	// MBID   : 3d6e4b6d-2700-458c-9722-9021965a8164
 	// Match  : 1
 }
+
+// Get Top Albums for Artist.
+func ExampleArtistClient_GetTopAlbums() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Artist.GetTopAlbums("Ogonek", "", 0, 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	album := response.TopAlbums[0]
+	fmt.Printf("Top Albums By : %v\n", album.Artist.Name)
+	fmt.Printf("Top Album #1 : %v\n", album.Name)
+	fmt.Printf("URL : %v\n", album.URL)
+	fmt.Printf("Playcount: %v\n", album.Playcount)
+	fmt.Printf("Image [%v] : %v\n", album.Image[0].Size, album.Image[0].URL)
+
+	// Output:
+	// Top Albums By : Ogonek
+	// Top Album #1 : Drum And Bass Massacre
+	// URL : http://www.last.fm/music/Ogonek/Drum+And+Bass+Massacre
+	// Playcount: 26
+	// Image [small] : http://cdn.last.fm/flatness/catalogue/noimage/2/default_album_medium.png
+}

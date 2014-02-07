@@ -1,15 +1,15 @@
 package lastfm
 
 type AlbumResponse struct {
-	Name       string                `xml:"name"`
-	ArtistName string                `xml:"artist"`
-	ID         int64                 `xml:"id"`
-	Rank       int                   `xml:"rank,attr"`
-	MBID       string                `xml:"mbid"`
-	Listeners  int64                 `xml:"listeners"`
-	URL        string                `xml:"url"`
-	Playcount  int64                 `xml:"playcount"`
-	Image      []LastfmImageResponse `xml:"image"`
+	Name      string                `xml:"name"`
+	Artist    ArtistResponse        `xml:"artist"`
+	ID        int64                 `xml:"id"`
+	Rank      int                   `xml:"rank,attr"`
+	MBID      string                `xml:"mbid"`
+	Listeners int64                 `xml:"listeners"`
+	URL       string                `xml:"url"`
+	Playcount int64                 `xml:"playcount"`
+	Image     []LastfmImageResponse `xml:"image"`
 }
 
 type AlbumInfoResponse struct {
