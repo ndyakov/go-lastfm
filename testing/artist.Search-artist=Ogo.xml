@@ -1,4 +1,4 @@
-tatus="ok">
+<lfm status="ok">
 <results for="Ogo" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
 <opensearch:Query role="request" searchTerms="Ogo" startPage="1" />
 <opensearch:totalResults>22</opensearch:totalResults>
