@@ -128,7 +128,27 @@ func (c *TagClient) GetTopArtists(tag string, page, limit int) (response TopArti
 	return
 }
 
-func (c *TagClient) GetTopTags(tag string, page, limit int) (response TopTagsResponse, err error) {
+func (c *TagClient) GetTopTags() (response TopTagsResponse, err error) {
+	method := "tag.getTopTags"
+	query := make(map[string]string)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

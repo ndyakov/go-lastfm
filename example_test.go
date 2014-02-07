@@ -371,3 +371,24 @@ func ExampleTagClient_GetTopArtists() {
 	// URL : http://www.last.fm/music/Pendulum
 	// MBID : 2030e776-73b2-4cf8-8c15-813e801f8151
 }
+
+// Get Top Tags in Lastfm.
+func ExampleTagClient_GetTopTags() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.GetTopTags()
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
+	fmt.Printf("Tag #1 :\n")
+	fmt.Printf("Name : %v\n", response.TopTags[0].Name)
+	fmt.Printf("URL : %v\n", response.TopTags[0].URL)
+	fmt.Printf("Count : %v\n", response.TopTags[0].Count)
+	// Output:
+	// Number of Top Tags : 250
+	// Tag #1 :
+	// Name : rock
+	// URL : www.last.fm/tag/rock
+	// Count : 3979953
+}
