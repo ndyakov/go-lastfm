@@ -352,3 +352,22 @@ func ExampleTagClient_GetTopAlbums() {
 	// MBID : 9d9b873c-fbd4-43df-9533-b401dd86081d
 	// Image [small] : http://userserve-ak.last.fm/serve/34s/41919803.png
 }
+
+// Get Top Artists for Tag.
+func ExampleTagClient_GetTopArtists() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.GetTopArtists("dnb", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	artist := response.TopArtists[0]
+	fmt.Printf("Artist #1 : %v\n", artist.Name)
+	fmt.Printf("URL : %v\n", artist.URL)
+	fmt.Printf("MBID : %v\n", artist.MBID)
+
+	// Output:
+	// Artist #1 : Pendulum
+	// URL : http://www.last.fm/music/Pendulum
+	// MBID : 2030e776-73b2-4cf8-8c15-813e801f8151
+}

@@ -105,6 +105,26 @@ func (c *TagClient) GetTopAlbums(tag string, page, limit int) (response TopAlbum
 }
 
 func (c *TagClient) GetTopArtists(tag string, page, limit int) (response TopArtistsResponse, err error) {
+	method := "tag.getTopArtists"
+	query := c.prepareQuery(tag, page, limit)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
