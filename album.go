@@ -6,9 +6,9 @@ import (
 )
 
 // AlbumClient
-// Collection of methods that coresponde to most of
+// Collection of methods that correspond to most of
 // LastFM's album\.(.+) methods.
-// Where the name of the method is \1 in CammelCase.
+// Where the name of the method is \1 in CamelCase.
 type AlbumClient struct {
 	Client
 }

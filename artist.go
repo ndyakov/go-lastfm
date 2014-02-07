@@ -6,9 +6,9 @@ import (
 )
 
 // ArtistClient
-// Collection of methods that coresponde to most of
+// Collection of methods that correspond to most of
 // LastFM's artist\.(.+) methods.
-// Where the name of the method is \1 in CammelCase.
+// Where the name of the method is \1 in CamelCase.
 type ArtistClient struct {
 	Client
 }
