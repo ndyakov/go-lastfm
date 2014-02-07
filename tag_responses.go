@@ -6,6 +6,7 @@ type TagResponse struct {
 	Reach      int64  `xml:"reach"`
 	Taggings   int64  `xml:"taggings"`
 	Streamable int    `xml:"streamable"`
+	Count      int64  `xml:"count"`
 }
 
 type TagInfoResponse struct {

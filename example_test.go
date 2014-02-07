@@ -237,3 +237,24 @@ func ExampleAlbumClient_GetTags() {
 	// Name : guano apes v2
 	// URL  : http://www.last.fm/tag/guano%20apes%20v2
 }
+
+// Get Top Tags for Album.
+func ExampleAlbumClient_GetTopTags() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Album.GetTopTags("Guano Apes", "Bel Air", "", 1)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
+	fmt.Printf("Tag #1 :\n")
+	fmt.Printf("Name : %v\n", response.TopTags[0].Name)
+	fmt.Printf("URL  : %v\n", response.TopTags[0].URL)
+	fmt.Printf("Count : %v\n", response.TopTags[0].Count)
+	// Output:
+	// Number of Top Tags : 14
+	// Tag #1 :
+	// Name : rock
+	// URL  : http://www.last.fm/tag/rock
+	// Count : 100
+}

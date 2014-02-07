@@ -64,9 +64,9 @@ func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect 
 	return
 }
 
-func (c *AlbumClient) GetTags(artist, album, mbid, username string, autocorrect int) (response TagsResponse, err error) {
+func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int) (response TagsResponse, err error) {
 	method := "album.getTags"
-	query := c.prepareQuery(artist, album, mbid, username, autocorrect, false)
+	query := c.prepareQuery(artist, album, mbid, user, autocorrect, false)
 	body, _, err := c.lfm.makeRequest(method, query)
 
 	if err != nil {
@@ -88,7 +88,27 @@ func (c *AlbumClient) GetTags(artist, album, mbid, username string, autocorrect 
 	return
 }
 
-func (c *AlbumClient) GetTopTags(artist, album, mbid, username string, autocorrect int) (response TopTagsResponse, err error) {
+func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (response TopTagsResponse, err error) {
+	method := "album.getTopTags"
+	query := c.prepareQuery(artist, album, mbid, "", autocorrect, false)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
