@@ -392,3 +392,24 @@ func ExampleTagClient_GetTopTags() {
 	// URL : www.last.fm/tag/rock
 	// Count : 3979953
 }
+
+// Get Top Tracks for Tag.
+func ExampleTagClient_GetTopTracks() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tag.GetTopTracks("rock", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	track := response.TopTracks[0]
+	fmt.Printf("Top Track #1 : %v\n", track.Name)
+	fmt.Printf("MBID : %v\n", track.MBID)
+	fmt.Printf("Artist : %v\n", track.Artist.Name)
+	fmt.Printf("URL : %v\n", track.URL)
+
+	// Output:
+	// Top Track #1 : Counting Stars
+	// MBID : 5e8d518e-328a-43da-a9fa-cc27513a4c86
+	// Artist : OneRepublic
+	// URL : http://www.last.fm/music/OneRepublic/_/Counting+Stars
+}

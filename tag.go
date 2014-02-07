@@ -153,6 +153,26 @@ func (c *TagClient) GetTopTags() (response TopTagsResponse, err error) {
 }
 
 func (c *TagClient) GetTopTracks(tag string, page, limit int) (response TopTracksResponse, err error) {
+	method := "tag.getTopTracks"
+	query := c.prepareQuery(tag, page, limit)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
