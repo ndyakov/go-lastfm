@@ -484,3 +484,24 @@ func ExampleTrackClient_GetInfo() {
 	// Playcount : 3321554
 	// Duration : 224000
 }
+
+// Get Similar Tracks to Track.
+func ExampleTrackClient_GetSimilar() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Track.GetSimilar("Kids with guns", "Gorillaz", "", 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	track := response.SimilarTracks[0]
+	fmt.Printf("Similar Track #1 : %v\n", track.Name)
+	fmt.Printf("MBID : %v\n", track.MBID)
+	fmt.Printf("Artist : %v\n", track.Artist.Name)
+	fmt.Printf("URL : %v\n", track.URL)
+
+	// Output:
+	// Similar Track #1 : Last Living Souls
+	// MBID : 14be88ec-e5a6-4b41-b999-d4ca44ac0c52
+	// Artist : Gorillaz
+	// URL : http://www.last.fm/music/Gorillaz/_/Last+Living+Souls
+}

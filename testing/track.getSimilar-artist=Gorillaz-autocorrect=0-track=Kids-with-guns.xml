@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<similartracks track="Kids With Guns" artist="Gorillaz">
+<track>
+    <name>Last Living Souls</name>
+        <playcount>2567378</playcount>
+            <mbid>14be88ec-e5a6-4b41-b999-d4ca44ac0c52</mbid>
+        <match>1</match>
+    <url>http://www.last.fm/music/Gorillaz/_/Last+Living+Souls</url>
+    <streamable fulltrack="0">0</streamable>
+    <duration>224000</duration>
+        <artist>
+        <name>Gorillaz</name>
+                <mbid>e21857d5-3256-4547-afb3-4b6ded592596</mbid>
+            <url>http://www.last.fm/music/Gorillaz</url>
+    </artist>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/44425129.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/44425129.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/44425129.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/44425129.png</image>
+    </track>
+<track>
+    <name>O Green World</name>
+        <playcount>2490100</playcount>
+            <mbid>18e66faf-9df4-4c8c-9a51-ca4ca4ba21fc</mbid>
+        <match>0.991136</match>
+    <url>http://www.last.fm/music/Gorillaz/_/O+Green+World</url>
+    <streamable fulltrack="0">0</streamable>
+    <duration>224000</duration>
+        <artist>
+        <name>Gorillaz</name>
+                <mbid>e21857d5-3256-4547-afb3-4b6ded592596</mbid>
+            <url>http://www.last.fm/music/Gorillaz</url>
+    </artist>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/44425129.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/44425129.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/44425129.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/44425129.png</image>
+    </track>
+</similartracks></lfm>
+

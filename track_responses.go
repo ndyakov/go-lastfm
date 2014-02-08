@@ -34,7 +34,7 @@ type TopTracksResponse struct {
 
 type TrackSimilarResponse struct {
 	LastfmStatusResponse
-	SilimarTracks []TrackResponse `xml:"similartracks>track"`
+	SimilarTracks []TrackResponse `xml:"similartracks>track"`
 }
 
 type TrackSingleCorrectionResponse struct {
