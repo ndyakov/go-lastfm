@@ -37,7 +37,7 @@ func ExampleArtistClient_GetTopTags() {
 // Get Tags for Artist.
 func ExampleArtistClient_GetTags() {
 	lfm := lastfm.New("api_key_for_testing")
-	response, err := lfm.Artist.GetTags("Red Hot Chili Peppers", "", 1, "RJ")
+	response, err := lfm.Artist.GetTags("Red Hot Chili Peppers", "", "RJ", 1)
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
@@ -504,4 +504,23 @@ func ExampleTrackClient_GetSimilar() {
 	// MBID : 14be88ec-e5a6-4b41-b999-d4ca44ac0c52
 	// Artist : Gorillaz
 	// URL : http://www.last.fm/music/Gorillaz/_/Last+Living+Souls
+}
+
+// Get Tags for Track.
+func ExampleTrackClient_GetTags() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Track.GetTags("Snow", "Red Hot Chili Peppers", "", "n3mo-", 1)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
+	fmt.Printf("Tag #1 :\n")
+	fmt.Printf("Name : %v\n", response.Tags[0].Name)
+	fmt.Printf("URL  : %v\n", response.Tags[0].URL)
+	// Output:
+	// Number of Tags by User : 2
+	// Tag #1 :
+	// Name : snow
+	// URL  : http://www.last.fm/tag/snow
 }

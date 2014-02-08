@@ -61,7 +61,7 @@ func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response 
 // Get tags for Artist who is in users directory.
 // Returns TagsResponse structure or error.
 // Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTags(name, mbid string, autocorrect int, user string) (response TagsResponse, err error) {
+func (c *ArtistClient) GetTags(name, mbid, user string, autocorrect int) (response TagsResponse, err error) {
 	method := "artist.getTags"
 	query := c.prepareQuery(name, mbid, autocorrect)
 	query["user"] = user

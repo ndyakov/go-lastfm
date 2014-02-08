@@ -85,7 +85,32 @@ func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (r
 	return
 }
 
-func (c *TrackClient) GetTags(track, artist, mbid string, autocorrect int) (response TagsResponse, err error) {
+func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int) (response TagsResponse, err error) {
+	method := "track.getTags"
+	query := c.prepareQuery(track, artist, mbid, autocorrect)
+
+	if user != "" {
+		query["user"] = user
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
