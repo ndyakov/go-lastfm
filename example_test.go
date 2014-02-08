@@ -776,3 +776,24 @@ func ExampleUserClient_GetTopTracks() {
 	// URL : http://www.last.fm/music/Dire+Straits/_/Sultans+of+Swing
 	// Playcount: 78
 }
+
+// Get Top Tags by User.
+func ExampleUserClient_GetTopTags() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetTopTags("RJ", 2)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
+	fmt.Printf("Tag #1 :\n")
+	fmt.Printf("Name : %v\n", response.TopTags[0].Name)
+	fmt.Printf("Count : %v\n", response.TopTags[0].Count)
+	fmt.Printf("URL  : %v\n", response.TopTags[0].URL)
+	// Output:
+	// Number of Top Tags : 2
+	// Tag #1 :
+	// Name : rock
+	// Count : 19
+	// URL  : www.last.fm/tag/rock
+}

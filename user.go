@@ -222,5 +222,25 @@ func (c *UserClient) GetTopTracks(user, period string, page, limit int) (respons
 }
 
 func (c *UserClient) GetTopTags(user string, limit int) (response TopTagsResponse, err error) {
+	method := "user.getTopTags"
+	query := c.prepareQuery(user, 0, limit)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
