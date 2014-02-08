@@ -755,3 +755,24 @@ func ExampleUserClient_GetTopArtists() {
 	// URL : http://www.last.fm/music/Dream+Theater
 	// MBID : 28503ab7-8bf2-4666-a7bd-2644bfc7cb1d
 }
+
+// Get Top Tracks for User.
+func ExampleUserClient_GetTopTracks() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetTopTracks("RJ", "", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	track := response.TopTracks[0]
+	fmt.Printf("Top Track #1 : %v\n", track.Name)
+	fmt.Printf("Artist Name : %v\n", track.Artist.Name)
+	fmt.Printf("URL : %v\n", track.URL)
+	fmt.Printf("Playcount: %v\n", track.Playcount)
+
+	// Output:
+	// Top Track #1 : Sultans of Swing
+	// Artist Name : Dire Straits
+	// URL : http://www.last.fm/music/Dire+Straits/_/Sultans+of+Swing
+	// Playcount: 78
+}

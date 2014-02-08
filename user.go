@@ -192,9 +192,35 @@ func (c *UserClient) GetTopArtists(user, period string, page, limit int) (respon
 	return
 }
 
-func (c *UserClient) GetTopTags(user string, limit int) (response TopTagsResponse, err error) {
+func (c *UserClient) GetTopTracks(user, period string, page, limit int) (response TopTracksResponse, err error) {
+	method := "user.getTopTracks"
+	query := c.prepareQuery(user, page, limit)
+
+	if period != "" {
+		query["period"] = period
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
-func (c *UserClient) GetTopTracks(user, period string, page, limit int) (response TopTracksResponse, err error) {
+
+func (c *UserClient) GetTopTags(user string, limit int) (response TopTagsResponse, err error) {
 	return
 }
