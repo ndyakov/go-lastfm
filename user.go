@@ -74,10 +74,29 @@ func (c *UserClient) GetLovedTracks(user string, page, limit int) (response Love
 	}
 
 	return
-
 }
 
 func (c *UserClient) GetNeighbours(user string, limit int) (response NeighboursResponse, err error) {
+	method := "user.getNeighbours"
+	query := c.prepareQuery(user, 0, limit)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

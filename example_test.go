@@ -668,3 +668,22 @@ func ExampleUserClient_GetLovedTracks() {
 	// URL : http://www.last.fm/music/Beach+House/_/New+Year
 	// Artist Name : Beach House
 }
+
+// Get neighbours to some user.
+func ExampleUserClient_GetNeighbours() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetNeighbours("RJ", 2)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	user := response.Neighbours[0]
+	fmt.Printf("Neighbour #1 : %v\n", user.Name)
+	fmt.Printf("Match : %v\n", user.Match)
+	fmt.Printf("URL : %v\n", user.URL)
+
+	// Output:
+	// Neighbour #1 : tonyetc
+	// Match : 0.99757462739944
+	// URL : http://www.last.fm/user/tonyetc
+}

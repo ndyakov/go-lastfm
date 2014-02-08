@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<neighbours user="RJ">
+<user>
+    <name>tonyetc</name>
+    <realname></realname>
+    <url>http://www.last.fm/user/tonyetc</url>
+    <image size="small"></image>
+    <image size="medium"></image>
+    <image size="large"></image>
+    <image size="extralarge"></image>
+    <match>0.99757462739944</match>
+</user>
+<user>
+    <name>cinquefoil5</name>
+    <realname></realname>
+    <url>http://www.last.fm/user/cinquefoil5</url>
+    <image size="small"></image>
+    <image size="medium"></image>
+    <image size="large"></image>
+    <image size="extralarge"></image>
+    <match>0.99745291471481</match>
+</user>
+</neighbours></lfm>
+
