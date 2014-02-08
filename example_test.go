@@ -713,3 +713,26 @@ func ExampleUserClient_GetRecentTracks() {
 	// Album : Novacane
 	// URL : http://www.last.fm/music/Frank+Ocean/_/Novacane
 }
+
+// Get Top Albums for User.
+func ExampleUserClient_GetTopAlbums() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetTopAlbums("RJ", "", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	album := response.TopAlbums[0]
+	fmt.Printf("Top Album #1 : %v\n", album.Name)
+	fmt.Printf("Artist Name : %v\n", album.Artist.Name)
+	fmt.Printf("URL : %v\n", album.URL)
+	fmt.Printf("Playcount: %v\n", album.Playcount)
+	fmt.Printf("Image [%v] : %v\n", album.Image[0].Size, album.Image[0].URL)
+
+	// Output:
+	// Top Album #1 : Images and Words
+	// Artist Name : Dream Theater
+	// URL : http://www.last.fm/music/Dream+Theater/Images+and+Words
+	// Playcount: 266
+	// Image [small] : http://userserve-ak.last.fm/serve/34s/93189941.png
+}

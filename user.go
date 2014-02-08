@@ -135,6 +135,31 @@ func (c *UserClient) GetRecentTracks(user string, page, limit int, from, to int6
 }
 
 func (c *UserClient) GetTopAlbums(user, period string, page, limit int) (response TopAlbumsResponse, err error) {
+	method := "user.getTopAlbums"
+	query := c.prepareQuery(user, page, limit)
+
+	if period != "" {
+		query["period"] = period
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
