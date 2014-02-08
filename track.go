@@ -32,6 +32,9 @@ func (c *TrackClient) prepareQuery(track, artist, mbid string, autocorrect int) 
 	return
 }
 
+// Get full information for some track.
+// Returns TrackInfoResponse or error.
+// Be awere there may be an error from the xml decoding.
 func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int) (response TrackInfoResponse, err error) {
 	method := "track.getInfo"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
@@ -61,7 +64,9 @@ func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int)
 	return
 }
 
-func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (response TrackSimilarResponse, err error) {
+// Get similar tracks to some track.
+// Returns SimilarTracksResponse or error.
+func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (response SimilarTracksResponse, err error) {
 	method := "track.getSimilar"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
 	body, _, err := c.lfm.makeRequest(method, query)
@@ -85,6 +90,8 @@ func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (r
 	return
 }
 
+// Get tags for some track tagged by some user.
+// Returns TagsResponse or error.
 func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int) (response TagsResponse, err error) {
 	method := "track.getTags"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
@@ -114,6 +121,8 @@ func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int)
 	return
 }
 
+// Get top fans for some track.
+// Returns TopFansResponse or error.
 func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (response TopFansResponse, err error) {
 	method := "track.getTopFans"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
@@ -138,6 +147,8 @@ func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (r
 	return
 }
 
+// Get top tags in lastfm for some track.
+// Returns TopTagsResponse or error.
 func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (response TopTagsResponse, err error) {
 	method := "track.getTopTags"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
@@ -162,6 +173,8 @@ func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (r
 	return
 }
 
+// Get correction for some track and artist.
+// Returns TrackCorrectionResponse or error.
 func (c *TrackClient) GetCorrection(track, artist string) (response TrackCorrectionResponse, err error) {
 	method := "track.getCorrection"
 	query := make(map[string]string)
@@ -188,11 +201,17 @@ func (c *TrackClient) GetCorrection(track, artist string) (response TrackCorrect
 	return
 }
 
+// Search for some track.
+// artist parameter is optional, you may specify it to narrow your search
+// otherwise pass empty string.
 func (c *TrackClient) Search(track, artist string, page, limit int) (response TrackSearchResponse, err error) {
 	method := "track.search"
 	query := make(map[string]string)
 	query["track"] = track
-	query["artist"] = artist
+
+	if artist != "" {
+		query["artist"] = artist
+	}
 
 	if page != 0 {
 		query["page"] = strconv.Itoa(page)

@@ -66,7 +66,7 @@ func (lfm *LastFM) makeRequest(method string, params map[string]string) (body io
 	for key, value := range params {
 		queryParams[key] = value
 	}
-
+	println(lfm.buildURL(queryParams))
 	response, err := lfm.getter.Get(lfm.buildURL(queryParams))
 	if err != nil {
 		if response != nil && response.Body != nil {
@@ -84,6 +84,7 @@ func (c *dummyGetter) Get(uri string) (resp *http.Response, err error) {
 	if err != nil {
 		return
 	}
+	println(c.buildFilename(u.Query()))
 	fh, err := os.Open(c.buildFilename(u.Query()))
 	if err != nil {
 		return

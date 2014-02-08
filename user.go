@@ -8,7 +8,7 @@ func (c *UserClient) GetInfo(user string) (response UserInfoResponse, err error)
 	return
 }
 
-func (c *UserClient) GetLovedTracks(user string, limit, page int) (response TracksLovedResponse, err error) {
+func (c *UserClient) GetLovedTracks(user string, limit, page int) (response LovedTracksResponse, err error) {
 	return
 }
 
@@ -16,7 +16,7 @@ func (c *UserClient) GetNeighbours(user string, limit int) (response NeighboursR
 	return
 }
 
-func (c *UserClient) GetRecentTracks(user string, limit, page int, from, to int64, extended int) (response TracksRecentResponse, err error) {
+func (c *UserClient) GetRecentTracks(user string, limit, page int, from, to int64, extended int) (response RecentTracksResponse, err error) {
 	return
 }
 
