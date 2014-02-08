@@ -2,6 +2,7 @@ package lastfm
 
 import (
 	"encoding/xml"
+	"strconv"
 )
 
 // UserClients
@@ -12,10 +13,24 @@ type UserClient struct {
 	Client
 }
 
+func (c *UserClient) prepareQuery(user string, page, limit int) (query map[string]string) {
+	query = make(map[string]string)
+	query["user"] = user
+
+	if page != 0 {
+		query["page"] = strconv.Itoa(page)
+	}
+
+	if limit != 0 {
+		query["limit"] = strconv.Itoa(limit)
+	}
+
+	return
+}
+
 func (c *UserClient) GetInfo(user string) (response UserInfoResponse, err error) {
 	method := "user.getInfo"
-	query := make(map[string]string)
-	query["user"] = user
+	query := c.prepareQuery(user, 0, 0)
 	body, _, err := c.lfm.makeRequest(method, query)
 
 	if err != nil {
