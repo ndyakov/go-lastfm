@@ -8,7 +8,7 @@ type UserResponse struct {
 	Image      []LastfmImageResponse `xml:"image"`
 	Country    string                `xml:"country"`
 	Age        int                   `xml:"age"`
-	Gender     rune                  `xml:"gender"`
+	Gender     string                `xml:"gender"`
 	Subscriber int                   `xml:"subscriber"`
 	Playcount  int64                 `xml:"playcount"`
 	Playlists  int                   `xml:"playlists"`
@@ -18,7 +18,7 @@ type UserResponse struct {
 
 type UserInfoResponse struct {
 	LastfmStatusResponse
-	UserResponse
+	User UserResponse `xml:"user"`
 }
 
 type FanResponse struct {

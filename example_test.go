@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/ndyakov/go-lastfm"
 	"reflect"
+	"strings"
 )
 
 // Create new api client object
@@ -617,4 +618,32 @@ func ExampleTrackClient_Search() {
 	//   Track Name : Kids With Guns
 	//   Artist Name : Gorillaz
 	//   Track MBID : 87fe260f-96c5-47bc-9d22-8a1c0f723475
+}
+
+// Get full info for User.
+func ExampleUserClient_GetInfo() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetInfo("RJ")
+
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+
+	fmt.Printf("User : %v\n", response.User.Name)
+	fmt.Printf("ID : %v\n", response.User.ID)
+	// In this example the user had extra space
+	// in his "Real Name" field, we have to trim it
+	// for the test to pass.
+	fmt.Printf("Real Name : %s\n", strings.Trim(response.User.RealName, " "))
+	fmt.Printf("URL : %v\n", response.User.URL)
+	fmt.Printf("Country : %v\n", response.User.Country)
+	fmt.Printf("Registered : %v\n", response.User.Registered.Date)
+	// Output:
+	// User : RJ
+	// ID : 1000002
+	// Real Name : Richard Jones
+	// URL : http://www.last.fm/user/RJ
+	// Country : UK
+	// Registered : 2002-11-20 11:50
 }
