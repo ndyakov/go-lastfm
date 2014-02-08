@@ -34,6 +34,13 @@ type AlbumResponseNoArtistStruct struct {
 	Tracks      []TrackResponse       `xml:"tracks>track"`
 }
 
+// AlbumInlineResponse used where <album mbid="xx">album name</album>
+// tag is present. For example in user.getRecentTracks
+type AlbumInlineResponse struct {
+	Name string `xml:",chardata"`
+	MBID string `xml:"mbid,attr"`
+}
+
 // AlbumInfoResponse, used for album.getInfo request.
 type AlbumInfoResponse struct {
 	LastfmStatusResponse

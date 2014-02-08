@@ -92,9 +92,17 @@ type LovedTracksResponse struct {
 
 // RecentTrackResponse is part of RecentTracksResponse.
 type RecentTrackResponse struct {
-	TrackResponse
-	NowPlaying string             `xml:"nowplaying,attr"`
-	Date       LastfmDateResponse `xml:"date"`
+	Name       string                  `xml:"name"`
+	ID         int64                   `xml:"id"`
+	MBID       string                  `xml:"mbid"`
+	URL        string                  `xml:"url"`
+	Streamable TrackStreamableResponse `xml:"streamable"`
+	Artist     ArtistResponse          `xml:"artist"`
+	Image      []LastfmImageResponse   `xml:"image"`
+	Loved      int                     `xml:"loved"`
+	Album      AlbumInlineResponse     `xml:"album"`
+	NowPlaying string                  `xml:"nowplaying,attr"`
+	Date       LastfmDateResponse      `xml:"date"`
 }
 
 // RecentTracksResponse is used where <recenttracks> is present.

@@ -687,3 +687,29 @@ func ExampleUserClient_GetNeighbours() {
 	// Match : 0.99757462739944
 	// URL : http://www.last.fm/user/tonyetc
 }
+
+// Get Recent Tracks for User.
+func ExampleUserClient_GetRecentTracks() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetRecentTracks("RJ", 0, 0, 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	track := response.RecentTracks[0]
+	fmt.Printf("Recent Track #1 : %v\n", track.Name)
+	if track.NowPlaying != "" {
+		fmt.Printf("!! Now Playing !!\n")
+	}
+	fmt.Printf("Loved : %v\n", track.Loved)
+	fmt.Printf("Artist : %v\n", track.Artist.Name)
+	fmt.Printf("Album : %v\n", track.Album.Name)
+	fmt.Printf("URL : %v\n", track.URL)
+
+	// Output:
+	// Recent Track #1 : Novacane
+	// Loved : 1
+	// Artist : Frank Ocean
+	// Album : Novacane
+	// URL : http://www.last.fm/music/Frank+Ocean/_/Novacane
+}
