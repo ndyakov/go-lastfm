@@ -163,6 +163,28 @@ func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (r
 }
 
 func (c *TrackClient) GetCorrection(track, artist string) (response TrackCorrectionResponse, err error) {
+	method := "track.getCorrection"
+	query := make(map[string]string)
+	query["track"] = track
+	query["artist"] = artist
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

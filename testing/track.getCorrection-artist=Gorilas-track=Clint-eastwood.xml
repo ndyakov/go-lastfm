@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<corrections>
+                        <correction index='0' artistcorrected='1' trackcorrected='0'>
+                                <track>
+    <name>Clint Eastwood</name>
+            <mbid>8afc33fa-23fb-4a54-b92e-6be1d7b5f220</mbid>
+        <url>www.last.fm/music/Gorillaz/_/Clint+Eastwood</url>
+        <artist>
+    <name>Gorillaz</name>
+            <mbid>e21857d5-3256-4547-afb3-4b6ded592596</mbid>
+        <url>http://www.last.fm/music/Gorillaz</url>
+</artist></track>            </correction>
+            </corrections></lfm>

@@ -562,3 +562,29 @@ func ExampleTrackClient_GetTopTags() {
 	// Name : alternative
 	// URL  : http://www.last.fm/tag/alternative
 }
+
+// Get Track correction.
+func ExampleTrackClient_GetCorrection() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Track.GetCorrection("Clint eastwood", "Gorilas")
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Corrections : %v\n", len(response.TrackCorrections))
+
+	if len(response.TrackCorrections) > 0 {
+		var track lastfm.TrackResponse
+		track = response.TrackCorrections[0].Track
+		fmt.Printf("Correction #1 :\n")
+		fmt.Printf("  Corrected: [%v] Artist , [%v] Track\n", response.TrackCorrections[0].ArtistCorrected, response.TrackCorrections[0].TrackCorrected)
+		fmt.Printf("  Track : %v\n", track.Name)
+		fmt.Printf("  Artist : %v\n", track.Artist.Name)
+	}
+	// Output:
+	// Corrections : 1
+	// Correction #1 :
+	//   Corrected: [1] Artist , [0] Track
+	//   Track : Clint Eastwood
+	//   Artist : Gorillaz
+}
