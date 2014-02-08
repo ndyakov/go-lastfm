@@ -53,7 +53,28 @@ func (c *UserClient) GetInfo(user string) (response UserInfoResponse, err error)
 }
 
 func (c *UserClient) GetLovedTracks(user string, page, limit int) (response LovedTracksResponse, err error) {
+	method := "user.getLovedTracks"
+	query := c.prepareQuery(user, page, limit)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
+
 }
 
 func (c *UserClient) GetNeighbours(user string, limit int) (response NeighboursResponse, err error) {

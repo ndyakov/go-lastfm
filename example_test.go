@@ -647,3 +647,24 @@ func ExampleUserClient_GetInfo() {
 	// Country : UK
 	// Registered : 2002-11-20 11:50
 }
+
+// Get Loved tracks from user.
+func ExampleUserClient_GetLovedTracks() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetLovedTracks("RJ", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	track := response.LovedTracks[0]
+	fmt.Printf("Loved Tracks by RJ\n")
+	fmt.Printf("Track #1 : %v\n", track.Name)
+	fmt.Printf("URL : %v\n", track.URL)
+	fmt.Printf("Artist Name : %v\n", track.Artist.Name)
+
+	// Output:
+	// Loved Tracks by RJ
+	// Track #1 : New Year
+	// URL : http://www.last.fm/music/Beach+House/_/New+Year
+	// Artist Name : Beach House
+}
