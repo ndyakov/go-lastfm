@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+    <comparison>
+        <result>
+            <score>0.34451797604561</score>
+            <artists matches="10">
+                <artist>
+                    <name>Iron Maiden</name>
+                    <url>http://www.last.fm/music/Iron+Maiden</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/2952322.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/2952322.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/2952322.jpg</image>
+                    <image size="extralarge">http://userserve-ak.last.fm/serve/252/2952322.jpg</image>
+                </artist>
+                <artist>
+                    <name>Pearl Jam</name>
+                    <url>http://www.last.fm/music/Pearl+Jam</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/93032.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/93032.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/93032.jpg</image>
+                    <image size="extralarge">http://userserve-ak.last.fm/serve/252/93032.jpg</image>
+                </artist>
+                <artist>
+                    <name>Eddie Vedder</name>
+                    <url>http://www.last.fm/music/Eddie+Vedder</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/61166771.png</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/61166771.png</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/61166771.png</image>
+                    <image size="extralarge">http://userserve-ak.last.fm/serve/252/61166771.png</image>
+                </artist>
+                <artist>
+                    <name>Korn</name>
+                    <url>http://www.last.fm/music/Korn</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/92539493.png</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/92539493.png</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/92539493.png</image>
+                    <image size="extralarge">http://userserve-ak.last.fm/serve/252/92539493.png</image>
+                </artist>
+                <artist>
+                    <name>Eric Clapton</name>
+                    <url>http://www.last.fm/music/Eric+Clapton</url>
+                    <image size="large">http://userserve-ak.last.fm/serve/126/2366379.jpg</image>
+                    <image size="medium">http://userserve-ak.last.fm/serve/64/2366379.jpg</image>
+                    <image size="small">http://userserve-ak.last.fm/serve/34/2366379.jpg</image>
+                    <image size="extralarge">http://userserve-ak.last.fm/serve/252/2366379.jpg</image>
+                </artist>
+            </artists>
+        </result>
+        <input>
+            <user>
+                <name>n3mo-</name>
+                <url>http://www.last.fm/user/n3mo-</url>
+                <image size="large">http://userserve-ak.last.fm/serve/126/24001813.jpg</image>
+                <image size="medium">http://userserve-ak.last.fm/serve/64/24001813.jpg</image>
+                <image size="small">http://userserve-ak.last.fm/serve/34/24001813.jpg</image>
+                <image size="extralarge">http://userserve-ak.last.fm/serve/252/24001813.jpg</image>
+            </user>
+            <user>
+                <name>RJ</name>
+                <url>http://www.last.fm/user/RJ</url>
+                <image size="large">http://userserve-ak.last.fm/serve/126/84504153.jpg</image>
+                <image size="medium">http://userserve-ak.last.fm/serve/64/84504153.jpg</image>
+                <image size="small">http://userserve-ak.last.fm/serve/34/84504153.jpg</image>
+                <image size="extralarge">http://userserve-ak.last.fm/serve/252/84504153.jpg</image>
+            </user>
+        </input>
+    </comparison></lfm>

@@ -443,3 +443,21 @@ func ExampleTagClient_Search() {
 	//   Tag Count : 3979953
 	//   Tag URL : www.last.fm/tag/rock
 }
+
+// Compare Users
+func ExampleTasteometerClient_Compare() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Tasteometer.Compare("user", "n3mo-", "user", "RJ", 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+
+	fmt.Printf("Compare between %v and %v :\n", response.Input.Users[0].Name, response.Input.Users[1].Name)
+	fmt.Printf("Score : %v\n", response.Result.Score)
+	fmt.Printf("First Artist: %v\n", response.Result.Artists[0].Name)
+	// Output:
+	// Compare between n3mo- and RJ :
+	// Score : 0.34451797604561
+	// First Artist: Iron Maiden
+}
