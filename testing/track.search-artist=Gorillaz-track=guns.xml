@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<results for="guns" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<opensearch:Query role="request" searchTerms="guns" startPage="1" />
+<opensearch:totalResults>260</opensearch:totalResults>
+<opensearch:startIndex>0</opensearch:startIndex>
+<opensearch:itemsPerPage>30</opensearch:itemsPerPage><trackmatches>
+<track>
+    <name>Kids With Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>609621</listeners>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/44425129.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/44425129.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/44425129.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/44425129.png</image>
+                <mbid>87fe260f-96c5-47bc-9d22-8a1c0f723475</mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Hot Chip Remix)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Hot+Chip+Remix)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>71820</listeners>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/86134225.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/86134225.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/86134225.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/86134225.png</image>
+                <mbid>14be1b4e-dd2c-4a7c-badb-420e415dbd76</mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Jamie T's Turns To Monsters Mix)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Jamie+T%27s+Turns+To+Monsters+Mix)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>46255</listeners>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/86134225.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/86134225.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/86134225.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/86134225.png</image>
+                <mbid>2f3d5321-690b-47ae-ae4d-d11e0195d7a1</mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Quiet Village Remix)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Quiet+Village+Remix)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>41793</listeners>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/86134225.png</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/86134225.png</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/86134225.png</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/86134225.png</image>
+                <mbid>9ae9abc7-8791-4b89-929d-70d26577e7a0</mbid>
+    </track>
+<track>
+    <name>Kids With Guns (feat. Neneh Cherry)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(feat.+Neneh+Cherry)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>8589</listeners>
+            <image size="small">http://userserve-ak.last.fm/serve/34s/56721653.jpg</image>
+    <image size="medium">http://userserve-ak.last.fm/serve/64s/56721653.jpg</image>
+    <image size="large">http://userserve-ak.last.fm/serve/126/56721653.jpg</image>
+    <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/56721653.jpg</image>
+                <mbid>810b0a6f-d542-4803-a0d0-1aace4071591</mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Hot Chip Remixes)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Hot+Chip+Remixes)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>3545</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Jamie T Remix)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Jamie+T+Remix)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>3275</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns [Hot Chip Remix]</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+%5BHot+Chip+Remix%5D</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>2537</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns [Quiet Village Remix]</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+%5BQuiet+Village+Remix%5D</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>1846</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns - Hot Chip Remix</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+-+Hot+Chip+Remix</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>2442</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns - Live At Manchester Opera House</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+-+Live+At+Manchester+Opera+House</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>2274</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns [Jamie T's Turns To Monsters Mix]</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+%5BJamie+T%27s+Turns+To+Monsters+Mix%5D</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>2102</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids with guns (Jamie T's turn to monsters mix)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+with+guns+(Jamie+T%27s+turn+to+monsters+mix)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>2093</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Live At Manchester Opera House)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Live+At+Manchester+Opera+House)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>1938</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns (Live)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(Live)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>686</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns - Jamie T's Turns To Monsters Mix</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+-+Jamie+T%27s+Turns+To+Monsters+Mix</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>1955</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns (iTunes Session)</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+(iTunes+Session)</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>973</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kid With Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/+noredirect/Gorillaz/_/Kid+With+Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>61</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns - Quiet Village Remix</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns+-+Quiet+Village+Remix</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>1433</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>kids whit guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/+noredirect/Gorillaz/_/kids+whit+guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>48</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kidz With Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kidz+With+Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>29</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids whith Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+whith+Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>20</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>James Bond's Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/James+Bond%27s+Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>15</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>&quot;Kids With Guns&quot;</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/%22Kids+With+Guns%22</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>13</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With  Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With++Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>10</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>kids wit guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/kids+wit+guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>9</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kid's with guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kid%27s+with+guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>7</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids With Guns.</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns.</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>8</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids w/ guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids+w%2F+guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>9</listeners>
+                    <mbid></mbid>
+    </track>
+<track>
+    <name>Kids  With Guns</name>
+    <artist>Gorillaz</artist>
+    <url>http://www.last.fm/music/Gorillaz/_/Kids++With+Guns</url>
+    <streamable fulltrack="0">0</streamable>
+    <listeners>7</listeners>
+                    <mbid></mbid>
+    </track>
+</trackmatches>
+</results></lfm>
+

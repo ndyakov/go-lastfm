@@ -189,5 +189,35 @@ func (c *TrackClient) GetCorrection(track, artist string) (response TrackCorrect
 }
 
 func (c *TrackClient) Search(track, artist string, page, limit int) (response TrackSearchResponse, err error) {
+	method := "track.search"
+	query := make(map[string]string)
+	query["track"] = track
+	query["artist"] = artist
+
+	if page != 0 {
+		query["page"] = strconv.Itoa(page)
+	}
+
+	if limit != 0 {
+		query["limit"] = strconv.Itoa(limit)
+	}
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }

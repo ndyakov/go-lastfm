@@ -588,3 +588,33 @@ func ExampleTrackClient_GetCorrection() {
 	//   Track : Clint Eastwood
 	//   Artist : Gorillaz
 }
+
+// Search for Track.
+func ExampleTrackClient_Search() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Track.Search("guns", "Gorillaz", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+
+	fmt.Printf("Search request for : %v\n", response.Query.SearchTerms)
+	fmt.Printf("Total results : %v\n", response.TotalResults)
+
+	if response.TotalResults > 0 {
+		var track lastfm.TrackResponseNoArtistStruct
+		track = response.TrackMatches[0]
+		fmt.Printf("First result :\n")
+		fmt.Printf("  Track Name : %v\n", track.Name)
+		fmt.Printf("  Artist Name : %v\n", track.Artist)
+		fmt.Printf("  Track MBID : %v\n", track.MBID)
+	}
+
+	// Output:
+	// Search request for : guns
+	// Total results : 260
+	// First result :
+	//   Track Name : Kids With Guns
+	//   Artist Name : Gorillaz
+	//   Track MBID : 87fe260f-96c5-47bc-9d22-8a1c0f723475
+}

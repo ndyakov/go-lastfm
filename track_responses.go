@@ -22,6 +22,22 @@ type TrackResponse struct {
 	Wiki       LastfmWikiResponse      `xml:"wiki"`
 }
 
+type TrackResponseNoArtistStruct struct {
+	Name       string                  `xml:"name"`
+	ID         int64                   `xml:"id"`
+	MBID       string                  `xml:"mbid"`
+	URL        string                  `xml:"url"`
+	Duration   int64                   `xml:"duration"`
+	Streamable TrackStreamableResponse `xml:"streamable"`
+	Listeners  int64                   `xml:"listeners"`
+	Playcount  int64                   `xml:"playcount"`
+	Artist     string                  `xml:"artist"`
+	Image      []LastfmImageResponse   `xml:"image"`
+	UserLoved  int                     `xml:"userloved"`
+	Album      AlbumResponse           `xml:"album"`
+	TopTags    TopTagsResponse         `xml:"toptags"`
+	Wiki       LastfmWikiResponse      `xml:"wiki"`
+}
 type TrackInfoResponse struct {
 	LastfmStatusResponse
 	Track TrackResponse `xml:"track"`
@@ -52,7 +68,7 @@ type TrackCorrectionResponse struct {
 type TrackSearchResponse struct {
 	LastfmStatusResponse
 	LastfmOpenSearchResponse
-	TrackMatches []TrackResponse `xml:"trackmatches>track"`
+	TrackMatches []TrackResponseNoArtistStruct `xml:"results>trackmatches>track"`
 }
 
 type TracksLovedResponse struct {
