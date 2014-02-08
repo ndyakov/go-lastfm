@@ -736,3 +736,22 @@ func ExampleUserClient_GetTopAlbums() {
 	// Playcount: 266
 	// Image [small] : http://userserve-ak.last.fm/serve/34s/93189941.png
 }
+
+// Get Top Artists for User.
+func ExampleUserClient_GetTopArtists() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.User.GetTopArtists("RJ", "", 0, 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	artist := response.TopArtists[0]
+	fmt.Printf("Artist #1 : %v\n", artist.Name)
+	fmt.Printf("URL : %v\n", artist.URL)
+	fmt.Printf("MBID : %v\n", artist.MBID)
+
+	// Output:
+	// Artist #1 : Dream Theater
+	// URL : http://www.last.fm/music/Dream+Theater
+	// MBID : 28503ab7-8bf2-4666-a7bd-2644bfc7cb1d
+}

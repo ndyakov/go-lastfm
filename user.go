@@ -164,6 +164,31 @@ func (c *UserClient) GetTopAlbums(user, period string, page, limit int) (respons
 }
 
 func (c *UserClient) GetTopArtists(user, period string, page, limit int) (response TopArtistsResponse, err error) {
+	method := "user.getTopArtists"
+	query := c.prepareQuery(user, page, limit)
+
+	if period != "" {
+		query["period"] = period
+	}
+
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 
