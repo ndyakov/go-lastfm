@@ -115,6 +115,26 @@ func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int)
 }
 
 func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (response TopFansResponse, err error) {
+	method := "track.getTopFans"
+	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	body, _, err := c.lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(&response)
+
+	if err != nil {
+		return
+	}
+
+	if response.Error.Code != 0 {
+		err = &response.Error
+		return
+	}
+
 	return
 }
 

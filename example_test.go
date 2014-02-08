@@ -524,3 +524,22 @@ func ExampleTrackClient_GetTags() {
 	// Name : snow
 	// URL  : http://www.last.fm/tag/snow
 }
+
+// Get Top Fans for Track.
+func ExampleTrackClient_GetTopFans() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Track.GetTopFans("", "", "87fe260f-96c5-47bc-9d22-8a1c0f723475", 0)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	user := response.TopFans[0]
+	fmt.Printf("Top Fan #1 : %v\n", user.Name)
+	fmt.Printf("URL : %v\n", user.URL)
+	fmt.Printf("Image [%v] : %v\n", user.Image[0].Size, user.Image[0].URL)
+
+	// Output:
+	// Top Fan #1 : Snerfmonster
+	// URL : http://www.last.fm/user/Snerfmonster
+	// Image [small] : http://userserve-ak.last.fm/serve/34/92047817.jpg
+}
