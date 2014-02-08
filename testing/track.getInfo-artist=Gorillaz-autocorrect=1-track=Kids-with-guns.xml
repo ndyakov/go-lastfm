@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lfm status="ok">
+<track>
+    <id>16225814</id>
+    <name>Kids With Guns</name>
+            <mbid>87fe260f-96c5-47bc-9d22-8a1c0f723475</mbid>
+            <url>http://www.last.fm/music/Gorillaz/_/Kids+With+Guns</url>
+    <duration>224000</duration>
+    <streamable fulltrack="0">0</streamable>    
+        <listeners>609621</listeners>
+    <playcount>3321554</playcount>
+        <artist>
+        <name>Gorillaz</name>
+                <mbid>e21857d5-3256-4547-afb3-4b6ded592596</mbid>
+                    <url>http://www.last.fm/music/Gorillaz</url>
+    </artist>
+        <album position="3">
+        <artist>Gorillaz</artist>
+        <title>Demon Days</title>
+                <mbid>26193df8-54c5-4c75-80e3-84ddc9aa7379</mbid>
+                    <url>http://www.last.fm/music/Gorillaz/Demon+Days</url>        
+        <image size="small">http://userserve-ak.last.fm/serve/64s/44425129.png</image>
+        <image size="medium">http://userserve-ak.last.fm/serve/126/44425129.png</image>
+        <image size="large">http://userserve-ak.last.fm/serve/174s/44425129.png</image>
+        <image size="extralarge">http://userserve-ak.last.fm/serve/300x300/44425129.png</image>
+    </album>
+        <toptags>
+        <tag>
+      <name>alternative</name>
+      <url>http://www.last.fm/tag/alternative</url>
+    </tag>
+        <tag>
+      <name>electronic</name>
+      <url>http://www.last.fm/tag/electronic</url>
+    </tag>
+        <tag>
+      <name>gorillaz</name>
+      <url>http://www.last.fm/tag/gorillaz</url>
+    </tag>
+        <tag>
+      <name>rock</name>
+      <url>http://www.last.fm/tag/rock</url>
+    </tag>
+        <tag>
+      <name>trip-hop</name>
+      <url>http://www.last.fm/tag/trip-hop</url>
+    </tag>
+      </toptags>
+          <wiki>
+        <published>Thu, 3 Mar 2011 18:35:58 +0000</published>
+        <summary><![CDATA[This song features <a href="http://www.last.fm/music/Neneh+Cherry" class="bbcode_artist">Neneh Cherry</a> on guest backing vocals.]]></summary>
+        <content><![CDATA[This song features <a href="http://www.last.fm/music/Neneh+Cherry" class="bbcode_artist">Neneh Cherry</a> on guest backing vocals.
+        
+User-contributed text is available under the Creative Commons By-SA License and may also be available under the GNU FDL.]]></content>
+      </wiki>
+    </track></lfm>
+

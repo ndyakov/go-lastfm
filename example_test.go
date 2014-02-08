@@ -461,3 +461,26 @@ func ExampleTasteometerClient_Compare() {
 	// Score : 0.34451797604561
 	// First Artist: Iron Maiden
 }
+
+// Get full info for Track.
+func ExampleTrackClient_GetInfo() {
+	lfm := lastfm.New("api_key_for_testing")
+	response, err := lfm.Track.GetInfo("Kids with guns", "Gorillaz", "", "", 1)
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Track : %v\n", response.Track.Name)
+	fmt.Printf("MBID : %v\n", response.Track.MBID)
+	fmt.Printf("URL : %v\n", response.Track.URL)
+	fmt.Printf("Listeners : %v\n", response.Track.Listeners)
+	fmt.Printf("Playcount : %v\n", response.Track.Playcount)
+	fmt.Printf("Duration : %v\n", response.Track.Duration)
+	// Output:
+	// Track : Kids With Guns
+	// MBID : 87fe260f-96c5-47bc-9d22-8a1c0f723475
+	// URL : http://www.last.fm/music/Gorillaz/_/Kids+With+Guns
+	// Listeners : 609621
+	// Playcount : 3321554
+	// Duration : 224000
+}

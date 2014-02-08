@@ -7,6 +7,7 @@ type TrackStreamableResponse struct {
 
 type TrackResponse struct {
 	Name       string                  `xml:"name"`
+	ID         int64                   `xml:"id"`
 	MBID       string                  `xml:"mbid"`
 	URL        string                  `xml:"url"`
 	Duration   int64                   `xml:"duration"`
@@ -15,16 +16,15 @@ type TrackResponse struct {
 	Playcount  int64                   `xml:"playcount"`
 	Artist     ArtistResponse          `xml:"artist"`
 	Image      []LastfmImageResponse   `xml:"image"`
+	UserLoved  int                     `xml:"userloved"`
+	Album      AlbumResponse           `xml:"album"`
+	TopTags    TopTagsResponse         `xml:"toptags"`
+	Wiki       LastfmWikiResponse      `xml:"wiki"`
 }
 
 type TrackInfoResponse struct {
 	LastfmStatusResponse
-	ID int64 `xml:"id"`
-	TrackResponse
-	UserLoved int                `xml:"userloved"`
-	Album     AlbumResponse      `xml:"album"`
-	TopTags   TopTagsResponse    `xml:"toptags"`
-	Wiki      LastfmWikiResponse `xml:"wiki"`
+	Track TrackResponse `xml:"track"`
 }
 
 type TopTracksResponse struct {
