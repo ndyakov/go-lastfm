@@ -1,12 +1,23 @@
 package lastfm
 
-type LastfmResponse interface{}
+type LastfmResponse interface {
+	getErrorCode() int
+	getError() error
+}
 
 // LastfmStatusResponse, used to parse the status
 // of any response from lastfm.
 type LastfmStatusResponse struct {
 	Status string              `xml:"status,attr"`
 	Error  LastfmErrorResponse `xml:"error"`
+}
+
+func (lfmSR LastfmStatusResponse) getErrorCode() int {
+	return lfmSR.Error.Code
+}
+
+func (lfmSR LastfmStatusResponse) getError() error {
+	return &lfmSR.Error
 }
 
 // LastfmErrorResponse

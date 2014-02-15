@@ -1,6 +1,7 @@
 package lastfm
 
 import (
+	"encoding/xml"
 	"io"
 	"net/http"
 	"net/url"
@@ -71,6 +72,27 @@ func (lfm *LastFM) buildURL(query map[string]string) string {
 	uri.RawQuery = values.Encode()
 
 	return uri.String()
+}
+
+func (lfm *LastFM) getResponse(method string, query map[string]string, response LastfmResponse) (err error) {
+	body, _, err := lfm.makeRequest(method, query)
+
+	if err != nil {
+		return
+	}
+
+	defer body.Close()
+	err = xml.NewDecoder(body).Decode(response)
+
+	if err != nil {
+		return
+	}
+
+	if response.getErrorCode() != 0 {
+		err = response.getError()
+		return
+	}
+	return
 }
 
 // Add metthod and api_key as part of the query parameters.

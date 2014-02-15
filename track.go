@@ -1,7 +1,6 @@
 package lastfm
 
 import (
-	"encoding/xml"
 	"strconv"
 )
 
@@ -35,7 +34,8 @@ func (c *TrackClient) prepareQuery(track, artist, mbid string, autocorrect int) 
 // Get full information for some track.
 // Returns TrackInfoResponse or error.
 // Be awere there may be an error from the xml decoding.
-func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int) (response TrackInfoResponse, err error) {
+func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int) (response *TrackInfoResponse, err error) {
+	response = new(TrackInfoResponse)
 	method := "track.getInfo"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
 
@@ -43,56 +43,26 @@ func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int)
 		query["username"] = user
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get similar tracks to some track.
 // Returns SimilarTracksResponse or error.
-func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (response SimilarTracksResponse, err error) {
+func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (response *SimilarTracksResponse, err error) {
+	response = new(SimilarTracksResponse)
 	method := "track.getSimilar"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get tags for some track tagged by some user.
 // Returns TagsResponse or error.
-func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int) (response TagsResponse, err error) {
+func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
+	response = new(TagsResponse)
 	method := "track.getTags"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
 
@@ -100,103 +70,42 @@ func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int)
 		query["user"] = user
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get top fans for some track.
 // Returns TopFansResponse or error.
-func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (response TopFansResponse, err error) {
+func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (response *TopFansResponse, err error) {
+	response = new(TopFansResponse)
 	method := "track.getTopFans"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get top tags in lastfm for some track.
 // Returns TopTagsResponse or error.
-func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (response TopTagsResponse, err error) {
+func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
+	response = new(TopTagsResponse)
 	method := "track.getTopTags"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get correction for some track and artist.
 // Returns TrackCorrectionResponse or error.
-func (c *TrackClient) GetCorrection(track, artist string) (response TrackCorrectionResponse, err error) {
+func (c *TrackClient) GetCorrection(track, artist string) (response *TrackCorrectionResponse, err error) {
+	response = new(TrackCorrectionResponse)
 	method := "track.getCorrection"
 	query := make(map[string]string)
 	query["track"] = track
 	query["artist"] = artist
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -204,7 +113,8 @@ func (c *TrackClient) GetCorrection(track, artist string) (response TrackCorrect
 // Search for some track.
 // artist parameter is optional, you may specify it to narrow your search
 // otherwise pass empty string.
-func (c *TrackClient) Search(track, artist string, page, limit int) (response TrackSearchResponse, err error) {
+func (c *TrackClient) Search(track, artist string, page, limit int) (response *TrackSearchResponse, err error) {
+	response = new(TrackSearchResponse)
 	method := "track.search"
 	query := make(map[string]string)
 	query["track"] = track
@@ -220,23 +130,8 @@ func (c *TrackClient) Search(track, artist string, page, limit int) (response Tr
 	if limit != 0 {
 		query["limit"] = strconv.Itoa(limit)
 	}
-	body, _, err := c.lfm.makeRequest(method, query)
 
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }

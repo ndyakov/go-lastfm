@@ -1,7 +1,6 @@
 package lastfm
 
 import (
-	"encoding/xml"
 	"strconv"
 )
 
@@ -13,7 +12,8 @@ type TasteometerClient struct {
 
 // Compare two users or two lists of artists (up to 100 artists per list, comma separated).
 // Returns TasteometerCompareResponse or error
-func (c *TasteometerClient) Compare(type1, value1, type2, value2 string, limit int) (response TasteometerCompareResponse, err error) {
+func (c *TasteometerClient) Compare(type1, value1, type2, value2 string, limit int) (response *TasteometerCompareResponse, err error) {
+	response = new(TasteometerCompareResponse)
 	method := "tasteometer.compare"
 	query := make(map[string]string)
 	query["type1"] = type1
@@ -25,23 +25,7 @@ func (c *TasteometerClient) Compare(type1, value1, type2, value2 string, limit i
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }

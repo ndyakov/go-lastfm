@@ -1,7 +1,6 @@
 package lastfm
 
 import (
-	"encoding/xml"
 	"strconv"
 )
 
@@ -43,78 +42,33 @@ func (c *AlbumClient) prepareQuery(artist, album, mbid, user string, autocorrect
 // Get full information for Album.
 // Returns AlbumInforResponse or error.
 // There may be an error returned from the parser/decoder as well.
-func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect int) (response AlbumInfoResponse, err error) {
+func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect int) (response *AlbumInfoResponse, err error) {
+	response = new(AlbumInfoResponse)
 	method := "album.getInfo"
 	query := c.prepareQuery(artist, album, mbid, username, autocorrect, true)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get Tags for some Album, that are added by some user.
 // Returns TagsResponse or error.
-func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int) (response TagsResponse, err error) {
+func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
+	response = new(TagsResponse)
 	method := "album.getTags"
 	query := c.prepareQuery(artist, album, mbid, user, autocorrect, false)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get Top Tags for Album.
 // Returns TopTagsResponse or error.
-func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (response TopTagsResponse, err error) {
+func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
+	response = new(TopTagsResponse)
 	method := "album.getTopTags"
 	query := c.prepareQuery(artist, album, mbid, "", autocorrect, false)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -122,7 +76,8 @@ func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (r
 // Search album by given name. You can specify page and limit also.
 // Default values are as stated in lastfm's api documentation.
 // Returns AlbumSearchResponse.
-func (c *AlbumClient) Search(album string, page, limit int) (response AlbumSearchResponse, err error) {
+func (c *AlbumClient) Search(album string, page, limit int) (response *AlbumSearchResponse, err error) {
+	response = new(AlbumSearchResponse)
 	method := "album.search"
 	query := make(map[string]string)
 	query["album"] = album
@@ -135,23 +90,7 @@ func (c *AlbumClient) Search(album string, page, limit int) (response AlbumSearc
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }

@@ -1,7 +1,6 @@
 package lastfm
 
 import (
-	"encoding/xml"
 	"strconv"
 )
 
@@ -34,26 +33,11 @@ func (c *ArtistClient) prepareQuery(name, mbid string, autocorrect int) (query m
 // Get top tags for Artist.
 // Returns TopTagsResponse structure or error.
 // Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response TopTagsResponse, err error) {
+func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
+	response = new(TopTagsResponse)
 	method := "artist.getTopTags"
 	query := c.prepareQuery(name, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -61,27 +45,12 @@ func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response 
 // Get tags for Artist who is in users directory.
 // Returns TagsResponse structure or error.
 // Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTags(name, mbid, user string, autocorrect int) (response TagsResponse, err error) {
+func (c *ArtistClient) GetTags(name, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
+	response = new(TagsResponse)
 	method := "artist.getTags"
 	query := c.prepareQuery(name, mbid, autocorrect)
 	query["user"] = user
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -89,7 +58,8 @@ func (c *ArtistClient) GetTags(name, mbid, user string, autocorrect int) (respon
 // Get top Albums for Artist.
 // Returns TopAlbumsResponse or error.
 // Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit int) (response TopAlbumsResponse, err error) {
+func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit int) (response *TopAlbumsResponse, err error) {
+	response = new(TopAlbumsResponse)
 	method := "artist.getTopAlbums"
 	query := c.prepareQuery(name, mbid, autocorrect)
 
@@ -101,23 +71,7 @@ func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit 
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -125,26 +79,11 @@ func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit 
 // Get top fans for Artist.
 // Returns TopFansResponse or error.
 // Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopFans(name, mbid string, autocorrect int) (response TopFansResponse, err error) {
+func (c *ArtistClient) GetTopFans(name, mbid string, autocorrect int) (response *TopFansResponse, err error) {
+	response = new(TopFansResponse)
 	method := "artist.getTopFans"
 	query := c.prepareQuery(name, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -152,7 +91,8 @@ func (c *ArtistClient) GetTopFans(name, mbid string, autocorrect int) (response 
 // Get top tracks for Artist.
 // Returns TopTracksResponse or error.
 // Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopTracks(name, mbid string, autocorrect, page, limit int) (response TopTracksResponse, err error) {
+func (c *ArtistClient) GetTopTracks(name, mbid string, autocorrect, page, limit int) (response *TopTracksResponse, err error) {
+	response = new(TopTracksResponse)
 	method := "artist.getTopTracks"
 	query := c.prepareQuery(name, mbid, autocorrect)
 
@@ -164,30 +104,15 @@ func (c *ArtistClient) GetTopTracks(name, mbid string, autocorrect, page, limit 
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Search for Artist by given name.
 // Returns ArtistSearchResponse or error.
-func (c *ArtistClient) Search(name string, page, limit int) (response ArtistSearchResponse, err error) {
+func (c *ArtistClient) Search(name string, page, limit int) (response *ArtistSearchResponse, err error) {
+	response = new(ArtistSearchResponse)
 	method := "artist.Search"
 	query := make(map[string]string)
 	query["artist"] = name
@@ -200,49 +125,18 @@ func (c *ArtistClient) Search(name string, page, limit int) (response ArtistSear
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
 
 // Get similar artists.
 // Returns ArtistSimilarResponse or error.
-func (c *ArtistClient) GetSimilar(name string, mbid string, autocorrect int) (response ArtistSimilarResponse, err error) {
+func (c *ArtistClient) GetSimilar(name string, mbid string, autocorrect int) (response *ArtistSimilarResponse, err error) {
+	response = new(ArtistSimilarResponse)
 	method := "artist.getsimilar"
 	query := c.prepareQuery(name, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
@@ -250,26 +144,11 @@ func (c *ArtistClient) GetSimilar(name string, mbid string, autocorrect int) (re
 // Get info for Artist with given name.
 // Returns ArtistInfoResponse or error.
 // Response data is actually in response.Artist.
-func (c *ArtistClient) GetInfo(name, mbid string, autocorrect int) (response ArtistInfoResponse, err error) {
+func (c *ArtistClient) GetInfo(name, mbid string, autocorrect int) (response *ArtistInfoResponse, err error) {
+	response = new(ArtistInfoResponse)
 	method := "artist.getInfo"
 	query := c.prepareQuery(name, mbid, autocorrect)
-	body, _, err := c.lfm.makeRequest(method, query)
-
-	if err != nil {
-		return
-	}
-
-	defer body.Close()
-	err = xml.NewDecoder(body).Decode(&response)
-
-	if err != nil {
-		return
-	}
-
-	if response.Error.Code != 0 {
-		err = &response.Error
-		return
-	}
+	err = c.lfm.getResponse(method, query, response)
 
 	return
 }
