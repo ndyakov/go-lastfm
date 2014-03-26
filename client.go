@@ -12,7 +12,8 @@ import (
 
 // lastfm's api root url
 var (
-	apiRootURL = url.URL{Scheme: "http", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
+	apiRootURL = url.URL{Scheme: "https", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
+	apiWebURL  = url.URL{Scheme: "https", Host: "www.last.fm", Path: "/api/auth/"}
 )
 
 // getter interface present
@@ -30,6 +31,9 @@ type Client struct {
 // LastFM struct with all available clients.
 type LastFM struct {
 	apiKey      string
+	apiSecret   string
+	sessionKey  string
+	userAgent   string
 	getter      getter
 	Album       AlbumClient
 	Artist      ArtistClient
@@ -41,9 +45,10 @@ type LastFM struct {
 
 // Initialize all clients and
 // chooses which getter to use.
-func New(apiKey string) *LastFM {
+func New(apiKey, apiSecret string) *LastFM {
 	lfm := new(LastFM)
 	lfm.apiKey = apiKey
+	lfm.apiSecret = apiSecret
 	lfm.Album = AlbumClient{Client: Client{lfm}}
 	lfm.Artist = ArtistClient{Client: Client{lfm}}
 	lfm.Tag = TagClient{Client: Client{lfm}}
@@ -58,6 +63,22 @@ func New(apiKey string) *LastFM {
 	}
 
 	return lfm
+}
+
+func (lfm *LastFM) SetSessionKey(sessionKey string) {
+	lfm.sessionKey = sessionKey
+}
+
+func (lfm *LastFM) GetSessionKey() string {
+	return lfm.sessionKey
+}
+
+func (lfm *LastFM) SetUserAgent(userAgent string) {
+	lfm.userAgent = userAgent
+}
+
+func (lfm *LastFM) GetUserAgent() string {
+	return lfm.userAgent
 }
 
 // Build url for the request.
@@ -150,7 +171,7 @@ func (c *dummyGetter) buildFilename(values url.Values) string {
 	var keys []string
 	parts = append(parts, values.Get("method"))
 
-	for key, _ := range values {
+	for key := range values {
 
 		if key == "method" || key == "api_key" {
 			continue

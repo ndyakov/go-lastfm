@@ -6,7 +6,7 @@ import (
 )
 
 func TestArtistTopTags(t *testing.T) {
-	lfm := New("api_key_for_testing")
+	lfm := New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetTopTags("Daft Punk", "", 0)
 	if err != nil {
 		t.Error(err)
@@ -17,7 +17,7 @@ func TestArtistTopTags(t *testing.T) {
 }
 
 func TestArtistSimilar(t *testing.T) {
-	lfm := New("api_key_for_testing")
+	lfm := New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetSimilar("Cher", "", 0)
 	if err != nil {
 		t.Error(err)

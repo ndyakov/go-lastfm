@@ -10,7 +10,7 @@ import (
 // Create new api client object
 // with your api key as argument.
 func ExampleLastFM_New() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	fmt.Printf("The type is %v\n", reflect.TypeOf(lfm))
 	// Output:
 	// The type is *lastfm.LastFM
@@ -18,7 +18,7 @@ func ExampleLastFM_New() {
 
 // Get Top Tags for Artist.
 func ExampleArtistClient_GetTopTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetTopTags("Daft Punk", "", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -37,7 +37,7 @@ func ExampleArtistClient_GetTopTags() {
 
 // Get Tags for Artist.
 func ExampleArtistClient_GetTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetTags("Red Hot Chili Peppers", "", "RJ", 1)
 	if err != nil {
 		fmt.Println("Error:")
@@ -56,7 +56,7 @@ func ExampleArtistClient_GetTags() {
 
 // Get Similar Artists.
 func ExampleArtistClient_GetSimilar() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetSimilar("Cher", "", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -78,7 +78,7 @@ func ExampleArtistClient_GetSimilar() {
 
 // Get Top Albums for Artist.
 func ExampleArtistClient_GetTopAlbums() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetTopAlbums("Ogonek", "", 0, 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -101,7 +101,7 @@ func ExampleArtistClient_GetTopAlbums() {
 
 // Get Top Fans for Artist.
 func ExampleArtistClient_GetTopFans() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetTopFans("Ogonek", "", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -120,7 +120,7 @@ func ExampleArtistClient_GetTopFans() {
 
 // Get Top Tracks for Artist.
 func ExampleArtistClient_GetTopTracks() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetTopTracks("Ogonek", "", 0, 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -141,7 +141,7 @@ func ExampleArtistClient_GetTopTracks() {
 
 // Search for Artist.
 func ExampleArtistClient_Search() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.Search("Ogo", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -171,7 +171,7 @@ func ExampleArtistClient_Search() {
 
 // Get full info for Artist.
 func ExampleArtistClient_GetInfo() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Artist.GetInfo("Gorillaz", "", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -192,7 +192,7 @@ func ExampleArtistClient_GetInfo() {
 
 // Get full info for Album.
 func ExampleAlbumClient_GetInfo() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Album.GetInfo("Ogonek", "Drum And Bass Massacre", "", "", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -222,7 +222,7 @@ func ExampleAlbumClient_GetInfo() {
 
 // Get Tags for Album.
 func ExampleAlbumClient_GetTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Album.GetTags("Guano Apes", "Bel Air", "", "n3mo-", 1)
 	if err != nil {
 		fmt.Println("Error:")
@@ -241,7 +241,7 @@ func ExampleAlbumClient_GetTags() {
 
 // Get Top Tags for Album.
 func ExampleAlbumClient_GetTopTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Album.GetTopTags("Guano Apes", "Bel Air", "", 1)
 	if err != nil {
 		fmt.Println("Error:")
@@ -262,7 +262,7 @@ func ExampleAlbumClient_GetTopTags() {
 
 // Search for Album.
 func ExampleAlbumClient_Search() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Album.Search("go", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -294,7 +294,7 @@ func ExampleAlbumClient_Search() {
 
 // Get full info for Tag.
 func ExampleTagClient_GetInfo() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.GetInfo("rock")
 	if err != nil {
 		fmt.Println("Error:")
@@ -313,7 +313,7 @@ func ExampleTagClient_GetInfo() {
 
 // Get Similar Tags.
 func ExampleTagClient_GetSimilar() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.GetSimilar("rock")
 	if err != nil {
 		fmt.Println("Error:")
@@ -333,7 +333,7 @@ func ExampleTagClient_GetSimilar() {
 
 // Get Top Albums for Tag.
 func ExampleTagClient_GetTopAlbums() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.GetTopAlbums("dnb", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -356,7 +356,7 @@ func ExampleTagClient_GetTopAlbums() {
 
 // Get Top Artists for Tag.
 func ExampleTagClient_GetTopArtists() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.GetTopArtists("dnb", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -375,7 +375,7 @@ func ExampleTagClient_GetTopArtists() {
 
 // Get Top Tags in Lastfm.
 func ExampleTagClient_GetTopTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.GetTopTags()
 	if err != nil {
 		fmt.Println("Error:")
@@ -396,7 +396,7 @@ func ExampleTagClient_GetTopTags() {
 
 // Get Top Tracks for Tag.
 func ExampleTagClient_GetTopTracks() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.GetTopTracks("rock", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -417,7 +417,7 @@ func ExampleTagClient_GetTopTracks() {
 
 // Search for Tags.
 func ExampleTagClient_Search() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tag.Search("rock", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -447,7 +447,7 @@ func ExampleTagClient_Search() {
 
 // Compare Users
 func ExampleTasteometerClient_Compare() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Tasteometer.Compare("user", "n3mo-", "user", "RJ", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -465,7 +465,7 @@ func ExampleTasteometerClient_Compare() {
 
 // Get full info for Track.
 func ExampleTrackClient_GetInfo() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.GetInfo("Kids with guns", "Gorillaz", "", "", 1)
 	if err != nil {
 		fmt.Println("Error:")
@@ -488,7 +488,7 @@ func ExampleTrackClient_GetInfo() {
 
 // Get Similar Tracks to Track.
 func ExampleTrackClient_GetSimilar() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.GetSimilar("Kids with guns", "Gorillaz", "", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -509,7 +509,7 @@ func ExampleTrackClient_GetSimilar() {
 
 // Get Tags for Track.
 func ExampleTrackClient_GetTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.GetTags("Snow", "Red Hot Chili Peppers", "", "n3mo-", 1)
 	if err != nil {
 		fmt.Println("Error:")
@@ -528,7 +528,7 @@ func ExampleTrackClient_GetTags() {
 
 // Get Top Fans for Track.
 func ExampleTrackClient_GetTopFans() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.GetTopFans("", "", "87fe260f-96c5-47bc-9d22-8a1c0f723475", 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -547,7 +547,7 @@ func ExampleTrackClient_GetTopFans() {
 
 // Get Top Tags for Track.
 func ExampleTrackClient_GetTopTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.GetTopTags("Clint Eastwood", "Gorillaz", "", 1)
 	if err != nil {
 		fmt.Println("Error:")
@@ -566,7 +566,7 @@ func ExampleTrackClient_GetTopTags() {
 
 // Get Track correction.
 func ExampleTrackClient_GetCorrection() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.GetCorrection("Clint eastwood", "Gorilas")
 	if err != nil {
 		fmt.Println("Error:")
@@ -592,7 +592,7 @@ func ExampleTrackClient_GetCorrection() {
 
 // Search for Track.
 func ExampleTrackClient_Search() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.Track.Search("guns", "Gorillaz", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -622,7 +622,7 @@ func ExampleTrackClient_Search() {
 
 // Get full info for User.
 func ExampleUserClient_GetInfo() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetInfo("RJ")
 
 	if err != nil {
@@ -650,7 +650,7 @@ func ExampleUserClient_GetInfo() {
 
 // Get Loved tracks from user.
 func ExampleUserClient_GetLovedTracks() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetLovedTracks("RJ", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -671,7 +671,7 @@ func ExampleUserClient_GetLovedTracks() {
 
 // Get neighbours to some user.
 func ExampleUserClient_GetNeighbours() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetNeighbours("RJ", 2)
 	if err != nil {
 		fmt.Println("Error:")
@@ -690,7 +690,7 @@ func ExampleUserClient_GetNeighbours() {
 
 // Get Recent Tracks for User.
 func ExampleUserClient_GetRecentTracks() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetRecentTracks("RJ", 0, 0, 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -716,7 +716,7 @@ func ExampleUserClient_GetRecentTracks() {
 
 // Get Top Albums for User.
 func ExampleUserClient_GetTopAlbums() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetTopAlbums("RJ", "", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -739,7 +739,7 @@ func ExampleUserClient_GetTopAlbums() {
 
 // Get Top Artists for User.
 func ExampleUserClient_GetTopArtists() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetTopArtists("RJ", "", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -758,7 +758,7 @@ func ExampleUserClient_GetTopArtists() {
 
 // Get Top Tracks for User.
 func ExampleUserClient_GetTopTracks() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetTopTracks("RJ", "", 0, 0)
 	if err != nil {
 		fmt.Println("Error:")
@@ -779,7 +779,7 @@ func ExampleUserClient_GetTopTracks() {
 
 // Get Top Tags by User.
 func ExampleUserClient_GetTopTags() {
-	lfm := lastfm.New("api_key_for_testing")
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
 	response, err := lfm.User.GetTopTags("RJ", 2)
 	if err != nil {
 		fmt.Println("Error:")
