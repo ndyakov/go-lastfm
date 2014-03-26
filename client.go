@@ -1,6 +1,8 @@
 package lastfm
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"encoding/xml"
 	"io"
 	"net/http"
@@ -34,6 +36,7 @@ type LastFM struct {
 	apiSecret   string
 	sessionKey  string
 	userAgent   string
+	token       string
 	getter      getter
 	Album       AlbumClient
 	Artist      ArtistClient
@@ -49,6 +52,7 @@ func New(apiKey, apiSecret string) *LastFM {
 	lfm := new(LastFM)
 	lfm.apiKey = apiKey
 	lfm.apiSecret = apiSecret
+	lfm.userAgent = "go-lastfm"
 	lfm.Album = AlbumClient{Client: Client{lfm}}
 	lfm.Artist = ArtistClient{Client: Client{lfm}}
 	lfm.Tag = TagClient{Client: Client{lfm}}
@@ -79,6 +83,36 @@ func (lfm *LastFM) SetUserAgent(userAgent string) {
 
 func (lfm *LastFM) GetUserAgent() string {
 	return lfm.userAgent
+}
+
+func (lfm *LastFM) SetToken(token string) {
+	lfm.token = token
+}
+
+func (lfm *LastFM) GetToken() string {
+	return lfm.token
+}
+
+func (lfm *LastFM) getSignature(params map[string]string) string {
+	var plainSignature string
+	var keys []string
+
+	for key := range params {
+		keys = append(keys, key)
+	}
+
+	sort.Strings(keys)
+
+	for _, key := range keys {
+		plainSignature += key + params[key]
+	}
+
+	plainSignature += lfm.apiSecret
+
+	hasher := md5.New()
+	hasher.Write([]byte(plainSignature))
+
+	return hex.EncodeToString(hasher.Sum(nil))
 }
 
 // Build url for the request.
