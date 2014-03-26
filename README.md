@@ -26,7 +26,7 @@ import "github.com/ndyakov/go-lastfm"
 ###2. Create new api client object.
 
 ```
-    lfm := lastfm.New("api-key")
+    lfm := lastfm.New("api-key", "api-secret")
 ```
 
 You can optain api key after registration [here](http://www.last.fm/api/account/create).
