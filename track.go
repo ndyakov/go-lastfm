@@ -36,14 +36,14 @@ func (c *TrackClient) prepareQuery(track, artist, mbid string, autocorrect int) 
 // Be awere there may be an error from the xml decoding.
 func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int) (response *TrackInfoResponse, err error) {
 	response = new(TrackInfoResponse)
-	method := "track.getInfo"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query["method"] = "track.getInfo"
 
 	if user != "" {
 		query["username"] = user
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -52,9 +52,9 @@ func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int)
 // Returns SimilarTracksResponse or error.
 func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (response *SimilarTracksResponse, err error) {
 	response = new(SimilarTracksResponse)
-	method := "track.getSimilar"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "track.getSimilar"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -63,14 +63,14 @@ func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (r
 // Returns TagsResponse or error.
 func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
 	response = new(TagsResponse)
-	method := "track.getTags"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query["method"] = "track.getTags"
 
 	if user != "" {
 		query["user"] = user
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -79,9 +79,9 @@ func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int)
 // Returns TopFansResponse or error.
 func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (response *TopFansResponse, err error) {
 	response = new(TopFansResponse)
-	method := "track.getTopFans"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "track.getTopFans"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -90,9 +90,9 @@ func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (r
 // Returns TopTagsResponse or error.
 func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
 	response = new(TopTagsResponse)
-	method := "track.getTopTags"
 	query := c.prepareQuery(track, artist, mbid, autocorrect)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "track.getTopTags"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -101,11 +101,11 @@ func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (r
 // Returns TrackCorrectionResponse or error.
 func (c *TrackClient) GetCorrection(track, artist string) (response *TrackCorrectionResponse, err error) {
 	response = new(TrackCorrectionResponse)
-	method := "track.getCorrection"
 	query := make(map[string]string)
+	query["method"] = "track.getCorrection"
 	query["track"] = track
 	query["artist"] = artist
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -115,8 +115,8 @@ func (c *TrackClient) GetCorrection(track, artist string) (response *TrackCorrec
 // otherwise pass empty string.
 func (c *TrackClient) Search(track, artist string, page, limit int) (response *TrackSearchResponse, err error) {
 	response = new(TrackSearchResponse)
-	method := "track.search"
 	query := make(map[string]string)
+	query["method"] = "track.search"
 	query["track"] = track
 
 	if artist != "" {
@@ -131,7 +131,7 @@ func (c *TrackClient) Search(track, artist string, page, limit int) (response *T
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }

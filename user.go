@@ -33,9 +33,9 @@ func (c *UserClient) prepareQuery(user string, page, limit int) (query map[strin
 // Returns UserInfoResponse or error.
 func (c *UserClient) GetInfo(user string) (response *UserInfoResponse, err error) {
 	response = new(UserInfoResponse)
-	method := "user.getInfo"
 	query := c.prepareQuery(user, 0, 0)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "user.getInfo"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -45,9 +45,9 @@ func (c *UserClient) GetInfo(user string) (response *UserInfoResponse, err error
 // Returns LovedTracksResponse or error.
 func (c *UserClient) GetLovedTracks(user string, page, limit int) (response *LovedTracksResponse, err error) {
 	response = new(LovedTracksResponse)
-	method := "user.getLovedTracks"
 	query := c.prepareQuery(user, page, limit)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "user.getLovedTracks"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -57,9 +57,9 @@ func (c *UserClient) GetLovedTracks(user string, page, limit int) (response *Lov
 // Returns NeighboursResponse or error.
 func (c *UserClient) GetNeighbours(user string, limit int) (response *NeighboursResponse, err error) {
 	response = new(NeighboursResponse)
-	method := "user.getNeighbours"
 	query := c.prepareQuery(user, 0, limit)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "user.getNeighbours"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -70,8 +70,8 @@ func (c *UserClient) GetNeighbours(user string, limit int) (response *Neighbours
 // Returns RecentTracksResponse or error.
 func (c *UserClient) GetRecentTracks(user string, page, limit int, from, to int64) (response *RecentTracksResponse, err error) {
 	response = new(RecentTracksResponse)
-	method := "user.getRecentTracks"
 	query := c.prepareQuery(user, page, limit)
+	query["method"] = "user.getRecentTracks"
 	query["extended"] = "1"
 
 	if from != 0 {
@@ -82,7 +82,7 @@ func (c *UserClient) GetRecentTracks(user string, page, limit int, from, to int6
 		query["to"] = strconv.FormatInt(to, 10)
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -95,14 +95,14 @@ func (c *UserClient) GetRecentTracks(user string, page, limit int, from, to int6
 // Returns TopAlbumsResponse or error.
 func (c *UserClient) GetTopAlbums(user, period string, page, limit int) (response *TopAlbumsResponse, err error) {
 	response = new(TopAlbumsResponse)
-	method := "user.getTopAlbums"
 	query := c.prepareQuery(user, page, limit)
+	query["method"] = "user.getTopAlbums"
 
 	if period != "" {
 		query["period"] = period
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -115,14 +115,14 @@ func (c *UserClient) GetTopAlbums(user, period string, page, limit int) (respons
 // Returns TopArtistsResponse or error.
 func (c *UserClient) GetTopArtists(user, period string, page, limit int) (response *TopArtistsResponse, err error) {
 	response = new(TopArtistsResponse)
-	method := "user.getTopArtists"
 	query := c.prepareQuery(user, page, limit)
+	query["method"] = "user.getTopArtists"
 
 	if period != "" {
 		query["period"] = period
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -135,14 +135,14 @@ func (c *UserClient) GetTopArtists(user, period string, page, limit int) (respon
 // Returns TopTracksResponse or error.
 func (c *UserClient) GetTopTracks(user, period string, page, limit int) (response *TopTracksResponse, err error) {
 	response = new(TopTracksResponse)
-	method := "user.getTopTracks"
 	query := c.prepareQuery(user, page, limit)
+	query["method"] = "user.getTopTracks"
 
 	if period != "" {
 		query["period"] = period
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -152,9 +152,9 @@ func (c *UserClient) GetTopTracks(user, period string, page, limit int) (respons
 // Returns TopTagsResponse or error.
 func (c *UserClient) GetTopTags(user string, limit int) (response *TopTagsResponse, err error) {
 	response = new(TopTagsResponse)
-	method := "user.getTopTags"
 	query := c.prepareQuery(user, 0, limit)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "user.getTopTags"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }

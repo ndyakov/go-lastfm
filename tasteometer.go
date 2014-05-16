@@ -14,8 +14,8 @@ type TasteometerClient struct {
 // Returns TasteometerCompareResponse or error
 func (c *TasteometerClient) Compare(type1, value1, type2, value2 string, limit int) (response *TasteometerCompareResponse, err error) {
 	response = new(TasteometerCompareResponse)
-	method := "tasteometer.compare"
 	query := make(map[string]string)
+	query["method"] = "tasteometer.compare"
 	query["type1"] = type1
 	query["value1"] = value1
 	query["type2"] = type2
@@ -25,7 +25,7 @@ func (c *TasteometerClient) Compare(type1, value1, type2, value2 string, limit i
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }

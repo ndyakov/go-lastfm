@@ -44,9 +44,9 @@ func (c *AlbumClient) prepareQuery(artist, album, mbid, user string, autocorrect
 // There may be an error returned from the parser/decoder as well.
 func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect int) (response *AlbumInfoResponse, err error) {
 	response = new(AlbumInfoResponse)
-	method := "album.getInfo"
 	query := c.prepareQuery(artist, album, mbid, username, autocorrect, true)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "album.getInfo"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -55,9 +55,9 @@ func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect 
 // Returns TagsResponse or error.
 func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
 	response = new(TagsResponse)
-	method := "album.getTags"
 	query := c.prepareQuery(artist, album, mbid, user, autocorrect, false)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "album.getTags"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -66,9 +66,9 @@ func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int)
 // Returns TopTagsResponse or error.
 func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
 	response = new(TopTagsResponse)
-	method := "album.getTopTags"
 	query := c.prepareQuery(artist, album, mbid, "", autocorrect, false)
-	err = c.lfm.getResponse(method, query, response)
+	query["method"] = "album.getTopTags"
+	err = c.lfm.getResponse(query, response)
 
 	return
 }
@@ -78,9 +78,9 @@ func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (r
 // Returns AlbumSearchResponse.
 func (c *AlbumClient) Search(album string, page, limit int) (response *AlbumSearchResponse, err error) {
 	response = new(AlbumSearchResponse)
-	method := "album.search"
 	query := make(map[string]string)
 	query["album"] = album
+	query["method"] = "album.search"
 
 	if page != 0 {
 		query["page"] = strconv.Itoa(page)
@@ -90,7 +90,7 @@ func (c *AlbumClient) Search(album string, page, limit int) (response *AlbumSear
 		query["limit"] = strconv.Itoa(limit)
 	}
 
-	err = c.lfm.getResponse(method, query, response)
+	err = c.lfm.getResponse(query, response)
 
 	return
 }

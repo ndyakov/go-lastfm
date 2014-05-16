@@ -44,6 +44,7 @@ type LastFM struct {
 	Track       TrackClient
 	User        UserClient
 	Tasteometer TasteometerClient
+	Auth        AuthClient
 }
 
 // Initialize all clients and
@@ -59,6 +60,7 @@ func New(apiKey, apiSecret string) *LastFM {
 	lfm.Track = TrackClient{Client: Client{lfm}}
 	lfm.User = UserClient{Client: Client{lfm}}
 	lfm.Tasteometer = TasteometerClient{Client: Client{lfm}}
+	lfm.Auth = AuthClient{Client: Client{lfm}}
 
 	if apiKey == "api_key_for_testing" {
 		lfm.getter = new(dummyGetter)
@@ -129,8 +131,8 @@ func (lfm *LastFM) buildURL(query map[string]string) string {
 	return uri.String()
 }
 
-func (lfm *LastFM) getResponse(method string, query map[string]string, response LastfmResponse) (err error) {
-	body, _, err := lfm.makeRequest(method, query)
+func (lfm *LastFM) getResponse(query map[string]string, response LastfmResponse) (err error) {
+	body, _, err := lfm.makeRequest(query)
 
 	if err != nil {
 		return
@@ -152,10 +154,9 @@ func (lfm *LastFM) getResponse(method string, query map[string]string, response 
 
 // Add metthod and api_key as part of the query parameters.
 // Call getter to get the requests body.
-func (lfm *LastFM) makeRequest(method string, params map[string]string) (body io.ReadCloser, hdr http.Header, err error) {
-	queryParams := make(map[string]string, len(params)+2)
+func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hdr http.Header, err error) {
+	queryParams := make(map[string]string, len(params)+1)
 	queryParams["api_key"] = lfm.apiKey
-	queryParams["method"] = method
 
 	for key, value := range params {
 		queryParams[key] = value
