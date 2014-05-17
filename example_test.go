@@ -797,3 +797,52 @@ func ExampleUserClient_GetTopTags() {
 	// Count : 19
 	// URL  : www.last.fm/tag/rock
 }
+
+// Get Token
+func ExampleAuthClient_GetToken() {
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
+	response, err := lfm.Auth.GetToken()
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Token : %s", response.Token)
+	// Output:
+	// Token : fba51a644f342186ba4d579d5675a167
+}
+
+// Get Session
+func ExampleAuthClient_GetSession() {
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
+	response, err := lfm.Auth.GetSession()
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Name : %s\n", response.Session.Name)
+	fmt.Printf("SessionKey : %s\n", response.Session.Key)
+	fmt.Printf("Subscriber : %d\n", response.Session.Subscriber)
+
+	// Output:
+	// Name : MyLastFMUsername
+	// SessionKey : d580d57f32848f5dcf574d1ce18d78b2
+	// Subscriber : 0
+}
+
+// Get Session
+func ExampleAuthClient_GetMobileSession() {
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
+	response, err := lfm.Auth.GetMobileSession("testPassword", "testUserName")
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+	}
+	fmt.Printf("Name : %s\n", response.Session.Name)
+	fmt.Printf("SessionKey : %s\n", response.Session.Key)
+	fmt.Printf("Subscriber : %d\n", response.Session.Subscriber)
+
+	// Output:
+	// Name : MyLastFMUsername
+	// SessionKey : d580d57f32848f5dcf574d1ce18d78b2
+	// Subscriber : 0
+}

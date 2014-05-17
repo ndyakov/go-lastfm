@@ -75,6 +75,12 @@ type LastfmOpenSearchResponse struct {
 	ItemsPerPage int                     `xml:"results>itemsPerPage"`
 }
 
+type LastfmSessionResponse struct {
+	Name       string `xml:"name"`
+	Key        string `xml:"key"`
+	Subscriber int    `xml:"subscriber"`
+}
+
 // OpenSearchQueryResponse is part of
 // LastfmOpenSearchResponse, holds data from the
 // <opensearch:Query> tag.
