@@ -14,8 +14,8 @@ func TestClientGetter(t *testing.T) {
 			reflect.TypeOf(lfm.getter).String())
 	}
 
-	if reflect.TypeOf(lfmTesting.getter).String() != "*lastfm.dummyGetter" {
-		t.Errorf("Expected lfmTesting.getter to be *lastfm.dummyGetter, but it is %s",
+	if reflect.TypeOf(lfmTesting.getter).String() != "*lastfm.dummyClient" {
+		t.Errorf("Expected lfmTesting.getter to be *lastfm.dummyClient, but it is %s",
 			reflect.TypeOf(lfmTesting.getter).String())
 	}
 }

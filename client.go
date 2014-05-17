@@ -21,12 +21,17 @@ var (
 		"auth.getMobileSession": true,
 		"auth.getToken":         true,
 	}
+
+	requiresPost = map[string]bool{
+		"auth.getMobileSession": true,
+	}
 )
 
 // getter interface present
 // so we can swap getters while testing
 type getter interface {
 	Get(uri string) (resp *http.Response, err error)
+	PostForm(uri string, data url.Values) (resp *http.Response, err error)
 }
 
 // Client struct that holds pointer
@@ -68,7 +73,7 @@ func New(apiKey, apiSecret string) *LastFM {
 	lfm.Auth = AuthClient{Client: Client{lfm}}
 
 	if apiKey == "api_key_for_testing" {
-		lfm.getter = new(dummyGetter)
+		lfm.getter = new(dummyClient)
 	} else {
 		lfm.getter = http.DefaultClient
 	}
@@ -124,16 +129,22 @@ func (lfm *LastFM) getSignature(params map[string]string) string {
 
 // Build url for the request.
 func (lfm *LastFM) buildURL(query map[string]string) string {
+	values := lfm.buildValues(query)
+
+	uri := apiRootURL
+	uri.RawQuery = values.Encode()
+
+	return uri.String()
+}
+
+func (lfm *LastFM) buildValues(query map[string]string) url.Values {
 	values := url.Values{}
 
 	for key, value := range query {
 		values.Add(key, value)
 	}
 
-	uri := apiRootURL
-	uri.RawQuery = values.Encode()
-
-	return uri.String()
+	return values
 }
 
 func (lfm *LastFM) getResponse(query map[string]string, response LastfmResponse) (err error) {
@@ -161,6 +172,7 @@ func (lfm *LastFM) getResponse(query map[string]string, response LastfmResponse)
 // Also add api_sig if requered.
 // Call getter to get the requests body.
 func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hdr http.Header, err error) {
+	var response *http.Response
 	params["api_key"] = lfm.apiKey
 
 	for key, value := range params {
@@ -171,7 +183,11 @@ func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hd
 		params["api_sig"] = lfm.getSignature(params)
 	}
 
-	response, err := lfm.getter.Get(lfm.buildURL(params))
+	if _, ok := requiresPost[params["method"]]; ok {
+		response, err = lfm.getter.PostForm(apiRootURL.String(), lfm.buildValues(params))
+	} else {
+		response, err = lfm.getter.Get(lfm.buildURL(params))
+	}
 
 	if err != nil {
 
@@ -185,13 +201,25 @@ func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hd
 	return response.Body, response.Header, err
 }
 
-// dummyGetter used for testing.
+// dummyClient used for testing.
 // Implements getter interface.
-type dummyGetter struct{}
+type dummyClient struct{}
+
+func (c *dummyClient) PostForm(uri string, params url.Values) (resp *http.Response, err error) {
+	fh, err := os.Open(c.buildFilename(params))
+
+	if err != nil {
+		return
+	}
+
+	resp = &http.Response{Body: fh}
+
+	return
+}
 
 // Getter that reads from some file and then returns it
 // as body of http.Response.
-func (c *dummyGetter) Get(uri string) (resp *http.Response, err error) {
+func (c *dummyClient) Get(uri string) (resp *http.Response, err error) {
 	u, err := url.Parse(uri)
 
 	if err != nil {
@@ -210,7 +238,7 @@ func (c *dummyGetter) Get(uri string) (resp *http.Response, err error) {
 }
 
 // Construct unique filename per request.
-func (c *dummyGetter) buildFilename(values url.Values) string {
+func (c *dummyClient) buildFilename(values url.Values) string {
 	var parts []string
 	var keys []string
 	parts = append(parts, values.Get("method"))
