@@ -14,9 +14,9 @@ import (
 
 // lastfm's api root url
 var (
-	apiRootURL     = url.URL{Scheme: "https", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
-	apiWebURL      = url.URL{Scheme: "https", Host: "www.last.fm", Path: "/api/auth/"}
-	needsSignature = map[string]bool{
+	apiRootURL        = url.URL{Scheme: "https", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
+	apiWebURL         = url.URL{Scheme: "https", Host: "www.last.fm", Path: "/api/auth/"}
+	requiresSignature = map[string]bool{
 		"auth.getSession":       true,
 		"auth.getMobileSession": true,
 		"auth.getToken":         true,
@@ -157,21 +157,21 @@ func (lfm *LastFM) getResponse(query map[string]string, response LastfmResponse)
 	return
 }
 
-// Add metthod and api_key as part of the query parameters.
+// Add api_key as part of the query parameters.
+// Also add api_sig if requered.
 // Call getter to get the requests body.
 func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hdr http.Header, err error) {
-	queryParams := make(map[string]string, len(params)+2)
-	queryParams["api_key"] = lfm.apiKey
+	params["api_key"] = lfm.apiKey
 
 	for key, value := range params {
-		queryParams[key] = value
+		params[key] = value
 	}
 
-	if _, ok := needsSignature[queryParams["method"]]; ok {
-		queryParams["api_sig"] = lfm.getSignature(queryParams)
+	if _, ok := requiresSignature[params["method"]]; ok {
+		params["api_sig"] = lfm.getSignature(params)
 	}
 
-	response, err := lfm.getter.Get(lfm.buildURL(queryParams))
+	response, err := lfm.getter.Get(lfm.buildURL(params))
 
 	if err != nil {
 
