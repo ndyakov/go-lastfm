@@ -38,8 +38,8 @@ endpoints or take a look at ``example_test.go`` for examples.
 
 ## TODO
 
-* Implement all methods that don't need authentication.
-* Make authentication work.
+* ~~Implement all methods that don't need authentication.~~
+* ~~Make authentication work.~~
 * Implement the rest of the API methods.
 
 ## License
