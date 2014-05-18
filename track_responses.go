@@ -84,6 +84,34 @@ type TrackSearchResponse struct {
 	TrackMatches []TrackResponseNoArtistStruct `xml:"results>trackmatches>track"`
 }
 
+type TrackScrobbleResponse struct {
+	LastfmStatusResponse
+	Scrobbles struct {
+		Accepted int                      `xml:"accepted,attr"`
+		Ignored  int                      `xml:"ignored,attr"`
+		Scrobble []TrackScrobblesResponse `xml:"scrobble"`
+	} `xml:"scrobbles"`
+}
+
+type TrackScrobblesResponse struct {
+	Track          TrackScrobbleFieldResponse          `xml:"track"`
+	Artist         TrackScrobbleFieldResponse          `xml:"artist"`
+	Album          TrackScrobbleFieldResponse          `xml:"album"`
+	AlbumArtist    TrackScrobbleFieldResponse          `xml:"albumArtist"`
+	Timestamp      int64                               `xml:"timestamp"`
+	IgnoredMessage TrackScrobbleIgnoredMessageResponse `xml:"ignoredMessage"`
+}
+
+type TrackScrobbleFieldResponse struct {
+	Name      string `xml:",chardata"`
+	Corrected int    `xml:"corrected,attr"`
+}
+
+type TrackScrobbleIgnoredMessageResponse struct {
+	Code    int    `xml:"code,attr"`
+	Message string `xml:",chardata"`
+}
+
 // LovedTracksResponse is used where <lovedtracks> is present.
 type LovedTracksResponse struct {
 	LastfmStatusResponse

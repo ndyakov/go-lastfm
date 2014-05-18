@@ -23,6 +23,7 @@ func ExampleArtistClient_GetTopTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
 	fmt.Printf("Tag #1 :\n")
@@ -42,6 +43,7 @@ func ExampleArtistClient_GetTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
 	fmt.Printf("Tag #1 :\n")
@@ -61,6 +63,7 @@ func ExampleArtistClient_GetSimilar() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	artist := response.SimilarArtists[0]
 	fmt.Printf("Number of matches : %v\n", len(response.SimilarArtists))
@@ -83,6 +86,7 @@ func ExampleArtistClient_GetTopAlbums() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	album := response.TopAlbums[0]
 	fmt.Printf("Top Albums By : %v\n", album.Artist.Name)
@@ -106,6 +110,7 @@ func ExampleArtistClient_GetTopFans() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	user := response.TopFans[0]
 	fmt.Printf("Top Fan #1 : %v\n", user.Name)
@@ -125,6 +130,7 @@ func ExampleArtistClient_GetTopTracks() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	track := response.TopTracks[0]
 	fmt.Printf("Top Tracks By : %v\n", track.Artist.Name)
@@ -146,6 +152,7 @@ func ExampleArtistClient_Search() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	var artist lastfm.ArtistResponse
@@ -176,6 +183,7 @@ func ExampleArtistClient_GetInfo() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Artist : %v\n", response.Artist.Name)
 	fmt.Printf("MBID : %v\n", response.Artist.MBID)
@@ -197,6 +205,7 @@ func ExampleAlbumClient_GetInfo() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Artist : %v\n", response.Album.Artist)
 	fmt.Printf("Album : %v\n", response.Album.Name)
@@ -227,6 +236,7 @@ func ExampleAlbumClient_GetTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
 	fmt.Printf("Tag #1 :\n")
@@ -246,6 +256,7 @@ func ExampleAlbumClient_GetTopTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
 	fmt.Printf("Tag #1 :\n")
@@ -267,6 +278,7 @@ func ExampleAlbumClient_Search() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	var album lastfm.AlbumResponseNoArtistStruct
@@ -299,6 +311,7 @@ func ExampleTagClient_GetInfo() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Name : %v\n", response.Tag.Name)
 	fmt.Printf("URL : %v\n", response.Tag.URL)
@@ -318,6 +331,7 @@ func ExampleTagClient_GetSimilar() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	tag := response.SimilarTags[0]
 	fmt.Printf("Number of matches : %v\n", len(response.SimilarTags))
@@ -338,6 +352,7 @@ func ExampleTagClient_GetTopAlbums() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	album := response.TopAlbums[0]
 	fmt.Printf("Top Album #1 : %v\n", album.Name)
@@ -361,6 +376,7 @@ func ExampleTagClient_GetTopArtists() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	artist := response.TopArtists[0]
 	fmt.Printf("Artist #1 : %v\n", artist.Name)
@@ -380,6 +396,7 @@ func ExampleTagClient_GetTopTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
 	fmt.Printf("Tag #1 :\n")
@@ -401,6 +418,7 @@ func ExampleTagClient_GetTopTracks() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	track := response.TopTracks[0]
 	fmt.Printf("Top Track #1 : %v\n", track.Name)
@@ -422,6 +440,7 @@ func ExampleTagClient_Search() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	var tag lastfm.TagResponse
@@ -452,6 +471,7 @@ func ExampleTasteometerClient_Compare() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Printf("Compare between %v and %v :\n", response.Input.Users[0].Name, response.Input.Users[1].Name)
@@ -470,6 +490,7 @@ func ExampleTrackClient_GetInfo() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Track : %v\n", response.Track.Name)
 	fmt.Printf("MBID : %v\n", response.Track.MBID)
@@ -493,6 +514,7 @@ func ExampleTrackClient_GetSimilar() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	track := response.SimilarTracks[0]
 	fmt.Printf("Similar Track #1 : %v\n", track.Name)
@@ -515,6 +537,7 @@ func ExampleTrackClient_GetTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
@@ -535,6 +558,7 @@ func ExampleTrackClient_GetTopFans() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	user := response.TopFans[0]
 	fmt.Printf("Top Fan #1 : %v\n", user.Name)
@@ -554,6 +578,7 @@ func ExampleTrackClient_GetTopTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
 	fmt.Printf("Tag #1 :\n")
@@ -573,6 +598,7 @@ func ExampleTrackClient_GetCorrection() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Corrections : %v\n", len(response.TrackCorrections))
 
@@ -599,6 +625,7 @@ func ExampleTrackClient_Search() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Printf("Search request for : %v\n", response.Query.SearchTerms)
@@ -622,6 +649,30 @@ func ExampleTrackClient_Search() {
 	//   Track MBID : 87fe260f-96c5-47bc-9d22-8a1c0f723475
 }
 
+func ExampleTrackClient_Scrobble() {
+	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
+	_, err := lfm.Auth.GetSession()
+	response, err := lfm.Track.Scrobble("Balkansky", "8.9", "1400380586", map[string]string{})
+
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Printf("Accepted: %d\n", response.Scrobbles.Accepted)
+	fmt.Printf("Ignored: %d\n", response.Scrobbles.Ignored)
+	fmt.Println("Scrobbles[0]:")
+	fmt.Printf("Artist: %s\n", response.Scrobbles.Scrobble[0].Artist.Name)
+	fmt.Printf("Track: %s\n", response.Scrobbles.Scrobble[0].Track.Name)
+	//Output:
+	//Accepted: 1
+	//Ignored: 0
+	//Scrobbles[0]:
+	//Artist: Balkansky
+	//Track: 8.9
+}
+
 // Get full info for User.
 func ExampleUserClient_GetInfo() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
@@ -630,6 +681,7 @@ func ExampleUserClient_GetInfo() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 
 	fmt.Printf("User : %v\n", response.User.Name)
@@ -657,6 +709,7 @@ func ExampleUserClient_GetLovedTracks() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	track := response.LovedTracks[0]
 	fmt.Printf("Loved Tracks by RJ\n")
@@ -678,6 +731,7 @@ func ExampleUserClient_GetNeighbours() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	user := response.Neighbours[0]
 	fmt.Printf("Neighbour #1 : %v\n", user.Name)
@@ -697,6 +751,7 @@ func ExampleUserClient_GetRecentTracks() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	track := response.RecentTracks[0]
 	fmt.Printf("Recent Track #1 : %v\n", track.Name)
@@ -723,6 +778,7 @@ func ExampleUserClient_GetTopAlbums() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	album := response.TopAlbums[0]
 	fmt.Printf("Top Album #1 : %v\n", album.Name)
@@ -746,6 +802,7 @@ func ExampleUserClient_GetTopArtists() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	artist := response.TopArtists[0]
 	fmt.Printf("Artist #1 : %v\n", artist.Name)
@@ -765,6 +822,7 @@ func ExampleUserClient_GetTopTracks() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	track := response.TopTracks[0]
 	fmt.Printf("Top Track #1 : %v\n", track.Name)
@@ -786,6 +844,7 @@ func ExampleUserClient_GetTopTags() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Number of Top Tags : %v\n", len(response.TopTags))
 	fmt.Printf("Tag #1 :\n")
@@ -807,6 +866,7 @@ func ExampleAuthClient_GetToken() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Token : %s", response.Token)
 	// Output:
@@ -820,6 +880,7 @@ func ExampleAuthClient_GetSession() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Name : %s\n", response.Session.Name)
 	fmt.Printf("SessionKey : %s\n", response.Session.Key)
@@ -838,6 +899,7 @@ func ExampleAuthClient_GetMobileSession() {
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
+		return
 	}
 	fmt.Printf("Name : %s\n", response.Session.Name)
 	fmt.Printf("SessionKey : %s\n", response.Session.Key)

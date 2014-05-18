@@ -102,3 +102,13 @@ func (c *TrackClient) Search(track string, optionalParams map[string]string) (re
 
 	return
 }
+
+func (c *TrackClient) Scrobble(artist, track, timestamp string, optionalParams map[string]string) (response *TrackScrobbleResponse, err error) {
+	response = new(TrackScrobbleResponse)
+	query := c.prepareQuery(track, artist, optionalParams)
+	query["timestamp"] = timestamp
+	query["method"] = "track.scrobble"
+	err = c.lfm.getResponse(query, response)
+
+	return
+}

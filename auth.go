@@ -10,13 +10,16 @@ func (c *AuthClient) GetSession() (response *AuthSessionResponse, err error) {
 	query["method"] = "auth.getSession"
 	tokenResponse, err := c.GetToken()
 
-	if err == nil {
-		query["token"] = tokenResponse.Token
-	} else {
+	if err != nil {
 		return
 	}
 
+	query["token"] = tokenResponse.Token
 	err = c.lfm.getResponse(query, response)
+
+	if err == nil {
+		c.lfm.SetSessionKey(response.Session.Key)
+	}
 
 	return
 }

@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/xml"
+	"errors"
 	"io"
 	"net/http"
 	"net/url"
@@ -14,16 +15,23 @@ import (
 
 // lastfm's api root url
 var (
-	apiRootURL        = url.URL{Scheme: "https", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
-	apiWebURL         = url.URL{Scheme: "https", Host: "www.last.fm", Path: "/api/auth/"}
+	apiRootURL = url.URL{Scheme: "https", Host: "ws.audioscrobbler.com", Path: "/2.0/"}
+	apiWebURL  = url.URL{Scheme: "https", Host: "www.last.fm", Path: "/api/auth/"}
+
 	requiresSignature = map[string]bool{
 		"auth.getSession":       true,
 		"auth.getMobileSession": true,
 		"auth.getToken":         true,
+		"track.scrobble":        true,
 	}
 
 	requiresPost = map[string]bool{
 		"auth.getMobileSession": true,
+		"track.scrobble":        true,
+	}
+
+	requiresSessionKey = map[string]bool{
+		"track.scrobble": true,
 	}
 )
 
@@ -63,7 +71,6 @@ func New(apiKey, apiSecret string) *LastFM {
 	lfm := new(LastFM)
 	lfm.apiKey = apiKey
 	lfm.apiSecret = apiSecret
-	lfm.userAgent = "go-lastfm"
 	lfm.Album = AlbumClient{Client: Client{lfm}}
 	lfm.Artist = ArtistClient{Client: Client{lfm}}
 	lfm.Tag = TagClient{Client: Client{lfm}}
@@ -89,6 +96,10 @@ func (lfm *LastFM) GetSessionKey() string {
 	return lfm.sessionKey
 }
 
+func (lfm *LastFM) HasSessionKey() bool {
+	return len(lfm.sessionKey) != 0
+}
+
 func (lfm *LastFM) SetUserAgent(userAgent string) {
 	lfm.userAgent = userAgent
 }
@@ -97,12 +108,20 @@ func (lfm *LastFM) GetUserAgent() string {
 	return lfm.userAgent
 }
 
+func (lfm *LastFM) HasUserAgent() bool {
+	return len(lfm.userAgent) != 0
+}
+
 func (lfm *LastFM) SetToken(token string) {
 	lfm.token = token
 }
 
 func (lfm *LastFM) GetToken() string {
 	return lfm.token
+}
+
+func (lfm *LastFM) HasToken() bool {
+	return len(lfm.token) != 0
 }
 
 func (lfm *LastFM) getSignature(params map[string]string) string {
@@ -150,11 +169,14 @@ func (lfm *LastFM) buildValues(query map[string]string) url.Values {
 func (lfm *LastFM) getResponse(query map[string]string, response LastfmResponse) (err error) {
 	body, _, err := lfm.makeRequest(query)
 
+	if body != nil {
+		defer body.Close()
+	}
+
 	if err != nil {
 		return
 	}
 
-	defer body.Close()
 	err = xml.NewDecoder(body).Decode(response)
 
 	if err != nil {
@@ -165,6 +187,7 @@ func (lfm *LastFM) getResponse(query map[string]string, response LastfmResponse)
 		err = response.getError()
 		return
 	}
+
 	return
 }
 
@@ -179,6 +202,15 @@ func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hd
 		params[key] = value
 	}
 
+	if _, ok := requiresSessionKey[params["method"]]; ok {
+		if !lfm.HasSessionKey() {
+			err = errors.New("You need to optain session key first!")
+			return
+		}
+
+		params["sk"] = lfm.GetSessionKey()
+	}
+
 	if _, ok := requiresSignature[params["method"]]; ok {
 		params["api_sig"] = lfm.getSignature(params)
 	}
@@ -190,7 +222,6 @@ func (lfm *LastFM) makeRequest(params map[string]string) (body io.ReadCloser, hd
 	}
 
 	if err != nil {
-
 		if response != nil && response.Body != nil {
 			response.Body.Close()
 		}

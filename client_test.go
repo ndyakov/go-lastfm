@@ -23,7 +23,16 @@ func TestClientGetter(t *testing.T) {
 func TestClientTokenSetterAndGetter(t *testing.T) {
 	token := "test_token"
 	lfm := New("api_key_for_testing", "api_secret_for_testing")
+
+	if lfm.HasToken() {
+		t.Errorf("Expected token to be empty at the beginning, but it is %v.", lfm.GetToken())
+	}
+
 	lfm.SetToken(token)
+
+	if !lfm.HasToken() {
+		t.Error("Expected token to be set, but it is empty.")
+	}
 
 	if lfm.GetToken() != lfm.GetToken() {
 		t.Error("Expected GetToken to be deterministic, but it isn't.")
@@ -37,7 +46,16 @@ func TestClientTokenSetterAndGetter(t *testing.T) {
 func TestClientUserAgentSetterAndGetter(t *testing.T) {
 	userAgent := "test_user_agent"
 	lfm := New("api_key_for_testing", "api_secret_for_testing")
+
+	if lfm.HasUserAgent() {
+		t.Errorf("Expected user agent to be empty at the beginning, but it is %v.", lfm.GetUserAgent())
+	}
+
 	lfm.SetUserAgent(userAgent)
+
+	if !lfm.HasUserAgent() {
+		t.Error("Expected user agent to be set, but it is empty.")
+	}
 
 	if lfm.GetUserAgent() != lfm.GetUserAgent() {
 		t.Error("Expected GetUserAgent to be deterministic, but it isn't.")
@@ -51,7 +69,16 @@ func TestClientUserAgentSetterAndGetter(t *testing.T) {
 func TestClientSessionKeySetterAndGetter(t *testing.T) {
 	sessionKey := "test_session_key"
 	lfm := New("api_key_for_testing", "api_secret_for_testing")
+
+	if lfm.HasSessionKey() {
+		t.Errorf("Expected SessionKey to be empty at the beginning, but it is %v.", lfm.GetToken())
+	}
+
 	lfm.SetSessionKey(sessionKey)
+
+	if !lfm.HasSessionKey() {
+		t.Error("Expected sessionKey to be set, but it is empty.")
+	}
 
 	if lfm.GetSessionKey() != lfm.GetSessionKey() {
 		t.Error("Expected GetSessionKey to be deterministic, but it isn't.")
