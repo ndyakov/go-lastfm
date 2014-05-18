@@ -105,6 +105,14 @@ func (lfm *LastFM) GetToken() string {
 	return lfm.token
 }
 
+func (lfm *LastFM) simpleMerge(destination, source map[string]string) map[string]string {
+	for key, value := range source {
+		destination[key] = value
+	}
+
+	return destination
+}
+
 func (lfm *LastFM) getSignature(params map[string]string) string {
 	var plainSignature string
 	var keys []string

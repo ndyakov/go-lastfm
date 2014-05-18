@@ -466,7 +466,7 @@ func ExampleTasteometerClient_Compare() {
 // Get full info for Track.
 func ExampleTrackClient_GetInfo() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
-	response, err := lfm.Track.GetInfo("Kids with guns", "Gorillaz", "", "", 1)
+	response, err := lfm.Track.GetInfo("Kids with guns", "Gorillaz", map[string]string{"autocorrect": "1"})
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
@@ -489,7 +489,7 @@ func ExampleTrackClient_GetInfo() {
 // Get Similar Tracks to Track.
 func ExampleTrackClient_GetSimilar() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
-	response, err := lfm.Track.GetSimilar("Kids with guns", "Gorillaz", "", 0)
+	response, err := lfm.Track.GetSimilar("Kids with guns", "Gorillaz", map[string]string{})
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
@@ -510,11 +510,13 @@ func ExampleTrackClient_GetSimilar() {
 // Get Tags for Track.
 func ExampleTrackClient_GetTags() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
-	response, err := lfm.Track.GetTags("Snow", "Red Hot Chili Peppers", "", "n3mo-", 1)
+	response, err := lfm.Track.GetTags("Snow", "Red Hot Chili Peppers", map[string]string{"user": "n3mo-", "autocorrect": "1"})
+
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
 	}
+
 	fmt.Printf("Number of Tags by User : %v\n", len(response.Tags))
 	fmt.Printf("Tag #1 :\n")
 	fmt.Printf("Name : %v\n", response.Tags[0].Name)
@@ -529,7 +531,7 @@ func ExampleTrackClient_GetTags() {
 // Get Top Fans for Track.
 func ExampleTrackClient_GetTopFans() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
-	response, err := lfm.Track.GetTopFans("", "", "87fe260f-96c5-47bc-9d22-8a1c0f723475", 0)
+	response, err := lfm.Track.GetTopFans("", "", map[string]string{"mbid": "87fe260f-96c5-47bc-9d22-8a1c0f723475"})
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
@@ -548,7 +550,7 @@ func ExampleTrackClient_GetTopFans() {
 // Get Top Tags for Track.
 func ExampleTrackClient_GetTopTags() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
-	response, err := lfm.Track.GetTopTags("Clint Eastwood", "Gorillaz", "", 1)
+	response, err := lfm.Track.GetTopTags("Clint Eastwood", "Gorillaz", map[string]string{"autocorrect": "1"})
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
@@ -593,7 +595,7 @@ func ExampleTrackClient_GetCorrection() {
 // Search for Track.
 func ExampleTrackClient_Search() {
 	lfm := lastfm.New("api_key_for_testing", "api_secret_for_testing")
-	response, err := lfm.Track.Search("guns", "Gorillaz", 0, 0)
+	response, err := lfm.Track.Search("guns", map[string]string{"artist": "Gorillaz"})
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)

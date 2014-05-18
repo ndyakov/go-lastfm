@@ -1,9 +1,5 @@
 package lastfm
 
-import (
-	"strconv"
-)
-
 // TrackClient
 // Collection of methods that correspond to most of
 // LastFM's track\.(.+) methods.
@@ -16,17 +12,13 @@ type TrackClient struct {
 // MBID is with higher priority, so if present track
 // and artist are igrnored, otherwise track and artist are used.
 // Returns map[string]string that can be used for lastfm makeRequest.
-func (c *TrackClient) prepareQuery(track, artist, mbid string, autocorrect int) (query map[string]string) {
-	query = make(map[string]string)
+func (c *TrackClient) prepareQuery(track, artist string, optionalParams map[string]string) (query map[string]string) {
+	query = optionalParams
 
-	if mbid == "" {
+	if _, ok := optionalParams["mbid"]; !ok {
 		query["track"] = track
 		query["artist"] = artist
-	} else {
-		query["mbid"] = mbid
 	}
-
-	query["autocorrect"] = strconv.Itoa(autocorrect)
 
 	return
 }
@@ -34,15 +26,10 @@ func (c *TrackClient) prepareQuery(track, artist, mbid string, autocorrect int) 
 // Get full information for some track.
 // Returns TrackInfoResponse or error.
 // Be awere there may be an error from the xml decoding.
-func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int) (response *TrackInfoResponse, err error) {
+func (c *TrackClient) GetInfo(track, artist string, optionalParams map[string]string) (response *TrackInfoResponse, err error) {
 	response = new(TrackInfoResponse)
-	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query := c.prepareQuery(track, artist, optionalParams)
 	query["method"] = "track.getInfo"
-
-	if user != "" {
-		query["username"] = user
-	}
-
 	err = c.lfm.getResponse(query, response)
 
 	return
@@ -50,9 +37,9 @@ func (c *TrackClient) GetInfo(track, artist, mbid, user string, autocorrect int)
 
 // Get similar tracks to some track.
 // Returns SimilarTracksResponse or error.
-func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (response *SimilarTracksResponse, err error) {
+func (c *TrackClient) GetSimilar(track, artist string, optionalParams map[string]string) (response *SimilarTracksResponse, err error) {
 	response = new(SimilarTracksResponse)
-	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query := c.prepareQuery(track, artist, optionalParams)
 	query["method"] = "track.getSimilar"
 	err = c.lfm.getResponse(query, response)
 
@@ -61,15 +48,10 @@ func (c *TrackClient) GetSimilar(track, artist, mbid string, autocorrect int) (r
 
 // Get tags for some track tagged by some user.
 // Returns TagsResponse or error.
-func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
+func (c *TrackClient) GetTags(track, artist string, optionalParams map[string]string) (response *TagsResponse, err error) {
 	response = new(TagsResponse)
-	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query := c.prepareQuery(track, artist, optionalParams)
 	query["method"] = "track.getTags"
-
-	if user != "" {
-		query["user"] = user
-	}
-
 	err = c.lfm.getResponse(query, response)
 
 	return
@@ -77,9 +59,9 @@ func (c *TrackClient) GetTags(track, artist, mbid, user string, autocorrect int)
 
 // Get top fans for some track.
 // Returns TopFansResponse or error.
-func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (response *TopFansResponse, err error) {
+func (c *TrackClient) GetTopFans(track, artist string, optionalParams map[string]string) (response *TopFansResponse, err error) {
 	response = new(TopFansResponse)
-	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query := c.prepareQuery(track, artist, optionalParams)
 	query["method"] = "track.getTopFans"
 	err = c.lfm.getResponse(query, response)
 
@@ -88,9 +70,9 @@ func (c *TrackClient) GetTopFans(track, artist, mbid string, autocorrect int) (r
 
 // Get top tags in lastfm for some track.
 // Returns TopTagsResponse or error.
-func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
+func (c *TrackClient) GetTopTags(track, artist string, optionalParams map[string]string) (response *TopTagsResponse, err error) {
 	response = new(TopTagsResponse)
-	query := c.prepareQuery(track, artist, mbid, autocorrect)
+	query := c.prepareQuery(track, artist, optionalParams)
 	query["method"] = "track.getTopTags"
 	err = c.lfm.getResponse(query, response)
 
@@ -101,10 +83,8 @@ func (c *TrackClient) GetTopTags(track, artist, mbid string, autocorrect int) (r
 // Returns TrackCorrectionResponse or error.
 func (c *TrackClient) GetCorrection(track, artist string) (response *TrackCorrectionResponse, err error) {
 	response = new(TrackCorrectionResponse)
-	query := make(map[string]string)
+	query := c.prepareQuery(track, artist, make(map[string]string))
 	query["method"] = "track.getCorrection"
-	query["track"] = track
-	query["artist"] = artist
 	err = c.lfm.getResponse(query, response)
 
 	return
@@ -113,24 +93,11 @@ func (c *TrackClient) GetCorrection(track, artist string) (response *TrackCorrec
 // Search for some track.
 // artist parameter is optional, you may specify it to narrow your search
 // otherwise pass empty string.
-func (c *TrackClient) Search(track, artist string, page, limit int) (response *TrackSearchResponse, err error) {
+func (c *TrackClient) Search(track string, optionalParams map[string]string) (response *TrackSearchResponse, err error) {
 	response = new(TrackSearchResponse)
-	query := make(map[string]string)
-	query["method"] = "track.search"
+	query := optionalParams
 	query["track"] = track
-
-	if artist != "" {
-		query["artist"] = artist
-	}
-
-	if page != 0 {
-		query["page"] = strconv.Itoa(page)
-	}
-
-	if limit != 0 {
-		query["limit"] = strconv.Itoa(limit)
-	}
-
+	query["method"] = "track.search"
 	err = c.lfm.getResponse(query, response)
 
 	return
