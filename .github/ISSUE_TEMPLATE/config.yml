@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/ndyakov/go-lastfm/security/policy
+    about: Review the security policy and report vulnerabilities privately.
+  - name: Last.fm API documentation
+    url: https://www.last.fm/api
+    about: Check Last.fm's official endpoint and parameter documentation.

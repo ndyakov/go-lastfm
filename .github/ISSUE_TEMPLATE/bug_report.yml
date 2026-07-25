@@ -1,0 +1,64 @@
+name: Bug report
+description: Report incorrect behavior in the go-lastfm client
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Remove all API secrets and session keys from examples and logs.
+  - type: input
+    id: package-version
+    attributes:
+      label: go-lastfm version
+      description: For example, v2.0.0 or a commit SHA.
+      placeholder: v2.0.0
+    validations:
+      required: true
+  - type: input
+    id: go-version
+    attributes:
+      label: Go version
+      description: Output from `go version`.
+      placeholder: go version go1.24.0 linux/amd64
+    validations:
+      required: true
+  - type: input
+    id: method
+    attributes:
+      label: Last.fm method
+      description: The affected API method, if applicable.
+      placeholder: artist.getInfo
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide the smallest runnable example. Use fake credentials.
+      render: go
+    validations:
+      required: true
+  - type: textarea
+    id: response
+    attributes:
+      label: Sanitized response or error
+      description: Remove API keys, signatures, session keys, usernames, and private data.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for duplicates.
+          required: true
+        - label: I removed credentials and private data from this report.
+          required: true
+        - label: This is not a security vulnerability requiring private reporting.
+          required: true

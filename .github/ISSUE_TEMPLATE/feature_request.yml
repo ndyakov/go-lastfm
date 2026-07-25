@@ -1,0 +1,50 @@
+name: Feature request
+description: Suggest an improvement to the Go client
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem or use case should this change address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the public API or behavior you would like.
+    validations:
+      required: true
+  - type: input
+    id: lastfm-method
+    attributes:
+      label: Last.fm method or documentation
+      description: Include the method name or an authoritative link when applicable.
+      placeholder: https://www.last.fm/api/show/artist.getInfo
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      options:
+        - Backward compatible
+        - Breaking change
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe workarounds or alternative designs.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for similar requests.
+          required: true
+        - label: I checked whether the method belongs in the stable or experimental client.
+          required: true
