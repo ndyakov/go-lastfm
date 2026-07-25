@@ -1,114 +1,167 @@
 package lastfm
 
-// TrackClient
-// Collection of methods that correspond to most of
-// LastFM's track\.(.+) methods.
-// Where the name of the method is \` is CamelCase.
-type TrackClient struct {
-	Client
-}
+import (
+	"context"
+	"fmt"
+	"net/url"
+	"strconv"
+	"strings"
+	"time"
+)
 
-// Prepares query for most of the Track requests.
-// MBID is with higher priority, so if present track
-// and artist are igrnored, otherwise track and artist are used.
-// Returns map[string]string that can be used for lastfm makeRequest.
-func (c *TrackClient) prepareQuery(track, artist string, optionalParams map[string]string) (query map[string]string) {
-	query = optionalParams
+type TrackClient struct{ client *Client }
 
-	if _, ok := optionalParams["mbid"]; !ok {
-		query["track"] = track
-		query["artist"] = artist
+func (c TrackClient) GetCorrection(ctx context.Context, artist, track string) (*TrackCorrectionResponse, error) {
+	v := url.Values{
+		"artist": {artist},
+		"track":  {track},
 	}
-
-	return
+	out := new(TrackCorrectionResponse)
+	return out, c.client.call(ctx, "track.getCorrection", v, out)
 }
 
-// Get full information for some track.
-// Returns TrackInfoResponse or error.
-// Be awere there may be an error from the xml decoding.
-func (c *TrackClient) GetInfo(track, artist string, optionalParams map[string]string) (response *TrackInfoResponse, err error) {
-	response = new(TrackInfoResponse)
-	query := c.prepareQuery(track, artist, optionalParams)
-	query["method"] = "track.getInfo"
-	err = c.lfm.getResponse(query, response)
-
-	return
+type TrackInfoParams struct {
+	TrackRef
+	Username string
 }
 
-// Get similar tracks to some track.
-// Returns SimilarTracksResponse or error.
-func (c *TrackClient) GetSimilar(track, artist string, optionalParams map[string]string) (response *SimilarTracksResponse, err error) {
-	response = new(SimilarTracksResponse)
-	query := c.prepareQuery(track, artist, optionalParams)
-	query["method"] = "track.getSimilar"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TrackClient) GetInfo(ctx context.Context, p TrackInfoParams) (*TrackInfoResponse, error) {
+	v := url.Values{}
+	p.TrackRef.values(v)
+	set(v, "username", p.Username)
+	out := new(TrackInfoResponse)
+	return out, c.client.call(ctx, "track.getInfo", v, out)
 }
 
-// Get tags for some track tagged by some user.
-// Returns TagsResponse or error.
-func (c *TrackClient) GetTags(track, artist string, optionalParams map[string]string) (response *TagsResponse, err error) {
-	response = new(TagsResponse)
-	query := c.prepareQuery(track, artist, optionalParams)
-	query["method"] = "track.getTags"
-	err = c.lfm.getResponse(query, response)
-
-	return
+type TrackSimilarParams struct {
+	TrackRef
+	Limit int
 }
 
-// Get top fans for some track.
-// Returns TopFansResponse or error.
-func (c *TrackClient) GetTopFans(track, artist string, optionalParams map[string]string) (response *TopFansResponse, err error) {
-	response = new(TopFansResponse)
-	query := c.prepareQuery(track, artist, optionalParams)
-	query["method"] = "track.getTopFans"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TrackClient) GetSimilar(ctx context.Context, p TrackSimilarParams) (*SimilarTracksResponse, error) {
+	v := url.Values{}
+	p.TrackRef.values(v)
+	setInt(v, "limit", p.Limit)
+	out := new(SimilarTracksResponse)
+	return out, c.client.call(ctx, "track.getSimilar", v, out)
 }
 
-// Get top tags in lastfm for some track.
-// Returns TopTagsResponse or error.
-func (c *TrackClient) GetTopTags(track, artist string, optionalParams map[string]string) (response *TopTagsResponse, err error) {
-	response = new(TopTagsResponse)
-	query := c.prepareQuery(track, artist, optionalParams)
-	query["method"] = "track.getTopTags"
-	err = c.lfm.getResponse(query, response)
-
-	return
+type TrackTagsParams struct {
+	TrackRef
+	User string
 }
 
-// Get correction for some track and artist.
-// Returns TrackCorrectionResponse or error.
-func (c *TrackClient) GetCorrection(track, artist string) (response *TrackCorrectionResponse, err error) {
-	response = new(TrackCorrectionResponse)
-	query := c.prepareQuery(track, artist, make(map[string]string))
-	query["method"] = "track.getCorrection"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TrackClient) GetTags(ctx context.Context, p TrackTagsParams) (*TagsResponse, error) {
+	v := url.Values{}
+	p.TrackRef.values(v)
+	set(v, "user", p.User)
+	out := new(TagsResponse)
+	return out, c.client.call(ctx, "track.getTags", v, out)
 }
 
-// Search for some track.
-// artist parameter is optional, you may specify it to narrow your search
-// otherwise pass empty string.
-func (c *TrackClient) Search(track string, optionalParams map[string]string) (response *TrackSearchResponse, err error) {
-	response = new(TrackSearchResponse)
-	query := optionalParams
-	query["track"] = track
-	query["method"] = "track.search"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TrackClient) GetTopTags(ctx context.Context, p TrackRef) (*TopTagsResponse, error) {
+	v := url.Values{}
+	p.values(v)
+	out := new(TopTagsResponse)
+	return out, c.client.call(ctx, "track.getTopTags", v, out)
 }
 
-func (c *TrackClient) Scrobble(artist, track, timestamp string, optionalParams map[string]string) (response *TrackScrobbleResponse, err error) {
-	response = new(TrackScrobbleResponse)
-	query := c.prepareQuery(track, artist, optionalParams)
-	query["timestamp"] = timestamp
-	query["method"] = "track.scrobble"
-	err = c.lfm.getResponse(query, response)
+type TrackSearchParams struct {
+	Track, Artist string
+	Pagination
+}
 
-	return
+func (c TrackClient) Search(ctx context.Context, p TrackSearchParams) (*TrackSearchResponse, error) {
+	v := url.Values{}
+	set(v, "track", p.Track)
+	set(v, "artist", p.Artist)
+	p.Pagination.values(v)
+	out := new(TrackSearchResponse)
+	return out, c.client.call(ctx, "track.search", v, out)
+}
+
+func (c TrackClient) AddTags(ctx context.Context, artist, track string, tags []string) error {
+	v := url.Values{
+		"artist": {artist},
+		"track":  {track},
+		"tags":   {strings.Join(tags, ",")},
+	}
+	return c.client.call(ctx, "track.addTags", v, new(StatusResponse))
+}
+
+func (c TrackClient) RemoveTag(ctx context.Context, artist, track, tag string) error {
+	v := url.Values{
+		"artist": {artist},
+		"track":  {track},
+		"tag":    {tag},
+	}
+	return c.client.call(ctx, "track.removeTag", v, new(StatusResponse))
+}
+
+func (c TrackClient) Love(ctx context.Context, artist, track string) error {
+	v := url.Values{
+		"artist": {artist},
+		"track":  {track},
+	}
+	return c.client.call(ctx, "track.love", v, new(StatusResponse))
+}
+
+func (c TrackClient) Unlove(ctx context.Context, artist, track string) error {
+	v := url.Values{
+		"artist": {artist},
+		"track":  {track},
+	}
+	return c.client.call(ctx, "track.unlove", v, new(StatusResponse))
+}
+
+type NowPlayingParams struct {
+	Artist, Track, Album, AlbumArtist, MBID string
+	TrackNumber, Duration                   int
+}
+
+func (c TrackClient) UpdateNowPlaying(ctx context.Context, p NowPlayingParams) (*TrackNowPlayingResponse, error) {
+	v := url.Values{}
+	set(v, "artist", p.Artist)
+	set(v, "track", p.Track)
+	set(v, "album", p.Album)
+	set(v, "albumArtist", p.AlbumArtist)
+	set(v, "mbid", p.MBID)
+	setInt(v, "trackNumber", p.TrackNumber)
+	setInt(v, "duration", p.Duration)
+	out := new(TrackNowPlayingResponse)
+	return out, c.client.call(ctx, "track.updateNowPlaying", v, out)
+}
+
+type Scrobble struct {
+	Artist, Track, Album, AlbumArtist, MBID string
+	Timestamp                               time.Time
+	ChosenByUser                            *bool
+	TrackNumber, Duration                   int
+}
+
+func (c TrackClient) Scrobble(ctx context.Context, entries []Scrobble) (*TrackScrobbleResponse, error) {
+	if len(entries) == 0 || len(entries) > 50 {
+		return nil, fmt.Errorf("lastfm: scrobble batch must contain 1 to 50 tracks")
+	}
+	v := url.Values{}
+	for i, e := range entries {
+		suffix := "[" + strconv.Itoa(i) + "]"
+		v.Set("artist"+suffix, e.Artist)
+		v.Set("track"+suffix, e.Track)
+		v.Set("timestamp"+suffix, strconv.FormatInt(e.Timestamp.Unix(), 10))
+		set(v, "album"+suffix, e.Album)
+		set(v, "albumArtist"+suffix, e.AlbumArtist)
+		set(v, "mbid"+suffix, e.MBID)
+		setInt(v, "trackNumber"+suffix, e.TrackNumber)
+		setInt(v, "duration"+suffix, e.Duration)
+		if e.ChosenByUser != nil {
+			if *e.ChosenByUser {
+				v.Set("chosenByUser"+suffix, "1")
+			} else {
+				v.Set("chosenByUser"+suffix, "0")
+			}
+		}
+	}
+	out := new(TrackScrobbleResponse)
+	return out, c.client.call(ctx, "track.scrobble", v, out)
 }

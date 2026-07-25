@@ -1,59 +1,109 @@
-#go-lastfm
+# go-lastfm v2
 
-* * *
-<img
-src="http://th02.deviantart.net/fs70/PRE/f/2013/134/2/1/i_m_not_ready_yet____pancham_by_avidmc-d65aa8b.jpg" style="margin:20px auto; width: 450px; display:block;" />
-* * * 
-[Lastfm's api](http://www.last.fm/api) wrapper in [golang](http://golang.org).
+A context-aware JSON client for the complete current [Last.fm API](https://www.last.fm/api).
 
-Documentation available on [godoc.org](http://godoc.org/github.com/ndyakov/go-lastfm).
+Version 2 is a deliberate breaking release. It covers all 57 currently published
+methods across Album, Artist, Auth, Chart, Geo, Library, Tag, Track, and User. Methods
+that disappeared from Last.fm's catalog were removed.
 
-[![BuildStatus](https://travis-ci.org/ndyakov/go-lastfm.png)](https://travis-ci.org/ndyakov/go-lastfm)
-[![GoDoc](https://godoc.org/github.com/ndyakov/go-lastfm?status.png)](https://godoc.org/github.com/ndyakov/go-lastfm)
+## Install
 
-## Instalation
-
-```
-    go get github.com/ndyakov/go-lastfm
+```sh
+go get github.com/ndyakov/go-lastfm/v2
 ```
 
 ## Usage
 
-###1. Import the package.
+```go
+ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+defer cancel()
+
+client, err := lastfm.New(
+	"api-key",
+	"shared-secret",
+	lastfm.WithUserAgent("my-app/1.0 (contact@example.com)"),
+)
+if err != nil {
+	log.Fatal(err)
+}
+
+result, err := client.Artist.GetInfo(ctx, lastfm.ArtistInfoParams{
+	ArtistRef: lastfm.ArtistRef{Artist: "Björk", Autocorrect: true},
+	Language:  "en",
+})
+if err != nil {
+	log.Fatal(err)
+}
+fmt.Println(result.Artist.Name)
 ```
-import "github.com/ndyakov/go-lastfm"
+
+Every network method accepts `context.Context`. Optional API parameters are represented
+by request structs, while reusable selectors and pagination use `ArtistRef`, `AlbumRef`,
+`TrackRef`, and `Pagination`.
+
+## Authentication
+
+Desktop flow:
+
+1. `token, err := client.Auth.GetToken(ctx)`
+2. Open `client.AuthorizationURL(token.Token, "")` and wait for the user to approve.
+3. `session, err := client.Auth.GetSession(ctx, token.Token)`
+
+`GetSession` and `GetMobileSession` store the returned session key. It can also be set
+with `SetSessionKey`. All write calls are POSTed, signed, and rejected locally when no
+session key is configured.
+
+Batch scrobbling accepts 1–50 `Scrobble` values and uses Last.fm's required indexed
+parameter names and ASCII-sorted signature calculation.
+
+## Migrating from v1
+
+- Change the import path to `github.com/ndyakov/go-lastfm/v2`.
+- `New` now returns `(*Client, error)`; use `MustNew` only for static known-valid options.
+- Pass a context as the first argument to every endpoint method.
+- Replace positional and `map[string]string` arguments with typed parameter structs.
+- Replace `GetSessionKey` with `SessionKey` and `AuthURL` with `AuthorizationURL`.
+- Removed undocumented methods: artist/track top fans, user neighbours, tag search, and
+  tasteometer comparison.
+
+## API coverage
+
+- Album: 6 methods
+- Artist: 10 methods
+- Auth: 3 methods
+- Chart: 3 methods
+- Geo: 2 methods
+- Library: 1 method
+- Tag: 7 methods
+- Track: 12 methods
+- User: 13 methods
+
+## Testing
+
+Tests are credential-free and use local HTTP servers. The suite covers all endpoint
+wrappers, authentication/signing, GET and POST requests, batch scrobbling, options,
+context errors, flexible JSON scalar decoding, and API/HTTP/JSON failure handling.
+
+```sh
+go test -cover ./...
 ```
-###2. Create new api client object.
 
+Additional ideas are recorded in [IMPROVEMENTS.md](IMPROVEMENTS.md).
+
+## Experimental legacy methods
+
+`Client.Experimental` exposes six historically documented methods that are absent from
+Last.fm's current method index: tag search, metros, user neighbours, artist and track
+top fans, and tasteometer comparison. Each call returns an `ExperimentalResult[T]`
+containing typed `Data` and the original `Raw` JSON. These methods are not covered by
+the v2 stability guarantee because Last.fm may change or disable them without notice.
+
+Live probes are opt-in:
+
+```sh
+LASTFM_RUN_EXPERIMENTAL_TESTS=1 LASTFM_API_KEY=... go test -run TestExperimentalLiveContracts
 ```
-    lfm := lastfm.New("api-key", "api-secret")
-```
-
-You can optain api key after registration [here](http://www.last.fm/api/account/create).
-
-###3. Browse the documentation for supported methods.
-Browse [here](http://godoc.org/github.com/ndyakov/go-lastfm) for available
-endpoints or take a look at ``example_test.go`` for examples.
-
-
-## TODO
-
-* ~~Implement all methods that don't need authentication.~~
-* ~~Make authentication work.~~
-* Implement the rest of the API methods.
 
 ## License
-   Copyright 2014 Nedyalko Dyakov
 
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
+Apache-2.0. See [LICENSE](LICENSE).

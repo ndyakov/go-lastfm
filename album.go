@@ -1,96 +1,73 @@
 package lastfm
 
 import (
-	"strconv"
+	"context"
+	"net/url"
+	"strings"
 )
 
-// AlbumClient
-// Collection of methods that correspond to most of
-// LastFM's album\.(.+) methods.
-// Where the name of the method is \1 in CamelCase.
-type AlbumClient struct {
-	Client
+type AlbumClient struct{ client *Client }
+
+type AlbumInfoParams struct {
+	AlbumRef
+	Username string
 }
 
-// Prepare query for most of the Album Requests.
-// MBID has higher priority than Artist's and Album's name, so if MBID is present
-// the names are ignored. Provide empty strings for missing data.
-// Returns map[string]string that can be used in LastFM.makeRequest.
-func (c *AlbumClient) prepareQuery(artist, album, mbid, user string, autocorrect int, userLongVariableName bool) (query map[string]string) {
-	query = make(map[string]string)
+func (c AlbumClient) GetInfo(ctx context.Context, p AlbumInfoParams) (*AlbumInfoResponse, error) {
+	v := url.Values{}
+	p.AlbumRef.values(v)
+	set(v, "username", p.Username)
+	out := new(AlbumInfoResponse)
+	return out, c.client.call(ctx, "album.getInfo", v, out)
+}
 
-	if mbid == "" {
-		query["artist"] = artist
-		query["album"] = album
-	} else {
-		query["mbid"] = mbid
+type AlbumTagsParams struct {
+	AlbumRef
+	User string
+}
+
+func (c AlbumClient) GetTags(ctx context.Context, p AlbumTagsParams) (*TagsResponse, error) {
+	v := url.Values{}
+	p.AlbumRef.values(v)
+	set(v, "user", p.User)
+	out := new(TagsResponse)
+	return out, c.client.call(ctx, "album.getTags", v, out)
+}
+
+func (c AlbumClient) GetTopTags(ctx context.Context, p AlbumRef) (*TopTagsResponse, error) {
+	v := url.Values{}
+	p.values(v)
+	out := new(TopTagsResponse)
+	return out, c.client.call(ctx, "album.getTopTags", v, out)
+}
+
+type AlbumSearchParams struct {
+	Album string
+	Pagination
+}
+
+func (c AlbumClient) Search(ctx context.Context, p AlbumSearchParams) (*AlbumSearchResponse, error) {
+	v := url.Values{}
+	set(v, "album", p.Album)
+	p.Pagination.values(v)
+	out := new(AlbumSearchResponse)
+	return out, c.client.call(ctx, "album.search", v, out)
+}
+
+func (c AlbumClient) AddTags(ctx context.Context, artist, album string, tags []string) error {
+	v := url.Values{
+		"artist": {artist},
+		"album":  {album},
+		"tags":   {strings.Join(tags, ",")},
 	}
+	return c.client.call(ctx, "album.addTags", v, new(StatusResponse))
+}
 
-	if user != "" {
-		if userLongVariableName {
-			query["username"] = user
-		} else {
-			query["user"] = user
-		}
+func (c AlbumClient) RemoveTag(ctx context.Context, artist, album, tag string) error {
+	v := url.Values{
+		"artist": {artist},
+		"album":  {album},
+		"tag":    {tag},
 	}
-
-	query["autocorrect"] = strconv.Itoa(autocorrect)
-
-	return
-}
-
-// Get full information for Album.
-// Returns AlbumInforResponse or error.
-// There may be an error returned from the parser/decoder as well.
-func (c *AlbumClient) GetInfo(artist, album, mbid, username string, autocorrect int) (response *AlbumInfoResponse, err error) {
-	response = new(AlbumInfoResponse)
-	query := c.prepareQuery(artist, album, mbid, username, autocorrect, true)
-	query["method"] = "album.getInfo"
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get Tags for some Album, that are added by some user.
-// Returns TagsResponse or error.
-func (c *AlbumClient) GetTags(artist, album, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
-	response = new(TagsResponse)
-	query := c.prepareQuery(artist, album, mbid, user, autocorrect, false)
-	query["method"] = "album.getTags"
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get Top Tags for Album.
-// Returns TopTagsResponse or error.
-func (c *AlbumClient) GetTopTags(artist, album, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
-	response = new(TopTagsResponse)
-	query := c.prepareQuery(artist, album, mbid, "", autocorrect, false)
-	query["method"] = "album.getTopTags"
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Search album by given name. You can specify page and limit also.
-// Default values are as stated in lastfm's api documentation.
-// Returns AlbumSearchResponse.
-func (c *AlbumClient) Search(album string, page, limit int) (response *AlbumSearchResponse, err error) {
-	response = new(AlbumSearchResponse)
-	query := make(map[string]string)
-	query["album"] = album
-	query["method"] = "album.search"
-
-	if page != 0 {
-		query["page"] = strconv.Itoa(page)
-	}
-
-	if limit != 0 {
-		query["limit"] = strconv.Itoa(limit)
-	}
-
-	err = c.lfm.getResponse(query, response)
-
-	return
+	return c.client.call(ctx, "album.removeTag", v, new(StatusResponse))
 }

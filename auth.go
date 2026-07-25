@@ -1,49 +1,32 @@
 package lastfm
 
-type AuthClient struct {
-	Client
+import (
+	"context"
+	"net/url"
+)
+
+type AuthClient struct{ client *Client }
+
+func (c AuthClient) GetToken(ctx context.Context) (*AuthTokenResponse, error) {
+	out := new(AuthTokenResponse)
+	return out, c.client.call(ctx, "auth.getToken", nil, out)
 }
 
-func (c *AuthClient) GetSession() (response *AuthSessionResponse, err error) {
-	response = new(AuthSessionResponse)
-	query := make(map[string]string)
-	query["method"] = "auth.getSession"
-	tokenResponse, err := c.GetToken()
-
-	if err != nil {
-		return
-	}
-
-	query["token"] = tokenResponse.Token
-	err = c.lfm.getResponse(query, response)
-
+func (c AuthClient) GetSession(ctx context.Context, token string) (*AuthSessionResponse, error) {
+	out := new(AuthSessionResponse)
+	err := c.client.call(ctx, "auth.getSession", url.Values{"token": {token}}, out)
 	if err == nil {
-		c.lfm.SetSessionKey(response.Session.Key)
+		c.client.SetSessionKey(out.Session.Key)
 	}
-
-	return
+	return out, err
 }
 
-func (c *AuthClient) GetMobileSession(password, username string) (response *AuthSessionResponse, err error) {
-	response = new(AuthSessionResponse)
-	query := make(map[string]string)
-	query["method"] = "auth.getMobileSession"
-	query["username"] = username
-	query["password"] = password
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-func (c *AuthClient) GetToken() (response *AuthTokenResponse, err error) {
-	response = new(AuthTokenResponse)
-	query := make(map[string]string)
-	query["method"] = "auth.getToken"
-	err = c.lfm.getResponse(query, response)
-
+func (c AuthClient) GetMobileSession(ctx context.Context, username, password string) (*AuthSessionResponse, error) {
+	v := url.Values{"username": {username}, "password": {password}}
+	out := new(AuthSessionResponse)
+	err := c.client.call(ctx, "auth.getMobileSession", v, out)
 	if err == nil {
-		c.lfm.SetToken(response.Token)
+		c.client.SetSessionKey(out.Session.Key)
 	}
-
-	return
+	return out, err
 }

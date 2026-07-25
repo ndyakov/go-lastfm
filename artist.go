@@ -1,154 +1,112 @@
 package lastfm
 
 import (
-	"strconv"
+	"context"
+	"net/url"
+	"strings"
 )
 
-// ArtistClient
-// Collection of methods that correspond to most of
-// LastFM's artist\.(.+) methods.
-// Where the name of the method is \1 in CamelCase.
-type ArtistClient struct {
-	Client
+type ArtistClient struct{ client *Client }
+
+func (c ArtistClient) GetCorrection(ctx context.Context, artist string) (*ArtistCorrectionResponse, error) {
+	v := url.Values{"artist": {artist}}
+	out := new(ArtistCorrectionResponse)
+	return out, c.client.call(ctx, "artist.getCorrection", v, out)
 }
 
-// Prepares query for few of the Artist Requests.
-// MBID has higher priority than Artist's name, so if MBID is present
-// the name is ignored. Provide empty strings for missing data.
-// Returns map[string]string that can be parsed to LastFM.makeRequest.
-func (c *ArtistClient) prepareQuery(name, mbid string, autocorrect int) (query map[string]string) {
-	query = make(map[string]string)
+type ArtistInfoParams struct {
+	ArtistRef
+	Username, Language string
+}
 
-	if mbid == "" {
-		query["artist"] = name
-	} else {
-		query["mbid"] = mbid
+func (c ArtistClient) GetInfo(ctx context.Context, p ArtistInfoParams) (*ArtistInfoResponse, error) {
+	v := url.Values{}
+	p.ArtistRef.values(v)
+	set(v, "username", p.Username)
+	set(v, "lang", p.Language)
+	out := new(ArtistInfoResponse)
+	return out, c.client.call(ctx, "artist.getInfo", v, out)
+}
+
+type ArtistSimilarParams struct {
+	ArtistRef
+	Limit int
+}
+
+func (c ArtistClient) GetSimilar(ctx context.Context, p ArtistSimilarParams) (*ArtistSimilarResponse, error) {
+	v := url.Values{}
+	p.ArtistRef.values(v)
+	setInt(v, "limit", p.Limit)
+	out := new(ArtistSimilarResponse)
+	return out, c.client.call(ctx, "artist.getSimilar", v, out)
+}
+
+type ArtistTagsParams struct {
+	ArtistRef
+	User string
+}
+
+func (c ArtistClient) GetTags(ctx context.Context, p ArtistTagsParams) (*TagsResponse, error) {
+	v := url.Values{}
+	p.ArtistRef.values(v)
+	set(v, "user", p.User)
+	out := new(TagsResponse)
+	return out, c.client.call(ctx, "artist.getTags", v, out)
+}
+
+type ArtistPagedParams struct {
+	ArtistRef
+	Pagination
+}
+
+func (c ArtistClient) GetTopAlbums(ctx context.Context, p ArtistPagedParams) (*TopAlbumsResponse, error) {
+	v := url.Values{}
+	p.ArtistRef.values(v)
+	p.Pagination.values(v)
+	out := new(TopAlbumsResponse)
+	return out, c.client.call(ctx, "artist.getTopAlbums", v, out)
+}
+
+func (c ArtistClient) GetTopTracks(ctx context.Context, p ArtistPagedParams) (*TopTracksResponse, error) {
+	v := url.Values{}
+	p.ArtistRef.values(v)
+	p.Pagination.values(v)
+	out := new(TopTracksResponse)
+	return out, c.client.call(ctx, "artist.getTopTracks", v, out)
+}
+
+func (c ArtistClient) GetTopTags(ctx context.Context, p ArtistRef) (*TopTagsResponse, error) {
+	v := url.Values{}
+	p.values(v)
+	out := new(TopTagsResponse)
+	return out, c.client.call(ctx, "artist.getTopTags", v, out)
+}
+
+type ArtistSearchParams struct {
+	Artist string
+	Pagination
+}
+
+func (c ArtistClient) Search(ctx context.Context, p ArtistSearchParams) (*ArtistSearchResponse, error) {
+	v := url.Values{}
+	set(v, "artist", p.Artist)
+	p.Pagination.values(v)
+	out := new(ArtistSearchResponse)
+	return out, c.client.call(ctx, "artist.search", v, out)
+}
+
+func (c ArtistClient) AddTags(ctx context.Context, artist string, tags []string) error {
+	v := url.Values{
+		"artist": {artist},
+		"tags":   {strings.Join(tags, ",")},
 	}
-
-	query["autocorrect"] = strconv.Itoa(autocorrect)
-
-	return
+	return c.client.call(ctx, "artist.addTags", v, new(StatusResponse))
 }
 
-// Get top tags for Artist.
-// Returns TopTagsResponse structure or error.
-// Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopTags(name, mbid string, autocorrect int) (response *TopTagsResponse, err error) {
-	response = new(TopTagsResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getTopTags"
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get tags for Artist who is in users directory.
-// Returns TagsResponse structure or error.
-// Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTags(name, mbid, user string, autocorrect int) (response *TagsResponse, err error) {
-	response = new(TagsResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getTags"
-	query["user"] = user
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get top Albums for Artist.
-// Returns TopAlbumsResponse or error.
-// Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopAlbums(name, mbid string, autocorrect, page, limit int) (response *TopAlbumsResponse, err error) {
-	response = new(TopAlbumsResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getTopAlbums"
-
-	if page != 0 {
-		query["page"] = strconv.Itoa(page)
+func (c ArtistClient) RemoveTag(ctx context.Context, artist, tag string) error {
+	v := url.Values{
+		"artist": {artist},
+		"tag":    {tag},
 	}
-
-	if limit != 0 {
-		query["limit"] = strconv.Itoa(limit)
-	}
-
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get top fans for Artist.
-// Returns TopFansResponse or error.
-// Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopFans(name, mbid string, autocorrect int) (response *TopFansResponse, err error) {
-	response = new(TopFansResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getTopFans"
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get top tracks for Artist.
-// Returns TopTracksResponse or error.
-// Be careful, there may be error returned from the parsing as well.
-func (c *ArtistClient) GetTopTracks(name, mbid string, autocorrect, page, limit int) (response *TopTracksResponse, err error) {
-	response = new(TopTracksResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getTopTracks"
-
-	if page != 0 {
-		query["page"] = strconv.Itoa(page)
-	}
-
-	if limit != 0 {
-		query["limit"] = strconv.Itoa(limit)
-	}
-
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Search for Artist by given name.
-// Returns ArtistSearchResponse or error.
-func (c *ArtistClient) Search(name string, page, limit int) (response *ArtistSearchResponse, err error) {
-	response = new(ArtistSearchResponse)
-	query := make(map[string]string)
-	query["method"] = "artist.Search"
-	query["artist"] = name
-
-	if page != 0 {
-		query["page"] = strconv.Itoa(page)
-	}
-
-	if limit != 0 {
-		query["limit"] = strconv.Itoa(limit)
-	}
-
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get similar artists.
-// Returns ArtistSimilarResponse or error.
-func (c *ArtistClient) GetSimilar(name string, mbid string, autocorrect int) (response *ArtistSimilarResponse, err error) {
-	response = new(ArtistSimilarResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getsimilar"
-	err = c.lfm.getResponse(query, response)
-
-	return
-}
-
-// Get info for Artist with given name.
-// Returns ArtistInfoResponse or error.
-// Response data is actually in response.Artist.
-func (c *ArtistClient) GetInfo(name, mbid string, autocorrect int) (response *ArtistInfoResponse, err error) {
-	response = new(ArtistInfoResponse)
-	query := c.prepareQuery(name, mbid, autocorrect)
-	query["method"] = "artist.getInfo"
-	err = c.lfm.getResponse(query, response)
-
-	return
+	return c.client.call(ctx, "artist.removeTag", v, new(StatusResponse))
 }

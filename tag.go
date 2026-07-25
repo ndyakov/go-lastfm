@@ -1,112 +1,65 @@
 package lastfm
 
 import (
-	"strconv"
+	"context"
+	"net/url"
 )
 
-// TagClient
-// Collection of methods that correspond to most of
-// LastFM's tag\.(.+) methods.
-// Where the name of the method is \1 in CamelCase.
-type TagClient struct {
-	Client
+type TagClient struct{ client *Client }
+
+type TagInfoParams struct {
+	Tag      string
+	Language string
 }
 
-// Prepares query for most of the Tag Requests.
-// Returns map[string]string that can be used with LastFM's makeRequest method.
-func (c *TagClient) prepareQuery(tag string, page, limit int) (query map[string]string) {
-	query = make(map[string]string)
-	query["tag"] = tag
-
-	if page != 0 {
-		query["page"] = strconv.Itoa(page)
-	}
-
-	if limit != 0 {
-		query["limit"] = strconv.Itoa(limit)
-	}
-
-	return
+func (c TagClient) GetInfo(ctx context.Context, p TagInfoParams) (*TagInfoResponse, error) {
+	v := url.Values{}
+	set(v, "tag", p.Tag)
+	set(v, "lang", p.Language)
+	out := new(TagInfoResponse)
+	return out, c.client.call(ctx, "tag.getInfo", v, out)
 }
 
-// Get full information for some tag.
-// Returns TagInfoResponse or error.
-func (c *TagClient) GetInfo(tag string) (response *TagInfoResponse, err error) {
-	response = new(TagInfoResponse)
-	query := make(map[string]string)
-	query["method"] = "tag.getInfo"
-	query["tag"] = tag
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TagClient) GetSimilar(ctx context.Context, tag string) (*TagSimilarResponse, error) {
+	out := new(TagSimilarResponse)
+	return out, c.client.call(ctx, "tag.getSimilar", url.Values{"tag": {tag}}, out)
 }
 
-// Get similar tags to some tag.
-// Returns TagSimilarResponse or error.
-func (c *TagClient) GetSimilar(tag string) (response *TagSimilarResponse, err error) {
-	response = new(TagSimilarResponse)
-	query := make(map[string]string)
-	query["method"] = "tag.getSimilar"
-	query["tag"] = tag
-	err = c.lfm.getResponse(query, response)
-
-	return
+type TagPagedParams struct {
+	Tag string
+	Pagination
 }
 
-// Get top Albums with some tag.
-// Returns TopAlbumsResponse or error.
-func (c *TagClient) GetTopAlbums(tag string, page, limit int) (response *TopAlbumsResponse, err error) {
-	response = new(TopAlbumsResponse)
-	query := c.prepareQuery(tag, page, limit)
-	query["method"] = "tag.getTopAlbums"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TagClient) GetTopAlbums(ctx context.Context, p TagPagedParams) (*TopAlbumsResponse, error) {
+	v := url.Values{}
+	set(v, "tag", p.Tag)
+	p.Pagination.values(v)
+	out := new(TopAlbumsResponse)
+	return out, c.client.call(ctx, "tag.getTopAlbums", v, out)
 }
 
-// Get top Artists with some tag.
-// Returns TopArtistsResponse or error.
-func (c *TagClient) GetTopArtists(tag string, page, limit int) (response *TopArtistsResponse, err error) {
-	response = new(TopArtistsResponse)
-	query := c.prepareQuery(tag, page, limit)
-	query["method"] = "tag.getTopArtists"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TagClient) GetTopArtists(ctx context.Context, p TagPagedParams) (*TopArtistsResponse, error) {
+	v := url.Values{}
+	set(v, "tag", p.Tag)
+	p.Pagination.values(v)
+	out := new(TopArtistsResponse)
+	return out, c.client.call(ctx, "tag.getTopArtists", v, out)
 }
 
-// Get Top Tags in Lastfm.
-// Returns TopTagsResponse or error.
-func (c *TagClient) GetTopTags() (response *TopTagsResponse, err error) {
-	response = new(TopTagsResponse)
-	query := make(map[string]string)
-	query["method"] = "tag.getTopTags"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TagClient) GetTopTracks(ctx context.Context, p TagPagedParams) (*TopTracksResponse, error) {
+	v := url.Values{}
+	set(v, "tag", p.Tag)
+	p.Pagination.values(v)
+	out := new(TopTracksResponse)
+	return out, c.client.call(ctx, "tag.getTopTracks", v, out)
 }
 
-// Get Top Tracks with some tag.
-// Returns TopTracksResponse or error.
-func (c *TagClient) GetTopTracks(tag string, page, limit int) (response *TopTracksResponse, err error) {
-	response = new(TopTracksResponse)
-	query := c.prepareQuery(tag, page, limit)
-	query["method"] = "tag.getTopTracks"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TagClient) GetTopTags(ctx context.Context) (*TopTagsResponse, error) {
+	out := new(TopTagsResponse)
+	return out, c.client.call(ctx, "tag.getTopTags", nil, out)
 }
 
-// Search tag by some string.
-// Returns TagSearchResponse or error.
-func (c *TagClient) Search(tag string, page, limit int) (response *TagSearchResponse, err error) {
-	response = new(TagSearchResponse)
-	query := c.prepareQuery(tag, page, limit)
-	query["method"] = "tag.search"
-	err = c.lfm.getResponse(query, response)
-
-	return
+func (c TagClient) GetWeeklyChartList(ctx context.Context, tag string) (*WeeklyChartListResponse, error) {
+	out := new(WeeklyChartListResponse)
+	return out, c.client.call(ctx, "tag.getWeeklyChartList", url.Values{"tag": {tag}}, out)
 }
-
-//TODO : getWeeklyArtistChart
-//TODO : getWeeklyChartList
