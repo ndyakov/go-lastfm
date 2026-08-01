@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/logo.svg" alt="go-lastfm — Last.fm API wrapper for Go" width="360">
+</p>
+
 # go-lastfm v2
 
 A context-aware JSON client for the complete current [Last.fm API](https://www.last.fm/api).
@@ -107,3 +111,9 @@ LASTFM_RUN_EXPERIMENTAL_TESTS=1 LASTFM_API_KEY=... go test -run TestExperimental
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+## Credits
+
+The Go gopher in the logo was designed by [Renee French](https://reneefrench.blogspot.com/);
+the vector version is by [Takuya Ueda](https://github.com/golang-samples/gopher-vector)
+(CC BY 3.0).
