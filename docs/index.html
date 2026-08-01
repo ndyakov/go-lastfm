@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>go-lastfm — A context-aware JSON client for the complete current Last.fm API</title>
+<meta name="description" content="A context-aware JSON client for the complete current Last.fm API">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0;
+    --code-bg: #f6f8fa; --accent: #D51007;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --border: #3d444d;
+      --code-bg: #161b22; --accent: #FF5A50;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.6 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 24px; width: 100%; }
+  .logo { display: block; margin: 0 auto 8px; max-width: 360px; width: 90%; }
+  h1 { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+       text-align: center; font-size: 1.9rem; margin: 0.2em 0 0; }
+  h1 span { color: var(--accent); }
+  p.tagline { text-align: center; color: var(--muted); margin-top: 0.4em; }
+  .links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0 36px; }
+  .links a {
+    border: 1px solid var(--border); border-radius: 8px; padding: 7px 16px;
+    text-decoration: none; color: var(--fg); font-size: 0.92rem;
+  }
+  .links a:hover { border-color: var(--accent); color: var(--accent); }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px 18px; overflow-x: auto; font: 13.5px/1.55 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  .install { text-align: center; }
+  .install code {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font: 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    display: inline-block;
+  }
+  ul.features { padding-left: 1.2em; }
+  ul.features li { margin: 0.45em 0; }
+  ul.features li::marker { color: var(--accent); }
+  footer { text-align: center; color: var(--muted); font-size: 0.85rem;
+           padding: 24px; margin-top: auto; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="logo.svg" alt="go-lastfm">
+  <h1>go-<span>lastfm</span></h1>
+  <p class="tagline">A context-aware JSON client for the complete current Last.fm API</p>
+  <div class="links">
+    <a href="https://github.com/ndyakov/go-lastfm">GitHub</a>
+    <a href="https://pkg.go.dev/github.com/ndyakov/go-lastfm/v2">pkg.go.dev</a>
+  </div>
+  <p class="install"><code>go get github.com/ndyakov/go-lastfm/v2</code></p>
+  <pre>client, _ := lastfm.New(&quot;api-key&quot;, &quot;shared-secret&quot;,
+    lastfm.WithUserAgent(&quot;my-app/1.0 (contact@example.com)&quot;),
+)
+
+result, err := client.Artist.GetInfo(ctx, lastfm.ArtistInfoParams{
+    ArtistRef: lastfm.ArtistRef{Artist: &quot;Björk&quot;, Autocorrect: true},
+    Language:  &quot;en&quot;,
+})
+if err != nil { log.Fatal(err) }
+fmt.Println(result.Artist.Name)</pre>
+  <ul class="features">
+    <li>All 57 currently published Last.fm API methods, typed end to end</li>
+    <li><code>context.Context</code> on every call; timeouts and cancellation just work</li>
+    <li>Auth flows for sessions, scrobbling and write methods</li>
+    <li>Zero dependencies beyond the standard library</li>
+    <li>Live contract tests against the real API (opt-in), httptest everywhere else</li>
+  </ul>
+</main>
+<footer>Last.fm is a trademark of its owner; this project is unaffiliated. Gopher by Renee French / Takuya Ueda (CC BY 3.0)</footer>
+</body>
+</html>
