@@ -41,16 +41,45 @@ func (f *Float) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// String accepts both JSON strings and the bare numbers Last.fm sometimes
+// returns for "#text" fields.
+type String string
+
+func (s *String) UnmarshalJSON(data []byte) error {
+	data = bytes.TrimSpace(data)
+	if len(data) == 0 || bytes.Equal(data, []byte("null")) {
+		*s = ""
+		return nil
+	}
+	if data[0] == '"' {
+		var value string
+		if err := json.Unmarshal(data, &value); err != nil {
+			return fmt.Errorf("lastfm: decode string %q: %w", data, err)
+		}
+		*s = String(value)
+		return nil
+	}
+	*s = String(data)
+	return nil
+}
+
 // List accepts both an array and Last.fm's single-object representation.
 type List[T any] []T
 
 func (list *List[T]) UnmarshalJSON(data []byte) error {
-	if bytes.Equal(bytes.TrimSpace(data), []byte("null")) {
+	data = bytes.TrimSpace(data)
+	if len(data) == 0 || bytes.Equal(data, []byte("null")) {
 		*list = nil
 		return nil
 	}
-	var values []T
-	if err := json.Unmarshal(data, &values); err == nil {
+	// Dispatch on the actual JSON shape. Trying the array form first and
+	// falling back on any error masks decode failures inside the elements,
+	// reporting them as "cannot unmarshal array into T".
+	if data[0] == '[' {
+		var values []T
+		if err := json.Unmarshal(data, &values); err != nil {
+			return err
+		}
 		*list = values
 		return nil
 	}
@@ -68,8 +97,25 @@ type Image struct {
 }
 
 type Date struct {
-	Text string  `json:"#text"`
+	Text String  `json:"#text"`
 	UTS  Integer `json:"uts"`
+}
+
+// UnmarshalJSON also accepts "unixtime", the key user.getInfo uses for the
+// registration timestamp in place of the "uts" used elsewhere.
+func (d *Date) UnmarshalJSON(data []byte) error {
+	type alias Date
+	aux := struct {
+		*alias
+		Unixtime Integer `json:"unixtime"`
+	}{alias: (*alias)(d)}
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	if d.UTS == 0 {
+		d.UTS = aux.Unixtime
+	}
+	return nil
 }
 
 type PaginationResponse struct {
@@ -113,6 +159,23 @@ type Artist struct {
 	} `json:"@attr"`
 }
 
+// UnmarshalJSON also accepts the nested {"mbid":...,"#text":"Name"} form used
+// for the artist embedded in user.getRecentTracks entries.
+func (a *Artist) UnmarshalJSON(data []byte) error {
+	type alias Artist
+	aux := struct {
+		*alias
+		Text string `json:"#text"`
+	}{alias: (*alias)(a)}
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	if a.Name == "" {
+		a.Name = aux.Text
+	}
+	return nil
+}
+
 type Album struct {
 	Name        string      `json:"name"`
 	Artist      any         `json:"artist"`
@@ -131,6 +194,23 @@ type Album struct {
 	Wiki Wiki `json:"wiki"`
 }
 
+// UnmarshalJSON also accepts the nested {"mbid":...,"#text":"Name"} form used
+// for the album embedded in user.getRecentTracks entries.
+func (a *Album) UnmarshalJSON(data []byte) error {
+	type alias Album
+	aux := struct {
+		*alias
+		Text string `json:"#text"`
+	}{alias: (*alias)(a)}
+	if err := json.Unmarshal(data, &aux); err != nil {
+		return err
+	}
+	if a.Name == "" {
+		a.Name = aux.Text
+	}
+	return nil
+}
+
 type Tag struct {
 	Name       string  `json:"name"`
 	URL        string  `json:"url"`
@@ -139,6 +219,36 @@ type Tag struct {
 	Streamable Integer `json:"streamable"`
 	Count      Integer `json:"count"`
 	Wiki       Wiki    `json:"wiki"`
+}
+
+// Streamable accepts both the object form returned by track.getInfo and the
+// bare scalar ("0") returned by user.getRecentTracks.
+type Streamable struct {
+	FullTrack Integer `json:"fulltrack"`
+	Text      Integer `json:"#text"`
+}
+
+func (s *Streamable) UnmarshalJSON(data []byte) error {
+	data = bytes.TrimSpace(data)
+	if len(data) == 0 || bytes.Equal(data, []byte("null")) {
+		*s = Streamable{}
+		return nil
+	}
+	if data[0] == '{' {
+		type alias Streamable
+		var value alias
+		if err := json.Unmarshal(data, &value); err != nil {
+			return err
+		}
+		*s = Streamable(value)
+		return nil
+	}
+	var text Integer
+	if err := text.UnmarshalJSON(data); err != nil {
+		return err
+	}
+	*s = Streamable{Text: text}
+	return nil
 }
 
 type Track struct {
@@ -153,11 +263,9 @@ type Track struct {
 	Album      Album       `json:"album"`
 	Images     List[Image] `json:"image"`
 	Wiki       Wiki        `json:"wiki"`
-	Streamable struct {
-		FullTrack Integer `json:"fulltrack"`
-		Text      Integer `json:"#text"`
-	} `json:"streamable"`
-	Attr struct {
+	Date       Date        `json:"date"`
+	Streamable Streamable  `json:"streamable"`
+	Attr       struct {
 		Rank       Integer `json:"rank"`
 		NowPlaying string  `json:"nowplaying"`
 	} `json:"@attr"`
