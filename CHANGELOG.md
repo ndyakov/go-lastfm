@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Track.Date`, so scrobble timestamps from `user.getRecentTracks` are retained.
+- `String` and `Streamable` types decoding the shapes Last.fm varies between
+  endpoints.
+
+### Fixed
+
+- `user.getInfo` failed to decode because `registered."#text"` arrives as a bare
+  JSON number.
+- `user.getRecentTracks` failed to decode because `streamable` arrives as a bare
+  string rather than the object `track.getInfo` returns.
+- Decode errors inside list elements were reported as `cannot unmarshal array
+  into T`, hiding the underlying cause.
+- `Artist.Name` and `Album.Name` decoded empty when nested in
+  `user.getRecentTracks` entries, where the name arrives in `#text`.
+- `User.Registered` decoded to zero because `user.getInfo` uses `unixtime` where
+  other methods use `uts`.
+
 ## [2.0.0] - 2026-07-21
 
 Version 2 is a complete, breaking redesign of go-lastfm for the current Last.fm API.
